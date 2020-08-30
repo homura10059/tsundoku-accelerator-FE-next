@@ -13,25 +13,8 @@ Globals:
       TargetArn: arn:aws:sns:ap-northeast-1:267428311438:failed-lambda
 
 Resources:
-  ## Lambda
-  Main:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./dist
-      Handler: lambda_handler.default
-      Role: !GetAtt MainRole.Arn
-      Environment:
-        Variables:
-          TOPIC_ARN: dummy
-      Events:
-        ScheduledEventForMain:
-          Type: Schedule
-          Properties:
-            Schedule: cron(0 8 * * ? *)
-            Input: '{"urls":["https://www.amazon.jp/hz/wishlist/ls/1KERB2C8N5NGY","https://www.amazon.jp/hz/wishlist/ls/1CU482XA9HO5F","https://www.amazon.jp/hz/wishlist/ls/3E1B11VRAD7UZ"]}'
-      Layers:
-        - !Ref CommonLayer
-  MainRole:
+  ## ROLE
+  LambdaRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -65,61 +48,76 @@ Resources:
                   "xray:GetSamplingStatisticSummaries"
                 ]
                 Resource: "*"
-  CommonLayer:
-    Type: AWS::Serverless::LayerVersion
+  ## ApiGatewayApi:
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
     Properties:
-      Description: puppeteer Layer
-      ContentUri: layer
-  LogGroupMain:
+      StageName: prod
+  ## Lambda
+  WishListsGet:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: controller/wish_lists.get
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /wish_lists/{id}
+            Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
+  LogWishListsGet:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Sub /aws/lambda/${Main}
+      LogGroupName: !Sub /aws/lambda/${WishListsGet}
       RetentionInDays: 14
   ## DynamoDB
-  AmazonItems:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-      AttributeDefinitions:
-        - AttributeName: "Url"
-          AttributeType: "S"
-        - AttributeName: "LastScrapeDateTime"
-          AttributeType: "N"
-        - AttributeName: "DiscountPer"
-          AttributeType: "N"
-        - AttributeName: "PointsPer"
-          AttributeType: "N"
-      KeySchema:
-        - AttributeName: "Url"
-          KeyType: "HASH"
-        - AttributeName: "LastScrapeDateTime"
-          KeyType: "RANGE"
-      LocalSecondaryIndexes:
-        - IndexName: "DiscountIndex"
-          KeySchema:
-            - AttributeName: "Url"
-              KeyType: "HASH"
-            - AttributeName: "DiscountPer"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: "ALL"
-        - IndexName: "PointsIndex"
-          KeySchema:
-            - AttributeName: "Url"
-              KeyType: "HASH"
-            - AttributeName: "PointsPer"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: "ALL"
-      TimeToLiveSpecification:
-        AttributeName: "Expired"
-        Enabled: true
+#  AmazonItems:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 1
+#        WriteCapacityUnits: 1
+#      AttributeDefinitions:
+#        - AttributeName: "Url"
+#          AttributeType: "S"
+#        - AttributeName: "LastScrapeDateTime"
+#          AttributeType: "N"
+#        - AttributeName: "DiscountPer"
+#          AttributeType: "N"
+#        - AttributeName: "PointsPer"
+#          AttributeType: "N"
+#      KeySchema:
+#        - AttributeName: "Url"
+#          KeyType: "HASH"
+#        - AttributeName: "LastScrapeDateTime"
+#          KeyType: "RANGE"
+#      LocalSecondaryIndexes:
+#        - IndexName: "DiscountIndex"
+#          KeySchema:
+#            - AttributeName: "Url"
+#              KeyType: "HASH"
+#            - AttributeName: "DiscountPer"
+#              KeyType: "RANGE"
+#          Projection:
+#            ProjectionType: "ALL"
+#        - IndexName: "PointsIndex"
+#          KeySchema:
+#            - AttributeName: "Url"
+#              KeyType: "HASH"
+#            - AttributeName: "PointsPer"
+#              KeyType: "RANGE"
+#          Projection:
+#            ProjectionType: "ALL"
+#      TimeToLiveSpecification:
+#        AttributeName: "Expired"
+#        Enabled: true
 Outputs:
-  AmazonScraper:
-    Description: 'Lambda Function ARN'
-    Value: !GetAtt Main.Arn
-  AmazonScraperIamRole:
+  WishListsGet:
+    Description: 'WishListsGet ARN'
+    Value: !GetAtt WishListsGet.Arn
+  LambdaRole:
     Description: 'Implicit IAM Role created for lambda function'
-    Value: !GetAtt MainRole.Arn
+    Value: !GetAtt LambdaRole.Arn
