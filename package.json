@@ -19,13 +19,13 @@
   "private": true,
   "dependencies": {
     "chrome-aws-lambda": "^2.0.1",
-    "fp-ts": "^2.2.0",
+    "folktale": "^3.0.1-ts",
     "puppeteer-autoscroll-down": "^0.1.2",
     "puppeteer-core": "^2.0.0",
-    "ramda": "^0.26.1",
     "typed-slack": "^0.1.4",
     "webpack": "^4.7.0",
-    "webpack-cli": "^3.1.1"
+    "webpack-cli": "^3.1.1",
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.3",
@@ -37,7 +37,7 @@
     "@types/node": "^12.12.5",
     "@types/puppeteer": "^1.20.2",
     "@types/puppeteer-core": "^2.0.0",
-    "@types/ramda": "^0.26.34",
+    "@types/ramda": "^0.26.36",
     "aws-sdk": "^2.573.0",
     "axios-mock-adapter": "^1.17.0",
     "jest": "^23.3.0",
