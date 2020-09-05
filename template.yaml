@@ -67,6 +67,27 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${WishListsGet}
       RetentionInDays: 14
+  ItemsGet:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: server/controllers/items.get
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /items
+            Method: get
+            RestApiId:
+              Ref: ApiGatewayApi
+      Layers:
+        - !Ref PuppeteerLayer
+  LogItemsGet:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ItemsGet}
+      RetentionInDays: 14
   ItemsUpdate:
     Type: AWS::Serverless::Function
     Properties:

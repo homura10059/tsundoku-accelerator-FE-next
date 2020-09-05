@@ -1,7 +1,10 @@
 import { getBrowser, scrape } from '../../repositories/scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
-import { getItemsRepository } from '../../repositories/dynamo_db'
+import {
+  getItemsRepository,
+  getWishListsRepository
+} from '../../repositories/dynamo_db'
 
 const getLinkListFromPage = async (page: Page): Promise<string[]> => {
   const links = await page
@@ -41,4 +44,9 @@ export const getItems = async (urls: string[]) => {
 export const updateItems = async (urls: string[]) => {
   const repos = getItemsRepository()
   await repos.update(urls)
+}
+
+export const getItemsFromCache = async () => {
+  const repos = getItemsRepository()
+  return repos.getItems()
 }

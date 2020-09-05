@@ -42,6 +42,19 @@ export const getItemsRepository = (): ItemsRepository => {
   const now = Math.floor(Date.now() / 1000)
 
   return {
+    getItems: async () => {
+      const params = {
+        TableName: tableName
+      }
+      return ddb
+        .scan(params)
+        .promise()
+        .then(res => {
+          const urls = res.Items.map(item => item.URL.S)
+          console.log('Success', urls)
+          return urls
+        })
+    },
     update: async (urls: string[]) => {
       await Promise.all(
         urls.map(url => {
