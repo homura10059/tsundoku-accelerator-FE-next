@@ -10,7 +10,7 @@
     "package": "sam package --template-file template.yaml --s3-bucket lambda-function-deploy-packages --output-template-file template.packaged.yaml",
     "deploy": "sam deploy --template-file template.packaged.yaml --stack-name ${npm_package_name}${STACK_ENV:-} --capabilities CAPABILITY_IAM",
     "clean": "rm -rf -v dist/* && rm -f template.packaged.yaml",
-    "sam-deploy": "yarn clean && yarn build && yarn package && yarn deploy",
+    "sam-deploy": "yarn build && yarn package && yarn deploy",
     "local-invoke": "sam local invoke --event ./events/events.json --env-vars env/env.json"
   },
   "repository": {},
@@ -18,14 +18,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "chrome-aws-lambda": "^2.0.1",
+    "chrome-aws-lambda": "^5.2.1",
     "folktale": "^3.0.1-ts",
-    "puppeteer-autoscroll-down": "^0.1.2",
-    "puppeteer-core": "^2.0.0",
+    "puppeteer-autoscroll-down": "^0.1.5",
+    "puppeteer-core": "^2.1.1",
+    "ramda": "^0.26.1",
     "typed-slack": "^0.1.4",
     "webpack": "^4.7.0",
-    "webpack-cli": "^3.1.1",
-    "ramda": "^0.26.1"
+    "webpack-cli": "^3.1.1"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.3",

@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import { WishListsRepository } from '../domain/repositories/wish_lists'
+import { ItemsRepository } from '../domain/repositories/items'
 
 AWS.config.update({ region: 'ap-northeast-1' })
 
@@ -31,6 +32,31 @@ export const getWishListsRepository = (): WishListsRepository => {
           console.log('Success', urls)
           return urls
         })
+    }
+  }
+}
+
+export const getItemsRepository = (): ItemsRepository => {
+  const ddb = getDynamoDB()
+  const tableName = process.env.TABLE_ITEMS || ''
+  const now = Math.floor(Date.now() / 1000)
+
+  return {
+    update: async (urls: string[]) => {
+      await Promise.all(
+        urls.map(url => {
+          const params = {
+            TableName: tableName,
+            Item: {
+              URL: { S: url },
+              EXPIRED_AT: {
+                N: `${now + 24 * 60 * 60}`
+              }
+            }
+          }
+          return ddb.putItem(params).promise()
+        })
+      )
     }
   }
 }

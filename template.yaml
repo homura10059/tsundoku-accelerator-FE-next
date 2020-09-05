@@ -11,6 +11,7 @@ Globals:
     Environment:
       Variables:
         TABLE_WISH_LISTS: !Ref TableWishLists
+        TABLE_ITEMS: !Ref TableItems
     DeadLetterQueue:
       Type: SNS
       TargetArn: arn:aws:sns:ap-northeast-1:267428311438:failed-lambda
@@ -40,6 +41,12 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: prod
+  ## Lambda Layer
+  PuppeteerLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      Description: puppeteer Layer
+      ContentUri: layer
   ## Lambda
   WishListsGet:
     Type: AWS::Serverless::Function
@@ -60,6 +67,19 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${WishListsGet}
       RetentionInDays: 14
+  ItemsUpdate:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: server/controllers/items.update
+      Role: !GetAtt LambdaRole.Arn
+      Layers:
+        - !Ref PuppeteerLayer
+  LogItemsUpdate:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ItemsUpdate}
+      RetentionInDays: 14
   ## DynamoDB
   TableWishLists:
     Type: AWS::DynamoDB::Table
@@ -73,6 +93,21 @@ Resources:
       KeySchema:
         - AttributeName: 'URL'
           KeyType: 'HASH'
+  TableItems:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      AttributeDefinitions:
+        - AttributeName: 'URL'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'URL'
+          KeyType: 'HASH'
+      TimeToLiveSpecification:
+        AttributeName: "EXPIRED_AT"
+        Enabled: true
 #  AmazonItems:
 #    Type: AWS::DynamoDB::Table
 #    Properties:
