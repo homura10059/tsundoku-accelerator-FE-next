@@ -1,10 +1,7 @@
 import { getBrowser, scrape } from '../../repositories/scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
-import {
-  getItemsRepository,
-  getWishListsRepository
-} from '../../repositories/dynamo_db'
+import { getItemsRepository } from '../../repositories/dynamo_db'
 
 const getLinkListFromPage = async (page: Page): Promise<string[]> => {
   const links = await page

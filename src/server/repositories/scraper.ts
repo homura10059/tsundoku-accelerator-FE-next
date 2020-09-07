@@ -16,7 +16,6 @@ export const getBrowser = (() => {
         defaultViewport: chromium.defaultViewport,
         executablePath: path
       })
-      console.log('success getBrowser')
     }
     return browser
   }
@@ -24,9 +23,7 @@ export const getBrowser = (() => {
 
 export const scrape = async (browser: Browser, url: string) => {
   const page = await browser.newPage()
-  console.log('success newPage')
   await page.goto(url, { waitUntil: ['networkidle0'], timeout: 300000 })
-  console.log('success page.goto')
   // error になるけど気にしない
   await scrollPageToBottom(page)
   console.log('success scrollPageToBottom')

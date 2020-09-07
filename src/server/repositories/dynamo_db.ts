@@ -1,6 +1,10 @@
 import AWS from 'aws-sdk'
 import { WishListsRepository } from '../domain/repositories/wish_lists'
 import { ItemsRepository } from '../domain/repositories/items'
+import { getUnixTimeInSec } from './dates'
+import { ItemHistoryRepository } from '../domain/repositories/itemHistories'
+import { ItemHistory } from '../domain/model/ItemHistory'
+import { UnixTimeInSec } from '../domain/model/Dates'
 
 AWS.config.update({ region: 'ap-northeast-1' })
 
@@ -39,7 +43,7 @@ export const getWishListsRepository = (): WishListsRepository => {
 export const getItemsRepository = (): ItemsRepository => {
   const ddb = getDynamoDB()
   const tableName = process.env.TABLE_ITEMS || ''
-  const now = Math.floor(Date.now() / 1000)
+  const now = getUnixTimeInSec(new Date(Date.now()))
 
   return {
     getItems: async () => {
@@ -62,10 +66,62 @@ export const getItemsRepository = (): ItemsRepository => {
             TableName: tableName,
             Item: {
               URL: { S: url },
-              EXPIRED_AT: {
-                N: `${now + 24 * 60 * 60}`
-              }
+              EXPIRED_AT: { N: `${now + 60 * 24 * 60 * 60}` }
             }
+          }
+          return ddb.putItem(params).promise()
+        })
+      )
+    }
+  }
+}
+
+type DdItemHistory = {
+  URL: { S: string }
+  TITLE: { S: string }
+  SCRAPED_AT: { N: string }
+  DISCOUNT?: { N: string }
+  DISCOUNT_RATE: { N: string }
+  POINTS?: { N: string }
+  POINTS_RATE: { N: string }
+  EXPIRED_AT: { N: string }
+  PRICE: { N: string }
+}
+
+const convertDdItemHistory = (
+  itemHistory: ItemHistory,
+  expiredAt: UnixTimeInSec
+): DdItemHistory => {
+  let ddItemHistory: DdItemHistory = {
+    URL: { S: itemHistory.url },
+    TITLE: { S: itemHistory.title },
+    SCRAPED_AT: { N: `${itemHistory.scrapedAt}` },
+    EXPIRED_AT: { N: `${expiredAt}` },
+    DISCOUNT_RATE: { N: `${itemHistory.discountRate || 0}` },
+    POINTS_RATE: { N: `${itemHistory.pointsRate || 0}` },
+    PRICE: { N: `${itemHistory.price}` }
+  }
+  if (itemHistory.discount) {
+    ddItemHistory.DISCOUNT = { N: `${itemHistory.discount}` }
+  }
+  if (itemHistory.points) {
+    ddItemHistory.POINTS = { N: `${itemHistory.points}` }
+  }
+  return ddItemHistory
+}
+
+export const getItemHistoryRepository = (): ItemHistoryRepository => {
+  const ddb = getDynamoDB()
+  const tableName = process.env.TABLE_ITEM_HISTORIES || ''
+  const expiredAt = getUnixTimeInSec(new Date(Date.now())) + 60 * 24 * 60 * 60
+
+  return {
+    update: async (itemHistories: ItemHistory[]) => {
+      await Promise.all(
+        itemHistories.map(itemHistory => {
+          const params = {
+            TableName: tableName,
+            Item: convertDdItemHistory(itemHistory, expiredAt)
           }
           return ddb.putItem(params).promise()
         })

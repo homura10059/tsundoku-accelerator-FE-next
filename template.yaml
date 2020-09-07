@@ -12,6 +12,7 @@ Globals:
       Variables:
         TABLE_WISH_LISTS: !Ref TableWishLists
         TABLE_ITEMS: !Ref TableItems
+        TABLE_ITEM_HISTORIES: !Ref TableItemHistories
     DeadLetterQueue:
       Type: SNS
       TargetArn: arn:aws:sns:ap-northeast-1:267428311438:failed-lambda
@@ -47,12 +48,12 @@ Resources:
     Properties:
       Description: puppeteer Layer
       ContentUri: layer
-  ## Lambda
+  ## Lambda-controllers
   WishListsGet:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./dist
-      Handler: server/controllers/wish_lists.get
+      Handler: server/app/controllers/wish_lists.get
       Role: !GetAtt LambdaRole.Arn
       Events:
         ApiEvent:
@@ -71,7 +72,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./dist
-      Handler: server/controllers/items.get
+      Handler: server/app/controllers/items.get
       Role: !GetAtt LambdaRole.Arn
       Events:
         ApiEvent:
@@ -88,11 +89,12 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${ItemsGet}
       RetentionInDays: 14
+  ## Lambda-schedulers
   ItemsUpdate:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./dist
-      Handler: server/controllers/items.update
+      Handler: server/app/schedulers/items.update
       Role: !GetAtt LambdaRole.Arn
       Layers:
         - !Ref PuppeteerLayer
@@ -100,6 +102,19 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/lambda/${ItemsUpdate}
+      RetentionInDays: 14
+  ItemHistoriesUpdate:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: server/app/schedulers/itemHistories.update
+      Role: !GetAtt LambdaRole.Arn
+      Layers:
+        - !Ref PuppeteerLayer
+  LogItemHistoriesUpdate:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ItemHistoriesUpdate}
       RetentionInDays: 14
   ## DynamoDB
   TableWishLists:
@@ -129,46 +144,46 @@ Resources:
       TimeToLiveSpecification:
         AttributeName: "EXPIRED_AT"
         Enabled: true
-#  AmazonItems:
-#    Type: AWS::DynamoDB::Table
-#    Properties:
-#      ProvisionedThroughput:
-#        ReadCapacityUnits: 1
-#        WriteCapacityUnits: 1
-#      AttributeDefinitions:
-#        - AttributeName: "Url"
-#          AttributeType: "S"
-#        - AttributeName: "LastScrapeDateTime"
-#          AttributeType: "N"
-#        - AttributeName: "DiscountPer"
-#          AttributeType: "N"
-#        - AttributeName: "PointsPer"
-#          AttributeType: "N"
-#      KeySchema:
-#        - AttributeName: "Url"
-#          KeyType: "HASH"
-#        - AttributeName: "LastScrapeDateTime"
-#          KeyType: "RANGE"
-#      LocalSecondaryIndexes:
-#        - IndexName: "DiscountIndex"
-#          KeySchema:
-#            - AttributeName: "Url"
-#              KeyType: "HASH"
-#            - AttributeName: "DiscountPer"
-#              KeyType: "RANGE"
-#          Projection:
-#            ProjectionType: "ALL"
-#        - IndexName: "PointsIndex"
-#          KeySchema:
-#            - AttributeName: "Url"
-#              KeyType: "HASH"
-#            - AttributeName: "PointsPer"
-#              KeyType: "RANGE"
-#          Projection:
-#            ProjectionType: "ALL"
-#      TimeToLiveSpecification:
-#        AttributeName: "Expired"
-#        Enabled: true
+  TableItemHistories:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      AttributeDefinitions:
+        - AttributeName: "URL"
+          AttributeType: "S"
+        - AttributeName: "SCRAPED_AT"
+          AttributeType: "N"
+        - AttributeName: "DISCOUNT_RATE"
+          AttributeType: "N"
+        - AttributeName: "POINTS_RATE"
+          AttributeType: "N"
+      KeySchema:
+        - AttributeName: "URL"
+          KeyType: "HASH"
+        - AttributeName: "SCRAPED_AT"
+          KeyType: "RANGE"
+      LocalSecondaryIndexes:
+        - IndexName: "DiscountIndex"
+          KeySchema:
+            - AttributeName: "URL"
+              KeyType: "HASH"
+            - AttributeName: "DISCOUNT_RATE"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "PointsIndex"
+          KeySchema:
+            - AttributeName: "URL"
+              KeyType: "HASH"
+            - AttributeName: "POINTS_RATE"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+      TimeToLiveSpecification:
+        AttributeName: "EXPIRED_AT"
+        Enabled: true
 Outputs:
   WishListsGet:
     Description: 'WishListsGet ARN'
