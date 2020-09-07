@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import { WishListsRepository } from '../domain/repositories/wish_lists'
+import { WishListsRepository } from '../domain/repositories/wishLists'
 import { ItemsRepository } from '../domain/repositories/items'
 import { getUnixTimeInSec } from './dates'
 import { ItemHistoryRepository } from '../domain/repositories/itemHistories'

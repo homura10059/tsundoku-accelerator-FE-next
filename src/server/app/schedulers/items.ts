@@ -1,5 +1,5 @@
 import { APIGatewayProxyStructuredResultV2 } from 'aws-lambda/trigger/api-gateway-proxy'
-import { getWishLists } from '../../domain/service/wish_lists'
+import { getWishLists } from '../../domain/service/wishLists'
 import { getItems, updateItems } from '../../domain/service/items'
 
 export const update = async (): Promise<APIGatewayProxyStructuredResultV2> => {

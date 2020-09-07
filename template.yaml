@@ -53,13 +53,13 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./dist
-      Handler: server/app/controllers/wish_lists.get
+      Handler: server/app/controllers/wishLists.get
       Role: !GetAtt LambdaRole.Arn
       Events:
         ApiEvent:
           Type: Api
           Properties:
-            Path: /wish_lists
+            Path: /wishLists
             Method: get
             RestApiId:
               Ref: ApiGatewayApi

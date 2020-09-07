@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventV2 } from 'aws-lambda'
-import { getWishLists } from '../../domain/service/wish_lists'
+import { getWishLists } from '../../domain/service/wishLists'
 import { APIGatewayProxyStructuredResultV2 } from 'aws-lambda/trigger/api-gateway-proxy'
 
 export const get = async (
