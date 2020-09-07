@@ -85,7 +85,7 @@ type DdItemHistory = {
   POINTS?: { N: string }
   POINTS_RATE: { N: string }
   EXPIRED_AT: { N: string }
-  PRICE: { N: string }
+  PRICE?: { N: string }
 }
 
 const convertDdItemHistory = (
@@ -98,8 +98,10 @@ const convertDdItemHistory = (
     SCRAPED_AT: { N: `${itemHistory.scrapedAt}` },
     EXPIRED_AT: { N: `${expiredAt}` },
     DISCOUNT_RATE: { N: `${itemHistory.discountRate || 0}` },
-    POINTS_RATE: { N: `${itemHistory.pointsRate || 0}` },
-    PRICE: { N: `${itemHistory.price}` }
+    POINTS_RATE: { N: `${itemHistory.pointsRate || 0}` }
+  }
+  if (itemHistory.price) {
+    ddItemHistory.PRICE = { N: `${itemHistory.discount}` }
   }
   if (itemHistory.discount) {
     ddItemHistory.DISCOUNT = { N: `${itemHistory.discount}` }
