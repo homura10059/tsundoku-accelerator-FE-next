@@ -26,6 +26,5 @@ export const scrape = async (browser: Browser, url: string) => {
   await page.goto(url, { waitUntil: ['networkidle0'], timeout: 300000 })
   // error になるけど気にしない
   await scrollPageToBottom(page)
-  console.log('success scrollPageToBottom')
   return page
 }

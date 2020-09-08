@@ -105,7 +105,7 @@ export const getItemHistory = async (
       const history = values.reduce((prev, current) => {
         return { ...prev, ...current }
       }, initialState)
-      console.timeEnd('history:' + JSON.stringify(history))
+      console.log('history:' + JSON.stringify(history))
       return history
     })
     .catch(err => {

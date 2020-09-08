@@ -81,9 +81,9 @@ type DdItemHistory = {
   TITLE: { S: string }
   SCRAPED_AT: { N: string }
   DISCOUNT?: { N: string }
-  DISCOUNT_RATE: { N: string }
+  DISCOUNT_RATE?: { N: string }
   POINTS?: { N: string }
-  POINTS_RATE: { N: string }
+  POINTS_RATE?: { N: string }
   EXPIRED_AT: { N: string }
   PRICE?: { N: string }
 }
@@ -96,18 +96,22 @@ const convertDdItemHistory = (
     URL: { S: itemHistory.url },
     TITLE: { S: itemHistory.title },
     SCRAPED_AT: { N: `${itemHistory.scrapedAt}` },
-    EXPIRED_AT: { N: `${expiredAt}` },
-    DISCOUNT_RATE: { N: `${itemHistory.discountRate || 0}` },
-    POINTS_RATE: { N: `${itemHistory.pointsRate || 0}` }
+    EXPIRED_AT: { N: `${expiredAt}` }
   }
-  if (itemHistory.price) {
-    ddItemHistory.PRICE = { N: `${itemHistory.discount}` }
+  if (itemHistory.price !== undefined) {
+    ddItemHistory.PRICE = { N: `${itemHistory.price}` }
   }
-  if (itemHistory.discount) {
+  if (itemHistory.discount !== undefined) {
     ddItemHistory.DISCOUNT = { N: `${itemHistory.discount}` }
   }
-  if (itemHistory.points) {
+  if (itemHistory.points !== undefined) {
     ddItemHistory.POINTS = { N: `${itemHistory.points}` }
+  }
+  if (itemHistory.discountRate !== undefined) {
+    ddItemHistory.DISCOUNT_RATE = { N: `${itemHistory.discountRate}` }
+  }
+  if (itemHistory.pointsRate !== undefined) {
+    ddItemHistory.POINTS_RATE = { N: `${itemHistory.pointsRate}` }
   }
   return ddItemHistory
 }
@@ -115,6 +119,7 @@ const convertDdItemHistory = (
 export const getItemHistoryRepository = (): ItemHistoryRepository => {
   const ddb = getDynamoDB()
   const tableName = process.env.TABLE_ITEM_HISTORIES || ''
+  console.log(`TABLE_ITEM_HISTORIES: ${tableName}`)
   const expiredAt = getUnixTimeInSec(new Date(Date.now())) + 60 * 24 * 60 * 60
 
   return {
@@ -125,7 +130,14 @@ export const getItemHistoryRepository = (): ItemHistoryRepository => {
             TableName: tableName,
             Item: convertDdItemHistory(itemHistory, expiredAt)
           }
-          return ddb.putItem(params).promise()
+
+          return ddb
+            .putItem(params)
+            .promise()
+            .catch(e => {
+              console.info(JSON.stringify(itemHistory))
+              console.error(e)
+            })
         })
       )
     }

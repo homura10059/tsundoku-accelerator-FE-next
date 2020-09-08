@@ -17,7 +17,6 @@ export const update = async (): Promise<APIGatewayProxyStructuredResultV2> => {
     },
     new Array<ItemHistory>()
   )
-  console.log(`histories: ${histories}`)
   await updateItemHistories(histories)
   return {
     statusCode: 200
