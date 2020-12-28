@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getItems } from '../../../domain/service/items'
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { url },
   } = req
 
-  res.status(200).json({ url })
+  const urls = await getItems(typeof url === 'string' ? [url] : url)
+
+  res.status(200).json({ urls })
 }
