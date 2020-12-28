@@ -2,6 +2,16 @@
   "name": "tsundoku-accelerator",
   "description": "A Node.js app using NextJs",
   "repository": "https://github.com/o-hayato/tsundoku-accelerator",
-  "keywords": ["node", "heroku"],
-  "image": "heroku/nodejs"
+  "keywords": [
+    "node",
+    "heroku"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/CoffeeAndCode/puppeteer-heroku-buildpack.git"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
 }
