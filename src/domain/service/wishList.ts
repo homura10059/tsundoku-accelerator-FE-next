@@ -38,7 +38,5 @@ export const getScrapedWishList = async (
 export const getScrapedWishLists = async (urls: string[]) => {
   const browser = await getBrowser()
   console.log('browser:')
-  return Promise.all(
-    urls.map((url) => getScrapedWishList(browser, url))
-  )
+  return Promise.all(urls.map((url) => getScrapedWishList(browser, url)))
 }
