@@ -3,6 +3,7 @@ import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
 import { ScrapedWishList } from '../model/WishList'
 import { getUnixTime } from '../../lib/Dates'
+import url from 'url'
 
 const getScrapedWishListFromPage = async (
   page: Page
@@ -14,7 +15,10 @@ const getScrapedWishListFromPage = async (
         .filter((href: string | null): href is string => href !== null)
     })
     .finally(() => page.close())
-  console.log(links)
+
+  const parsedUrl = url.parse(page.url())
+  const protocol = parsedUrl.protocol || 'https:'
+  const host = parsedUrl.host || 'www.amazon.co.jp'
 
   return {
     url: page.url(),
@@ -22,7 +26,7 @@ const getScrapedWishListFromPage = async (
     items: links
       .filter((href: string) => href.includes('?coliid'))
       .filter((href: string) => href.includes('&ref'))
-      .map((href: string) => href.split('?')[0]),
+      .map((href: string) => `${protocol}//${host}${href.split('?')[0]}`),
   }
 }
 
