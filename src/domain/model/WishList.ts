@@ -7,4 +7,4 @@ export type WishList = {
   items: ItemUrl[]
 }
 
-export type ScrapedWishList = Scraped<WishList>
+export type ScrapedWishList = Omit<WishList, 'id'>

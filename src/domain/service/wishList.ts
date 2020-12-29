@@ -29,7 +29,7 @@ const getScrapedWishListFromPage = async (
 export const getScrapedWishList = async (
   browser: Browser,
   url: string
-): Promise<string[]> => {
+): Promise<ScrapedWishList> => {
   console.log('start scrapeUrl:' + url)
   const scrapeUrl = R.curry(scrape)(browser)
   return scrapeUrl(url).then((page) => getScrapedWishListFromPage(page))
@@ -40,9 +40,5 @@ export const getScrapedWishLists = async (urls: string[]) => {
   console.log('browser:')
   return Promise.all(
     urls.map((url) => getScrapedWishList(browser, url))
-  ).then((list) =>
-    list.reduce((previousValue, currentValue) =>
-      R.concat(previousValue, currentValue)
-    )
   )
 }
