@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "db:up": "docker-compose up -d",
+    "db:down": "docker-compose down -v",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start": "prisma migrate deploy --preview-feature && next start -p $PORT"
   },
   "engines": {
     "node": "14.15.3"
