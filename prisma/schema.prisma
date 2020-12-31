@@ -8,17 +8,25 @@ datasource db {
 }
 
 model Post {
-  authorId  Int?
+  authorId  String?
   content   String?
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(cuid())
   published Boolean @default(false)
   title     String
   author    User?   @relation(fields: [authorId], references: [id])
 }
 
 model User {
-  email String  @unique
-  id    Int     @id @default(autoincrement())
-  name  String?
+  id    String  @id @default(cuid())
+  name  String  @unique
   posts Post[]
+  wishLists WishList[]
+}
+
+model WishList {
+  id    String  @id @default(cuid())
+  url   String
+  scrapedAt Int
+  userId  String?
+  author  User?   @relation(fields: [userId], references: [id])
 }

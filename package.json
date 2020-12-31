@@ -5,7 +5,8 @@
   "scripts": {
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down -v",
-    "dev": "next dev",
+    "db:deploy": "prisma migrate deploy --preview-feature",
+    "dev": "yarn db:deploy && next dev",
     "build": "next build",
     "start": "prisma migrate deploy --preview-feature && next start -p $PORT"
   },
