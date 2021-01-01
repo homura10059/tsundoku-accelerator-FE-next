@@ -28,5 +28,12 @@ model WishList {
   url   String
   scrapedAt Int
   userId  String?
-  author  User?   @relation(fields: [userId], references: [id])
+  user  User?   @relation(fields: [userId], references: [id])
+  items  Item[]   @relation(references: [url])
+}
+
+model Item {
+  url   String @id
+  scrapedAt Int
+  wishLists WishList[] @relation(references: [id])
 }
