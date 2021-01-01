@@ -1,0 +1,42 @@
+import type { GetServerSideProps } from 'next'
+import React from 'react'
+import { useRouter } from 'next/router'
+import * as UserService from '../../domain/service/user'
+
+type Props = {
+  user?: {
+    id: string
+    name: string
+  }
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
+  const name = ctx.params.name
+  if (typeof name !== 'string') {
+    return {
+      props: {},
+    }
+  }
+  const user = await UserService.searchUser(name)
+  return {
+    props: {
+      user,
+    },
+  }
+}
+
+const User = (props: Props) => {
+  if (!props.user) {
+    return <p>no user</p>
+  }
+  const { id, name } = props.user
+
+  return (
+    <>
+      <p>Id: {id}</p>
+      <p>name: {name}</p>
+    </>
+  )
+}
+
+export default User

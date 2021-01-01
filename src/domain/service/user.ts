@@ -16,3 +16,15 @@ export const getAll = async () => {
     },
   })
 }
+
+export const searchUser = async (name?: string) => {
+  return name
+    ? prisma.user.findUnique({
+        select: {
+          name: true,
+          id: true,
+        },
+        where: { name },
+      })
+    : undefined
+}
