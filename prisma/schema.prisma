@@ -26,7 +26,7 @@ model User {
 model WishList {
   id    String  @id @default(cuid())
   url   String
-  scrapedAt Int
+  scrapedAt Int?
   userId  String?
   user  User?   @relation(fields: [userId], references: [id])
   items  Item[]   @relation(references: [url])
@@ -34,6 +34,6 @@ model WishList {
 
 model Item {
   url   String @id
-  scrapedAt Int
+  scrapedAt Int?
   wishLists WishList[] @relation(references: [id])
 }

@@ -4,6 +4,7 @@ import * as R from 'ramda'
 import { ScrapedWishList } from '../model/WishList'
 import { getUnixTime } from '../../lib/Dates'
 import url from 'url'
+import prisma from '../../lib/prisma'
 
 const getScrapedWishListFromPage = async (
   page: Page
@@ -43,4 +44,18 @@ export const getScrapedWishLists = async (urls: string[]) => {
   const browser = await getBrowser()
   console.log('browser:')
   return Promise.all(urls.map((url) => getScrapedWishList(browser, url)))
+}
+
+export const addWishList = async (userId: string, url: string) => {
+  await prisma.wishList.create({
+    data: {
+      url,
+      scrapedAt: null,
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  })
 }

@@ -6,8 +6,7 @@
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down -v",
     "db:deploy": "prisma migrate deploy --preview-feature",
-    "dev:db:update": "prisma migrate dev --preview-feature",
-    "generate:db:type": "npx prisma generate",
+    "dev:db:update": "prisma migrate dev --preview-feature && npx prisma generate",
     "dev": "yarn db:deploy && next dev",
     "build": "next build",
     "start": "prisma migrate deploy --preview-feature && next start -p $PORT"
