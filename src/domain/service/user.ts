@@ -23,6 +23,7 @@ export const searchUser = async (name?: string) => {
         select: {
           name: true,
           id: true,
+          wishLists: true,
         },
         where: { name },
       })

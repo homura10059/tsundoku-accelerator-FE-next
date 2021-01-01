@@ -7,6 +7,11 @@ type Props = {
   user?: {
     id: string
     name: string
+    wishLists: {
+      id: string
+      url: string
+      scrapedAt: number | null
+    }[]
   }
 }
 
@@ -29,12 +34,28 @@ const User = (props: Props) => {
   if (!props.user) {
     return <p>no user</p>
   }
-  const { id, name } = props.user
+  const { id, name, wishLists } = props.user
 
   return (
     <>
       <p>Id: {id}</p>
       <p>name: {name}</p>
+      <table>
+        <tr>
+          <th>id</th>
+          <th>url</th>
+          <th>scrapedAt</th>
+        </tr>
+        {wishLists.map((wishList) => (
+          <>
+            <tr>
+              <td>{wishList.id}</td>
+              <td>{wishList.url}</td>
+              <td>{wishList.scrapedAt}</td>
+            </tr>
+          </>
+        ))}
+      </table>
     </>
   )
 }
