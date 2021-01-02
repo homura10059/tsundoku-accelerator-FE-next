@@ -2,7 +2,7 @@ import { getBrowser, scrape } from '../repositories/scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
 import { ScrapedWishList } from '../model/WishList'
-import { getUnixTime } from '../../lib/Dates'
+import { getUnixTimeNow } from '../../lib/dates'
 import { unique } from '../../lib/arrays'
 import url from 'url'
 
@@ -23,7 +23,7 @@ const getScrapedWishListFromPage = async (
 
   return {
     url: page.url(),
-    scrapedAt: getUnixTime(),
+    scrapedAt: getUnixTimeNow(),
     items: unique(
       links
         .filter((href: string) => href.includes('?coliid'))
