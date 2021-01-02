@@ -3,14 +3,15 @@ export type UUID = string
 export type WishListUrl = string
 export type ItemUrl = string
 export type Title = string
-export type Price = string
-export type Discount = string
-export type DiscountRate = string
-export type Points = string
-export type PointsRate = string
+
 
 // number
 export type UnixTimeInSec = number
+export type Price = number
+export type Discount = number
+export type DiscountRate = number
+export type Points = number
+export type PointsRate = number
 
 // generics
 export type Scraped<T> = Omit<T, 'id'>

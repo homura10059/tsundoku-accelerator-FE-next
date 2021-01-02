@@ -5,7 +5,8 @@
   "scripts": {
     "db:up": "docker-compose up -d",
     "db:down": "docker-compose down -v",
-    "dev:db:update": "prisma migrate dev --preview-feature && npx prisma generate",
+    "dev:db:update": "prisma migrate dev --preview-feature",
+    "dev:db:generate": "npx prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "prisma migrate deploy --preview-feature && next start -p $PORT"

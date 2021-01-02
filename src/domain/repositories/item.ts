@@ -28,7 +28,7 @@ const getPrice = async (page: Page): Promise<Pick<Item, 'price'>> => {
     return {
       price:
         price && price.length > 0
-          ? price[0].trim().replace(',', '')
+          ? parseInt(price[0].trim().replace(',', ''), 10)
           : undefined,
     }
   })
@@ -43,10 +43,10 @@ const getSaving = async (
     return {
       discount:
         discount && discount.length > 0
-          ? discount[0].trim().replace(',', '')
+          ? parseInt(discount[0].trim().replace(',', ''), 10)
           : undefined,
       discountRate:
-        discountPer && discountPer.length > 0 ? discountPer[0] : undefined,
+        discountPer && discountPer.length > 0 ? parseInt(discountPer[0], 10) : undefined,
     }
   })
 }
@@ -57,7 +57,7 @@ const getPoint = async (page: Page): Promise<Pick<Item, 'points'>> => {
     return {
       points:
         points && points.length > 0
-          ? points[0].trim().replace(',', '')
+          ? parseInt(points[0].trim().replace(',', ''), 10)
           : undefined,
     }
   })
@@ -77,7 +77,7 @@ const getPointsPer = async (page: Page): Promise<Pick<Item, 'pointsRate'>> => {
       const pointsPer = percentageRegex.exec(pointsPerStr)
       return {
         pointsRate:
-          pointsPer && pointsPer.length > 0 ? pointsPer[0] : undefined,
+          pointsPer && pointsPer.length > 0 ? parseInt(pointsPer[0], 10) : undefined,
       }
     })
 }
