@@ -3,7 +3,7 @@ import { Browser, Page } from 'puppeteer'
 import { Item } from '../model/Item'
 import * as R from 'ramda'
 import { POINTS, POINTS_RATE, PRICE, SAVING, TITLE } from '../model/CssSelector'
-import { getUnixTimeInSec } from '../../lib/dates'
+import { getUnixTimeInSec } from '../../lib/Dates'
 import { concurrentPromise } from '../../lib/promises'
 
 const priceRegex = /\d{1,3}(,\d{3})*/

@@ -2,7 +2,7 @@ import { getBrowser, scrape } from '../repositories/scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
 import { ScrapedWishList } from '../model/WishList'
-import { getUnixTimeNow } from '../../lib/dates'
+import { getUnixTimeNow } from '../../lib/Dates'
 import { unique } from '../../lib/arrays'
 import url from 'url'
 
