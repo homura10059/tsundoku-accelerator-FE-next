@@ -50,7 +50,7 @@ const User = (props: Props) => {
           <>
             <tr>
               <td>{wishList.id}</td>
-              <td>{wishList.url}</td>
+              <td><a href={wishList.url}>{wishList.url}</a></td>
               <td>{wishList.scrapedAt}</td>
             </tr>
           </>
