@@ -1,3 +1,4 @@
 const fetch = require('node-fetch');
 // レスポンスは必要ないのであえてawaitしない
-fetch('http://localhost:3000/api/wishLists', { method: 'POST' })
+const port = ENV['PORT'] || '3000'
+fetch(`http://localhost:${port}/api/wishLists`, { method: 'POST' })
