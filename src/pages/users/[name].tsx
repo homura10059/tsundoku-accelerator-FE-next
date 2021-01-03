@@ -1,7 +1,8 @@
 import type { GetServerSideProps } from 'next'
 import React from 'react'
-import { useRouter } from 'next/router'
 import * as UserService from '../../domain/service/user'
+import Page from '../../components/Page/Page'
+import styled from 'styled-components'
 
 type Props = {
   user?: {
@@ -30,6 +31,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   }
 }
 
+const Title = styled.h1`
+  font-size: 2.0rem;
+  color: ${({ theme }) => theme.colors.primary};
+`
+const titleTxt = 'MyPage'
+
 const User = (props: Props) => {
   if (!props.user) {
     return <p>no user</p>
@@ -37,26 +44,27 @@ const User = (props: Props) => {
   const { id, name, wishLists } = props.user
 
   return (
-    <>
+    <Page title={titleTxt}>
+      <Title>{titleTxt}</Title>
       <p>Id: {id}</p>
       <p>name: {name}</p>
       <table>
         <tr>
-          <th>id</th>
           <th>url</th>
           <th>scrapedAt</th>
         </tr>
         {wishLists.map((wishList) => (
           <>
             <tr>
-              <td>{wishList.id}</td>
-              <td><a href={wishList.url}>{wishList.url}</a></td>
+              <td>
+                <a href={wishList.url}>{wishList.url}</a>
+              </td>
               <td>{wishList.scrapedAt}</td>
             </tr>
           </>
         ))}
       </table>
-    </>
+    </Page>
   )
 }
 
