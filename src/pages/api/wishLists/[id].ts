@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as z from 'zod'
-import { fetchWishList, updateWishList } from '../../../domain/service/wishList'
+import { fetchWishList, updateWishListById } from '../../../domain/service/wishList'
 
 const requestParamSchema = z.object({
   id: z.string().min(1),
@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PUT':
       try {
         const result = requestParamSchema.parse(req.query)
-        await updateWishList(result.id)
+        await updateWishListById(result.id)
         res.json({
           status: 'ok',
         })

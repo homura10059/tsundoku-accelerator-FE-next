@@ -27,9 +27,15 @@ export const fetchWishList = async (id: string) => {
   return { ...dbData, ...scrapedData }
 }
 
-export const updateWishList = async (id: string) => {
-  const wishList = await fetchWishList(id)
-  wishList.items.forEach(async (url) => {
+export const updateWishList = async (wishList: {
+  url: string
+  scrapedAt: number
+  id: string
+  userId: string
+}) => {
+  const scrapedData = await getScrapedWishList(wishList.url)
+  const result = { ...wishList, ...scrapedData }
+  result.items.forEach(async (url) => {
     await prisma.item.upsert({
       where: {
         url,
@@ -39,14 +45,14 @@ export const updateWishList = async (id: string) => {
         scrapedAt: null,
         wishLists: {
           connect: {
-            id: wishList.id,
+            id: result.id,
           },
         },
       },
       update: {
         wishLists: {
           connect: {
-            id: wishList.id,
+            id: result.id,
           },
         },
       },
@@ -54,10 +60,27 @@ export const updateWishList = async (id: string) => {
   })
   await prisma.wishList.update({
     data: {
-      scrapedAt: wishList.scrapedAt,
+      scrapedAt: result.scrapedAt,
     },
+    where: {
+      id: result.id,
+    },
+  })
+}
+
+export const updateWishListById = async (id: string) => {
+  const dbData = await prisma.wishList.findUnique({
     where: {
       id,
     },
+  })
+
+  await updateWishList(dbData)
+}
+
+export const updateAllWishLists = async () => {
+  const wishLists = await prisma.wishList.findMany()
+  wishLists.forEach(async (wishList) => {
+    await updateWishList(wishList)
   })
 }

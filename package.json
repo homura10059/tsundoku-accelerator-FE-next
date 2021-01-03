@@ -9,7 +9,8 @@
     "dev:db:generate": "npx prisma generate",
     "dev": "next dev",
     "build": "next build",
-    "start": "prisma migrate deploy --preview-feature && next start -p $PORT"
+    "start": "prisma migrate deploy --preview-feature && next start -p $PORT",
+    "command:update:wishLists": "node schedulers/wishLists/update.js"
   },
   "engines": {
     "node": "14.15.3"
