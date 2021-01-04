@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as z from 'zod'
-import {fetchItem , updateItem} from '../../../domain/service/item'
+import { fetchItem, updateItemByUrl, updateAllItems } from '../../../domain/service/item'
 
 const requestParamSchema = z.object({
   url: z.string().min(1),
@@ -23,7 +23,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PUT':
       try {
         const result = requestParamSchema.parse(req.query)
-        await updateItem(result.url)
+        await updateItemByUrl(result.url)
+        res.json({
+          status: 'ok',
+        })
+      } catch (error) {
+        res.json({ status: 'error', error })
+      }
+      break
+    case 'POST':
+      try {
+        await updateAllItems()
         res.json({
           status: 'ok',
         })
