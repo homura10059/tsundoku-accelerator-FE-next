@@ -35,6 +35,17 @@ export const updateWishList = async (wishList: {
 }) => {
   const scrapedData = await getScrapedWishList(wishList.url)
   const result = { ...wishList, ...scrapedData }
+  await prisma.wishList.update({
+    data: {
+      scrapedAt: result.scrapedAt,
+      items: {
+        disconnect: {}
+      }
+    },
+    where: {
+      id: result.id,
+    },
+  })
   result.items.forEach(async (url) => {
     await prisma.item.upsert({
       where: {
@@ -57,14 +68,6 @@ export const updateWishList = async (wishList: {
         },
       },
     })
-  })
-  await prisma.wishList.update({
-    data: {
-      scrapedAt: result.scrapedAt,
-    },
-    where: {
-      id: result.id,
-    },
   })
 }
 
