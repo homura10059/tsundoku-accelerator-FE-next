@@ -3,7 +3,7 @@ import * as z from 'zod'
 import * as WishListService from '../../../domain/service/wishList'
 
 const requestParamSchema = z.object({
-  id: z.string().min(1),
+  id: z.number().min(0),
   url: z.string().min(1),
 })
 

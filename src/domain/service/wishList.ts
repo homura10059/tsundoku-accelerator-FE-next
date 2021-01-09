@@ -1,7 +1,7 @@
 import { getScrapedWishList } from '../repositories/wishList'
 import prisma from '../../lib/prisma'
 
-export const addWishList = async (userId: string, url: string) => {
+export const addWishList = async (userId: number, url: string) => {
   await prisma.wishList.create({
     data: {
       url,
@@ -31,7 +31,7 @@ export const updateWishList = async (wishList: {
   url: string
   scrapedAt: number
   id: string
-  userId: string
+  userId: number
 }) => {
   const scrapedData = await getScrapedWishList(wishList.url)
   const result = { ...wishList, ...scrapedData }
@@ -39,8 +39,8 @@ export const updateWishList = async (wishList: {
     data: {
       scrapedAt: result.scrapedAt,
       items: {
-        disconnect: {}
-      }
+        disconnect: {},
+      },
     },
     where: {
       id: result.id,
