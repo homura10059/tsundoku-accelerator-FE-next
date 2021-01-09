@@ -1,17 +1,10 @@
-import Image from 'next/image'
+// Header.tsx
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
-import styled from 'styled-components'
 
-type Props = {}
-
-const Header = styled.header`
-  background-color: ${({ theme }) => theme.colors.primary};
-`
-
-const MustHead: React.FC<Props> = () => {
+const Header: React.FC = () => {
   const router = useRouter()
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname
@@ -202,20 +195,18 @@ const MustHead: React.FC<Props> = () => {
   }
 
   return (
-    <Header>
-      <nav>
-        {left}
-        {right}
-        <style jsx>{`
-          nav {
-            display: flex;
-            padding: 2rem;
-            align-items: center;
-          }
-        `}</style>
-      </nav>
-    </Header>
+    <nav>
+      {left}
+      {right}
+      <style jsx>{`
+        nav {
+          display: flex;
+          padding: 2rem;
+          align-items: center;
+        }
+      `}</style>
+    </nav>
   )
 }
 
-export default MustHead
+export default Header

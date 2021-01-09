@@ -1,40 +1,54 @@
-import type { GetServerSideProps } from 'next'
-import React from 'react'
-import { PostForm } from '../components/PostForm'
-import prisma, { Post } from '../lib/prisma'
+import React from "react"
+import { GetStaticProps } from "next"
+import Layout from "../components/Layout"
+import Post, { PostProps } from "../components/Post"
+import prisma from '../lib/prisma'
 
-type Props = {
-  posts: Pick<Post, 'id' | 'title' | 'content'>[]
-}
-
-export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  const posts = await prisma.post.findMany({
-    select: {
-      title: true,
-      content: true,
-      id: true,
+export const getStaticProps: GetStaticProps = async () => {
+  const feed = await prisma.post.findMany({
+    where: { published: true },
+    include: {
+      author: {
+        select: { name: true },
+      },
     },
   })
-  return {
-    props: {
-      posts,
-    },
-  }
+  return { props: { feed } }
 }
 
-export default function Index(props: Props) {
+type Props = {
+  feed: PostProps[]
+}
+
+const Blog: React.FC<Props> = (props) => {
   return (
-    <>
-      <PostForm />
-      <div>post count: {props.posts.length}</div>
-      {props.posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
-          </div>
-        )
-      })}
-    </>
+    <Layout>
+      <div className="page">
+        <h1>Public Feed</h1>
+        <main>
+          {props.feed.map((post) => (
+            <div key={post.id} className="post">
+              <Post post={post} />
+            </div>
+          ))}
+        </main>
+      </div>
+      <style jsx>{`
+        .post {
+          background: white;
+          transition: box-shadow 0.1s ease-in;
+        }
+
+        .post:hover {
+          box-shadow: 1px 1px 3px #aaa;
+        }
+
+        .post + .post {
+          margin-top: 2rem;
+        }
+      `}</style>
+    </Layout>
   )
 }
+
+export default Blog
