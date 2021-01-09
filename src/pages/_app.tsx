@@ -1,3 +1,4 @@
+import { Provider } from 'next-auth/client'
 import { AppProps } from 'next/app'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import reset from 'styled-reset'
@@ -21,7 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Provider session={pageProps.session}>
+          <Component {...pageProps} />
+        </Provider>
       </ThemeProvider>
     </>
   )
