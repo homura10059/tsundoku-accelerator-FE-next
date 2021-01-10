@@ -4,7 +4,7 @@ import Metadata from '../organisms/Metadata/Metadata'
 import styled from 'styled-components'
 
 type Props = {
-  title: string
+  title?: string
   children: ReactNode
 }
 

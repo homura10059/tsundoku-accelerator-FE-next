@@ -1,10 +1,8 @@
-import { UUID, UnixTimeInSec, WishListUrl, ItemUrl, Scraped } from './global'
+import { UUID, UnixTimeInSec, WishListUrl, ItemUrl } from './global'
+import { WishList } from '../../lib/prisma'
 
-export type WishList = {
-  id: UUID
+export type ScrapedWishList = {
   url: WishListUrl
   scrapedAt: UnixTimeInSec
   items: ItemUrl[]
 }
-
-export type ScrapedWishList = Omit<WishList, 'id'>
