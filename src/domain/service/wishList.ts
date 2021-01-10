@@ -87,3 +87,10 @@ export const updateAllWishLists = async () => {
     await updateWishList(wishList)
   })
 }
+
+export const getWishLists = async (userId: number) =>
+  prisma.wishList.findMany({
+    where: {
+      userId,
+    },
+  })

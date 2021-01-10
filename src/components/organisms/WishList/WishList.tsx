@@ -1,32 +1,25 @@
 import React from 'react'
 import Router from 'next/router'
-import ReactMarkdown from 'react-markdown'
+import { WishList as WishListModel } from '../../../domain/model/WishList'
+import styled from 'styled-components'
 
-export type Props = {
-  id: number
-  title: string
-  author: {
-    name: string
-    email: string
-  } | null
-  content: string
-  published: boolean
-}
+export type Props = WishListModel
 
-const WishList: React.FC<{ post: Props }> = ({ post }) => {
-  const authorName = post.author ? post.author.name : 'Unknown author'
+const Wrapper = styled.article`
+  background-color: ${({ theme }) => theme.colors.base};
+`
+const Box = styled.a``
+const Title = styled.h1``
+
+const WishList: React.FC<Props> = (wishList) => {
+  const onClick = () => Router.push('/p/[id]', `/p/${wishList.id}`)
   return (
-    <div onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-      <h2>{post.title}</h2>
-      <small>By {authorName}</small>
-      <ReactMarkdown source={post.content} />
-      <style jsx>{`
-        div {
-          color: inherit;
-          padding: 2rem;
-        }
-      `}</style>
-    </div>
+    <Wrapper>
+      <Box onClick={onClick}>
+        <Title>{wishList.url}</Title>
+        <p>{wishList.scrapedAt}</p>
+      </Box>
+    </Wrapper>
   )
 }
 
