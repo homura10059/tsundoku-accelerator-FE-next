@@ -1,6 +1,6 @@
 import React from "react"
 import { GetStaticProps } from "next"
-import Layout from "../components/Layout"
+import Layout from "../components/Page/Layout"
 import Post, { PostProps } from "../components/Post"
 import prisma from '../lib/prisma'
 
@@ -22,7 +22,7 @@ type Props = {
 
 const Blog: React.FC<Props> = (props) => {
   return (
-    <Layout>
+    <Layout title={'MyPage'}>
       <div className="page">
         <h1>Public Feed</h1>
         <main>
