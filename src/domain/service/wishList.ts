@@ -1,14 +1,14 @@
 import { getScrapedWishList } from '../repositories/wishList'
 import prisma from '../../lib/prisma'
 
-export const addWishList = async (userId: number, url: string) => {
+export const addWishList = async (email: string, url: string) => {
   await prisma.wishList.create({
     data: {
       url,
       scrapedAt: null,
       user: {
         connect: {
-          id: userId,
+          email
         },
       },
     },

@@ -1,12 +1,34 @@
-// Header.tsx
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
 import styled from 'styled-components'
+import Button from '../../atoms/Button/Button'
 
-const aaaaa = styled.header`
+const AppBar = styled.nav`
+  display: flex;
+  padding: 1.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
   background-color: ${({ theme }) => theme.colors.primary};
+`
+
+const Left = styled.div`
+  display: flex;
+`
+const Right = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  &:first-child {
+    margin-bottom: 20px;
+  }
+`
+
+const RightWrapper = styled.div`
+  &:not(:last-child) {
+    margin-right: 0.2rem;
+  }
 `
 
 const Header: React.FC = () => {
@@ -152,65 +174,34 @@ const Header: React.FC = () => {
       </div>
     )
     right = (
-      <div className="right">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
-        <Link href="/create">
-          <button>
-            <a>New post</a>
-          </button>
-        </Link>
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-
-          p {
-            display: inline-block;
-            font-size: 13px;
-            padding-right: 1rem;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid black;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
-          button {
-            border: none;
-          }
-        `}</style>
-      </div>
+      <Right>
+        <RightWrapper>
+          <p>
+            {session.user.name} ({session.user.email})
+          </p>
+        </RightWrapper>
+        <RightWrapper>
+          <Link href="/create">
+            <Button label={'New post'} />
+          </Link>
+        </RightWrapper>
+        <RightWrapper>
+          <Link href="/wishList/add">
+            <Button label={'Add WishList'} />
+          </Link>
+        </RightWrapper>
+        <RightWrapper>
+          <Button label={'Log out'} onClick={() => signOut()} />
+        </RightWrapper>
+      </Right>
     )
   }
 
   return (
-    <nav>
+    <AppBar>
       {left}
       {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
-    </nav>
+    </AppBar>
   )
 }
 
