@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
 import styled from 'styled-components'
-import Button from '../../atoms/Button/Button'
+import TextButton from '../../atoms/Button/TextButton'
 
 const AppBar = styled.nav`
   display: flex;
@@ -182,16 +182,16 @@ const Header: React.FC = () => {
         </RightWrapper>
         <RightWrapper>
           <Link href="/create">
-            <Button label={'New post'} />
+            <TextButton label={'New post'} />
           </Link>
         </RightWrapper>
         <RightWrapper>
           <Link href="/wishList/add">
-            <Button label={'Add WishList'} />
+            <TextButton label={'Add WishList'} />
           </Link>
         </RightWrapper>
         <RightWrapper>
-          <Button label={'Log out'} onClick={() => signOut()} />
+          <TextButton label={'Log out'} onClick={() => signOut()} />
         </RightWrapper>
       </Right>
     )

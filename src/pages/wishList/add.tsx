@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Page/Layout'
 import Router from 'next/router'
-import Button from '../../components/atoms/Button/Button'
+import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
 import styled from 'styled-components'
 
@@ -44,7 +44,7 @@ const Draft: React.FC = () => {
             value={url}
           />
           <SubmitButton disabled={!url} value="Add" />
-          <Button
+          <TextButton
             label={'Cancel'}
             href={'#'}
             onClick={() => Router.push('/')}

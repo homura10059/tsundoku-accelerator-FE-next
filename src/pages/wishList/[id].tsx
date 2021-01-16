@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
 import { format } from 'date-fns'
-import Button from '../../components/atoms/Button/Button'
+import TextButton from '../../components/atoms/Button/TextButton'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = typeof params?.id === 'string' ? params?.id : ''
@@ -55,10 +55,10 @@ const WishList: React.FC<WishListProps> = (props) => {
         </p>
         <p>scrapedAt: {scrapedAt}</p>
         {userHasValidSession && (
-          <Button onClick={() => updateWishList(props.id)} label="Update" />
+          <TextButton onClick={() => updateWishList(props.id)} label="Update" />
         )}
         {userHasValidSession && (
-          <Button onClick={() => deleteWishList(props.id)} label="Delete" />
+          <TextButton onClick={() => deleteWishList(props.id)} label="Delete" />
         )}
       </Wrapper>
     </Layout>
