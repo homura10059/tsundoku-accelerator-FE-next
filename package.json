@@ -17,7 +17,8 @@
     "node": "14.15.3"
   },
   "dependencies": {
-    "@prisma/client": "2",
+    "@prisma/client": "^2.1.4",
+    "date-fns": "^2.16.1",
     "final-form": "^4.20.1",
     "next": "^10.0.4",
     "next-auth": "^3.1.0",

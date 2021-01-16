@@ -28,10 +28,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           status: 'ok',
         })
       } catch (error) {
-        res.json({ status: 'error', error })
+        res.status(500).json({ status: 'error', error })
       }
       break
     default:
-      res.json({ status: 'error', case: 'invalid method' })
+      res.status(500).json({ status: 'error', case: 'invalid method' })
   }
 }
