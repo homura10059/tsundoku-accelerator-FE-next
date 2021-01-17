@@ -53,17 +53,29 @@ CREATE TABLE "sessions" (
 );
 
 -- CreateTable
-CREATE TABLE "WishList" (
+CREATE TABLE "wishLists" (
     "id" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "scrapedAt" INTEGER,
     "userId" INTEGER,
+    "discountRateThreshold" INTEGER NOT NULL DEFAULT 0,
+    "pointsRateThreshold" INTEGER NOT NULL DEFAULT 0,
 
     PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Item" (
+CREATE TABLE "slackNotifications" (
+    "id" TEXT NOT NULL,
+    "incomingWebhookUrl" TEXT NOT NULL,
+    "channel" TEXT NOT NULL,
+    "wishListId" TEXT NOT NULL,
+
+    PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "items" (
     "url" TEXT NOT NULL,
     "scrapedAt" INTEGER,
     "price" INTEGER,
@@ -112,10 +124,13 @@ CREATE INDEX "_ItemToWishList_B_index" ON "_ItemToWishList"("B");
 ALTER TABLE "Post" ADD FOREIGN KEY("authorId")REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "WishList" ADD FOREIGN KEY("userId")REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "wishLists" ADD FOREIGN KEY("userId")REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ItemToWishList" ADD FOREIGN KEY("A")REFERENCES "Item"("url") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "slackNotifications" ADD FOREIGN KEY("wishListId")REFERENCES "wishLists"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ItemToWishList" ADD FOREIGN KEY("B")REFERENCES "WishList"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_ItemToWishList" ADD FOREIGN KEY("A")REFERENCES "items"("url") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ItemToWishList" ADD FOREIGN KEY("B")REFERENCES "wishLists"("id") ON DELETE CASCADE ON UPDATE CASCADE;

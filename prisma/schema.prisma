@@ -63,12 +63,27 @@ model Session {
 }
 
 model WishList {
-  id        String  @id @default(cuid())
-  url       String
-  scrapedAt Int?
-  userId    Int?
-  user      User?   @relation(fields: [userId], references: [id])
-  items     Item[]  @relation(references: [url])
+  id                    String              @id @default(cuid())
+  url                   String
+  scrapedAt             Int?
+  userId                Int?
+  discountRateThreshold Int                 @default(0)
+  pointsRateThreshold   Int                 @default(0)
+  user                  User?               @relation(fields: [userId], references: [id])
+  items                 Item[]              @relation(references: [url])
+  SlackNotifications    SlackNotification[]
+
+  @@map(name: "wishLists")
+}
+
+model SlackNotification {
+  id                 String   @id @default(cuid())
+  incomingWebhookUrl String
+  channel            String
+  wishListId         String
+  wishList           WishList @relation(fields: [wishListId], references: [id])
+
+  @@map(name: "slackNotifications")
 }
 
 model Item {
@@ -80,4 +95,6 @@ model Item {
   points       Int?
   pointsRate   Int?
   wishLists    WishList[] @relation(references: [id])
+
+  @@map(name: "items")
 }

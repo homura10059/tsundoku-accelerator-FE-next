@@ -5,6 +5,8 @@ import * as z from 'zod'
 
 const requestParamSchema = z.object({
   url: z.string().min(1),
+  discountRateThreshold: z.number().optional(),
+  pointsRateThreshold: z.number().optional(),
 })
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -12,8 +14,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       try {
         const session = await getSession({ req })
-        const result = requestParamSchema.parse(req.body)
-        await addWishList(session?.user?.email, result.url)
+        const {
+          url,
+          discountRateThreshold,
+          pointsRateThreshold,
+        } = requestParamSchema.parse(req.body)
+
+        await addWishList(
+          session?.user?.email,
+          url,
+          discountRateThreshold,
+          pointsRateThreshold
+        )
         res.json({
           status: 'ok',
         })

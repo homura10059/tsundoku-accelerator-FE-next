@@ -1,17 +1,34 @@
 import { getScrapedWishList } from '../repositories/wishList'
 import prisma from '../../lib/prisma'
 
-export const addWishList = async (email: string, url: string) => {
+export const addWishList = async (
+  email: string,
+  url: string,
+  discountRateThreshold = 0,
+  pointsRateThreshold = 0
+) => {
   await prisma.wishList.create({
     data: {
       url,
       scrapedAt: null,
+      discountRateThreshold,
+      pointsRateThreshold,
       user: {
         connect: {
           email,
         },
       },
     },
+  })
+}
+
+export const deleteWishList = async (
+  id: string
+) => {
+  await prisma.wishList.delete({
+    where:{
+      id
+    }
   })
 }
 
@@ -36,8 +53,8 @@ export const updateWishList = async (wishList: {
   const scrapedData = await getScrapedWishList(wishList.url)
   const next = { ...wishList, ...scrapedData }
   const before = await prisma.wishList.findUnique({
-    include:{
-      items: true
+    include: {
+      items: true,
     },
     where: {
       id: wishList.id,
@@ -47,8 +64,8 @@ export const updateWishList = async (wishList: {
     data: {
       scrapedAt: next.scrapedAt,
       items: {
-        disconnect: before.items.map(item => ({ url : item.url}))
-      }
+        disconnect: before.items.map((item) => ({ url: item.url })),
+      },
     },
     where: {
       id: wishList.id,
@@ -109,8 +126,8 @@ export const getWishList = async (id: string) => {
     where: {
       id,
     },
-    include:{
-      items: true
-    }
+    include: {
+      items: true,
+    },
   })
 }
