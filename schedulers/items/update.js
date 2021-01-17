@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 // レスポンスは必要ないのであえてawaitしない
 const port = process.env.PORT || '3000'
-const apiPath = '/api/items'
+const apiPath = '/api/items/all'
 const url =
   port === '3000'
     ? `http://localhost:${port}${apiPath}`
