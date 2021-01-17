@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@prisma/client": "^2.1.4",
+    "@types/react-table": "^7.0.26",
     "date-fns": "^2.16.1",
     "final-form": "^4.20.1",
     "next": "^10.0.4",
@@ -29,6 +30,7 @@
     "react-dom": "^17.0.1",
     "react-final-form": "^6.5.2",
     "react-markdown": "^5.0.3",
+    "react-table": "^7.6.3",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.4",
     "zod": "^1.11.11"

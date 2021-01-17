@@ -109,5 +109,8 @@ export const getWishList = async (id: string) => {
     where: {
       id,
     },
+    include:{
+      items: true
+    }
   })
 }
