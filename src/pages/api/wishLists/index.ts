@@ -19,7 +19,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           discountRateThreshold,
           pointsRateThreshold,
         } = requestParamSchema.parse(req.body)
-
         await addWishList(
           session?.user?.email,
           url,

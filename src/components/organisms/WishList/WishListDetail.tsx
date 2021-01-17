@@ -20,6 +20,8 @@ export type WishListProps = {
   url: string
   scrapedAt: number | null
   userId: number | null
+  discountRateThreshold: number
+  pointsRateThreshold: number
   items: ItemProps[]
 }
 
@@ -95,6 +97,8 @@ const WishListDetail: React.FC<Props> = (props) => {
       <Text>
         scrapedAt : <LocalDate unixTimeInSec={props.scrapedAt} />
       </Text>
+      <Text>discountRateThreshold : {props.discountRateThreshold}</Text>
+      <Text>pointsRateThreshold : {props.pointsRateThreshold}</Text>
       <ItemTable items={props.items} />
     </>
   )

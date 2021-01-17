@@ -4,7 +4,6 @@ import Layout from '../../components/Page/Layout'
 import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
-import { format } from 'date-fns'
 import WishListDetail from '../../components/organisms/WishList/WishListDetail'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -24,6 +23,8 @@ export type Props = {
   url: string
   scrapedAt: number | null
   userId: number | null
+  discountRateThreshold: number
+  pointsRateThreshold: number
   items: {
     url: string
     scrapedAt: number | null
@@ -42,9 +43,6 @@ const WishList: React.FC<Props> = (props) => {
   }
   const userHasValidSession = Boolean(session)
 
-  const scrapedAt = props.scrapedAt
-    ? format(new Date(props.scrapedAt * 1000), 'yyyy/MM/dd HH:mm:ss')
-    : '-'
   return (
     <Layout>
       <Wrapper>

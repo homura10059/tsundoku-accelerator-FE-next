@@ -5,7 +5,7 @@ import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
 import styled from 'styled-components'
 
-const UrlArea = styled.input`
+const TextArea = styled.input`
   width: 100%;
   padding: 0.5rem;
   margin: 0.5rem 0;
@@ -15,11 +15,13 @@ const UrlArea = styled.input`
 
 const Draft: React.FC = () => {
   const [url, setUrl] = useState('')
+  const [discountRateThreshold, setDiscountRateThreshold] = useState(0)
+  const [pointsRateThreshold, setPointsRateThreshold] = useState(0)
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { url }
+      const body = { url, discountRateThreshold, pointsRateThreshold }
       await fetch('/api/wishLists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,12 +38,27 @@ const Draft: React.FC = () => {
       <div>
         <form onSubmit={submitData}>
           <h1>Add WishList</h1>
-          <UrlArea
+          url :
+          <TextArea
             autoFocus
             onChange={(e) => setUrl(e.target.value)}
             placeholder="url"
-            type="text"
+            type="url"
             value={url}
+          />
+          閾値(割引率):
+          <TextArea
+            onChange={(e) => setDiscountRateThreshold(e.target.valueAsNumber)}
+            placeholder="0"
+            type="number"
+            value={discountRateThreshold}
+          />
+          閾値(ポイト還元率率):
+          <TextArea
+            onChange={(e) => setPointsRateThreshold(e.target.valueAsNumber)}
+            placeholder="0"
+            type="number"
+            value={pointsRateThreshold}
           />
           <SubmitButton disabled={!url} value="Add" />
           <TextButton

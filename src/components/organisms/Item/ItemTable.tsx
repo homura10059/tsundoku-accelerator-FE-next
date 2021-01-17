@@ -44,6 +44,10 @@ const Styles = styled.div`
 `
 
 const ItemTable: React.FC<Props> = ({ items }) => {
+  if (items.length === 0) {
+    return null
+  }
+
   const data = React.useMemo(() => items, [items])
   const columns: Column<ItemProps>[] = React.useMemo(
     () => [
