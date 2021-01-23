@@ -122,13 +122,14 @@ export const getWishLists = async (userId: number) =>
     },
   })
 
-export const getWishListsWithItems = async (userId: number) =>
+export const getWishListDetails = async (userId: number) =>
   prisma.wishList.findMany({
     where: {
       userId,
     },
     include: {
       items: true,
+      slackNotifications: true
     },
   })
 

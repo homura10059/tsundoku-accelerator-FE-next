@@ -1,6 +1,6 @@
 import { User, WishList, Item } from '@prisma/client'
 import { getAll } from './user'
-import { getWishListsWithItems } from './wishList'
+import { getWishListDetails } from './wishList'
 
 export const getNotificationFor = async (
   wishList: WishList & {
@@ -15,7 +15,7 @@ export const getNotificationFor = async (
 }
 
 export const notifyForUser = async (user: User): Promise<void> => {
-  const wishLists = await getWishListsWithItems(user.id)
+  const wishLists = await getWishListDetails(user.id)
 }
 
 export const notifyAllWishList = async (): Promise<void> => {

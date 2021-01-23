@@ -26,7 +26,7 @@ model User {
   updatedAt          DateTime            @updatedAt @map(name: "updated_at")
   posts              Post[]
   wishLists          WishList[]
-  SlackNotifications SlackNotification[]
+  slackNotifications SlackNotification[]
 
   @@map(name: "users")
 }
@@ -74,7 +74,7 @@ model WishList {
   user                  User?              @relation(fields: [userId], references: [id])
   items                 Item[]             @relation(references: [url])
   slackNotificationId   String?
-  SlackNotifications    SlackNotification? @relation(fields: [slackNotificationId], references: [id])
+  slackNotifications    SlackNotification? @relation(fields: [slackNotificationId], references: [id])
 
   @@map(name: "wishLists")
 }
@@ -85,7 +85,7 @@ model SlackNotification {
   channel            String
   userId             Int
   user               User       @relation(fields: [userId], references: [id])
-  WishList           WishList[]
+  wishList           WishList[]
 
   @@map(name: "slackNotifications")
 }
