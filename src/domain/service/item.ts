@@ -20,6 +20,7 @@ export const updateItem = async (item: Item) => {
   await prisma.item.update({
     data: {
       scrapedAt: result.scrapedAt,
+      title: result.title,
       price: result.price,
       discount: result.discount,
       discountRate: result.discountRate,
@@ -47,4 +48,16 @@ export const updateAllItems = async () => {
   items.forEach(async (item) => {
     await updateItem(item)
   })
+}
+
+export const getItemsByUserId = async (userId: number) => {
+  return prisma.wishList
+    .findMany({
+      where: {
+        userId,
+      },
+      include: {
+        items: true,
+      },
+    })
 }

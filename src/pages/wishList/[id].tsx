@@ -27,6 +27,7 @@ export type Props = {
   pointsRateThreshold: number
   items: {
     url: string
+    title: string | null
     scrapedAt: number | null
     price: number | null
     discount: number | null

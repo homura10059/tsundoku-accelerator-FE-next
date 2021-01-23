@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 export type ItemProps = {
   url: string
+  title: string | null
   scrapedAt: number | null
   price: number | null
   discount: number | null
@@ -54,6 +55,10 @@ const ItemTable: React.FC<Props> = ({ items }) => {
       {
         Header: 'Url',
         accessor: 'url',
+      },
+      {
+        Header: 'Title',
+        accessor: 'title',
       },
       {
         Header: 'ScrapedAt',

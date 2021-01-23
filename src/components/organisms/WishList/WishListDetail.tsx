@@ -7,6 +7,7 @@ import ItemTable from '../Item/ItemTable'
 
 export type ItemProps = {
   url: string
+  title: string | null
   scrapedAt: number | null
   price: number | null
   discount: number | null

@@ -88,6 +88,7 @@ model SlackNotification {
 
 model Item {
   url          String     @id
+  title        String?
   scrapedAt    Int?
   price        Int?
   discount     Int?
