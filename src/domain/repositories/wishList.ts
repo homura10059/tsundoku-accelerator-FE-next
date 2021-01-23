@@ -5,10 +5,21 @@ import { ScrapedWishList } from '../model/WishList'
 import { getUnixTimeNow } from '../../lib/Dates'
 import { unique } from '../../lib/arrays'
 import url from 'url'
+import { WISH_LIST_NAME } from '../model/CssSelector'
+
+const getTitle = async (page: Page): Promise<string> => {
+  return page
+    .$(WISH_LIST_NAME)
+    .then((element) => element.getProperty('textContent'))
+    .then((some) => some.jsonValue())
+    .then((str) => (typeof str === 'string' ? str.trim() : ''))
+    .catch((_) => '')
+}
 
 const getScrapedWishListFromPage = async (
   page: Page
 ): Promise<ScrapedWishList> => {
+  const title = await getTitle(page)
   const links = await page
     .$$eval('a', (elements) => {
       return elements
@@ -23,6 +34,7 @@ const getScrapedWishListFromPage = async (
 
   return {
     url: page.url(),
+    title: title,
     scrapedAt: getUnixTimeNow(),
     items: unique(
       links

@@ -19,6 +19,7 @@ export type ItemProps = {
 export type WishListProps = {
   id: string
   url: string
+  title: string| null
   scrapedAt: number | null
   userId: number | null
   discountRateThreshold: number
@@ -92,6 +93,7 @@ const WishListDetail: React.FC<Props> = (props) => {
         </ButtonArea>
       </TopBar>
       <Text>Id: {props.id}</Text>
+      <Text>title: {props.title}</Text>
       <Text>
         url: <a href={props.url}>{props.url}</a>
       </Text>

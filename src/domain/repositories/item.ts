@@ -9,7 +9,7 @@ import { concurrentPromise } from '../../lib/promises'
 const priceRegex = /\d{1,3}(,\d{3})*/
 const percentageRegex = /\d{1,3}/
 
-const getText = async (page: Page, selector: string): Promise<string> => {
+export const getText = async (page: Page, selector: string): Promise<string> => {
   return page
     .$(selector)
     .then((element) => element.getProperty('textContent'))

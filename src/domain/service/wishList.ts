@@ -63,6 +63,7 @@ export const updateWishList = async (wishList: {
   await prisma.wishList.update({
     data: {
       scrapedAt: next.scrapedAt,
+      title: next.title,
       items: {
         disconnect: before.items.map((item) => ({ url: item.url })),
       },
@@ -118,6 +119,16 @@ export const getWishLists = async (userId: number) =>
   prisma.wishList.findMany({
     where: {
       userId,
+    },
+  })
+
+export const getWishListsWithItems = async (userId: number) =>
+  prisma.wishList.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      items: true,
     },
   })
 

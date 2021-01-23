@@ -24,3 +24,5 @@ export const scrape = async (browser: Browser, url: string) => {
   await scrollPageToBottom(page)
   return page
 }
+
+

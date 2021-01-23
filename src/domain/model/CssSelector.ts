@@ -1,3 +1,4 @@
+export const WISH_LIST_NAME = '#profile-list-name'
 export const TITLE = '#productTitle'
 export const PRICE =
   '#buybox > div > table > tbody > tr.kindle-price > td.a-color-price.a-size-large.a-align-bottom.a-text-bold > span'

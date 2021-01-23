@@ -21,6 +21,7 @@ const Wrapper = styled.article`
 export type Props = {
   id: string
   url: string
+  title: string | null
   scrapedAt: number | null
   userId: number | null
   discountRateThreshold: number

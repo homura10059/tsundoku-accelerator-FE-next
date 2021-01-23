@@ -17,15 +17,16 @@ model Post {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?  @map(name: "email_verified")
-  image         String?
-  createdAt     DateTime   @default(now()) @map(name: "created_at")
-  updatedAt     DateTime   @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  wishLists     WishList[]
+  id                 Int                 @id @default(autoincrement())
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?           @map(name: "email_verified")
+  image              String?
+  createdAt          DateTime            @default(now()) @map(name: "created_at")
+  updatedAt          DateTime            @updatedAt @map(name: "updated_at")
+  posts              Post[]
+  wishLists          WishList[]
+  SlackNotifications SlackNotification[]
 
   @@map(name: "users")
 }
@@ -63,25 +64,28 @@ model Session {
 }
 
 model WishList {
-  id                    String              @id @default(cuid())
+  id                    String             @id @default(cuid())
   url                   String
   scrapedAt             Int?
+  title                 String?
   userId                Int?
-  discountRateThreshold Int                 @default(0)
-  pointsRateThreshold   Int                 @default(0)
-  user                  User?               @relation(fields: [userId], references: [id])
-  items                 Item[]              @relation(references: [url])
-  SlackNotifications    SlackNotification[]
+  discountRateThreshold Int                @default(0)
+  pointsRateThreshold   Int                @default(0)
+  user                  User?              @relation(fields: [userId], references: [id])
+  items                 Item[]             @relation(references: [url])
+  slackNotificationId   String?
+  SlackNotifications    SlackNotification? @relation(fields: [slackNotificationId], references: [id])
 
   @@map(name: "wishLists")
 }
 
 model SlackNotification {
-  id                 String   @id @default(cuid())
+  id                 String     @id @default(cuid())
   incomingWebhookUrl String
   channel            String
-  wishListId         String
-  wishList           WishList @relation(fields: [wishListId], references: [id])
+  userId             Int
+  user               User       @relation(fields: [userId], references: [id])
+  WishList           WishList[]
 
   @@map(name: "slackNotifications")
 }
