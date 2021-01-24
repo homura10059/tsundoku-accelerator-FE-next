@@ -16,15 +16,15 @@ const Tabs: React.FC<Props> = ({ session, loading }) => {
   if (session && !loading) {
     return (
       <Wrapper>
-        <Tab href={'/'}>Feed</Tab>
-        <Tab href={'/drafts'}>MyDrafts</Tab>
+        <Tab href={'/'}>Home</Tab>
+        <Tab href={'/notification'}>Notification</Tab>
       </Wrapper>
     )
   }
 
   return (
     <Wrapper>
-      <Tab href={'/'}>Feed</Tab>
+      <Tab href={'/'}>Home</Tab>
     </Wrapper>
   )
 }
