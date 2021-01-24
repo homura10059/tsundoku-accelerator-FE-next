@@ -129,7 +129,7 @@ export const getWishListDetails = async (userId: number) =>
     },
     include: {
       items: true,
-      slackNotifications: true
+      incomingWebhook: true
     },
   })
 

@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { updateAllWishLists } from '../../../domain/service/notification'
+import { notifyAllWishList } from '../../../domain/service/notification'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST': {
-      await updateAllWishLists()
+      await notifyAllWishList()
       res.json({
         status: 'ok',
       })
