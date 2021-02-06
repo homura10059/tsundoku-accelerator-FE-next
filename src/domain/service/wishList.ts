@@ -5,30 +5,50 @@ export const addWishList = async (
   email: string,
   url: string,
   discountRateThreshold = 0,
-  pointsRateThreshold = 0
+  pointsRateThreshold = 0,
+  incomingWebhookId?: string
 ) => {
-  await prisma.wishList.create({
-    data: {
-      url,
-      scrapedAt: null,
-      discountRateThreshold,
-      pointsRateThreshold,
-      user: {
-        connect: {
-          email,
+  if (incomingWebhookId) {
+    await prisma.wishList.create({
+      data: {
+        url,
+        scrapedAt: null,
+        discountRateThreshold,
+        pointsRateThreshold,
+        user: {
+          connect: {
+            email,
+          },
+        },
+        incomingWebhook: {
+          connect: {
+            id: incomingWebhookId,
+          },
         },
       },
-    },
-  })
+    })
+  } else {
+    await prisma.wishList.create({
+      data: {
+        url,
+        scrapedAt: null,
+        discountRateThreshold,
+        pointsRateThreshold,
+        user: {
+          connect: {
+            email,
+          },
+        },
+      },
+    })
+  }
 }
 
-export const deleteWishList = async (
-  id: string
-) => {
+export const deleteWishList = async (id: string) => {
   await prisma.wishList.delete({
-    where:{
-      id
-    }
+    where: {
+      id,
+    },
   })
 }
 
@@ -129,7 +149,7 @@ export const getWishListDetails = async (userId: number) =>
     },
     include: {
       items: true,
-      incomingWebhook: true
+      incomingWebhook: true,
     },
   })
 

@@ -5,6 +5,22 @@ import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
+import { getIncomingWebhooksByUserId } from '../../domain/service/notification'
+import { IncomingWebhook } from '../../lib/prisma'
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req })
+  const incomingWebhooks = !session
+    ? []
+    : await getIncomingWebhooksByUserId(session.user.id)
+  return { props: { incomingWebhooks } }
+}
+
+type Props = {
+  incomingWebhooks: IncomingWebhook[]
+}
 
 const FromArea = styled.div`
   margin-top: 0.5rem;
@@ -22,14 +38,20 @@ type FormInputs = {
   url: string
   discountRateThreshold: number
   pointsRateThreshold: number
+  incomingWebhookId: string
 }
 
-const Draft: React.FC = () => {
-  const { register, handleSubmit, formState } = useForm<FormInputs>()
-  const { isDirty, isValid } = formState
+const Draft: React.FC<Props> = (props) => {
+  const {
+    register,
+    errors,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<FormInputs>({
+    mode: 'onBlur',
+  })
 
   const onSubmit = async (data, e) => {
-    console.log(data, e)
     e.preventDefault()
     try {
       await fetch('/api/wishLists', {
@@ -58,31 +80,51 @@ const Draft: React.FC = () => {
                 ref={register({ required: true })}
                 type="url"
                 autoFocus
-                placeholder="url"
               />
             </div>
+            {errors.url && <p>{errors.url.message}</p>}
             <div>
               閾値(割引率):
               <TextArea
                 name="discountRateThreshold"
                 ref={register({ valueAsNumber: true })}
                 type="number"
-                autoFocus
-                placeholder="0"
+                placeholder="20"
               />
             </div>
+            {errors.discountRateThreshold && (
+              <p>{errors.discountRateThreshold.message}</p>
+            )}
             <div>
               閾値(ポイト還元率率):
               <TextArea
                 name="pointsRateThreshold"
                 ref={register({ valueAsNumber: true })}
                 type="number"
-                autoFocus
-                placeholder="0"
+                placeholder="20"
               />
             </div>
+            {errors.pointsRateThreshold && (
+              <p>{errors.pointsRateThreshold.message}</p>
+            )}
+            <div>
+              incomingWebhook:
+              <select name="incomingWebhookId" ref={register}>
+                <option value={undefined} key={1}>                </option>
+                {props.incomingWebhooks.map((hook) => {
+                  return (
+                    <option value={hook.id} key={hook.id}>
+                      {hook.service}: {hook.id}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            {errors.incomingWebhookId && (
+              <p>{errors.incomingWebhookId.message}</p>
+            )}
           </FromArea>
-          <SubmitButton disabled={isDirty || isValid} value="Add" />
+          <SubmitButton disabled={!isValid} value="Add" />
           <TextButton
             label={'Cancel'}
             href={'#'}

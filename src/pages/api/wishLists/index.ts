@@ -7,6 +7,7 @@ const requestParamSchema = z.object({
   url: z.string().min(1),
   discountRateThreshold: z.number().optional(),
   pointsRateThreshold: z.number().optional(),
+  incomingWebhookId: z.string().optional(),
 })
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -18,18 +19,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           url,
           discountRateThreshold,
           pointsRateThreshold,
+          incomingWebhookId
         } = requestParamSchema.parse(req.body)
         await addWishList(
           session?.user?.email,
           url,
           discountRateThreshold,
-          pointsRateThreshold
+          pointsRateThreshold,
+          incomingWebhookId
         )
         res.json({
           status: 'ok',
         })
       } catch (error) {
-        res.json({ status: 'error', error })
+        console.error(error)
+        res.status(500).json({ status: 'error', error })
       }
       break
     default:
