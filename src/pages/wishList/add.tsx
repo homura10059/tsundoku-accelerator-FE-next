@@ -4,28 +4,38 @@ import Router from 'next/router'
 import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
 import styled from 'styled-components'
+import { useForm } from 'react-hook-form'
+
+const FromArea = styled.div`
+  margin-top: 0.5rem;
+  * + * {
+    margin-top: 0.5rem;
+  }
+`
 
 const TextArea = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0;
   border-radius: 0.25rem;
   border: 0.125rem solid rgba(0, 0, 0, 0.2);
 `
 
-const Draft: React.FC = () => {
-  const [url, setUrl] = useState('')
-  const [discountRateThreshold, setDiscountRateThreshold] = useState(0)
-  const [pointsRateThreshold, setPointsRateThreshold] = useState(0)
+type FormInputs = {
+  url: string
+  discountRateThreshold: number
+  pointsRateThreshold: number
+}
 
-  const submitData = async (e: React.SyntheticEvent) => {
+const Draft: React.FC = () => {
+  const { register, handleSubmit, formState } = useForm<FormInputs>()
+  const { isDirty, isValid } = formState
+
+  const onSubmit = async (data, e) => {
+    console.log(data, e)
     e.preventDefault()
     try {
-      const body = { url, discountRateThreshold, pointsRateThreshold }
       await fetch('/api/wishLists', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify(data),
       })
       await Router.push('/')
     } catch (error) {
@@ -33,34 +43,46 @@ const Draft: React.FC = () => {
     }
   }
 
+  const onError = (errors, e) => console.log(errors, e)
+
   return (
     <Layout>
       <div>
-        <form onSubmit={submitData}>
+        <form onSubmit={handleSubmit(onSubmit, onError)}>
           <h1>Add WishList</h1>
-          url :
-          <TextArea
-            autoFocus
-            onChange={(e) => setUrl(e.target.value)}
-            placeholder="url"
-            type="url"
-            value={url}
-          />
-          閾値(割引率):
-          <TextArea
-            onChange={(e) => setDiscountRateThreshold(e.target.valueAsNumber)}
-            placeholder="0"
-            type="number"
-            value={discountRateThreshold}
-          />
-          閾値(ポイト還元率率):
-          <TextArea
-            onChange={(e) => setPointsRateThreshold(e.target.valueAsNumber)}
-            placeholder="0"
-            type="number"
-            value={pointsRateThreshold}
-          />
-          <SubmitButton disabled={!url} value="Add" />
+          <FromArea>
+            <div>
+              url :
+              <TextArea
+                name="url"
+                ref={register({ required: true })}
+                type="url"
+                autoFocus
+                placeholder="url"
+              />
+            </div>
+            <div>
+              閾値(割引率):
+              <TextArea
+                name="discountRateThreshold"
+                ref={register({ valueAsNumber: true })}
+                type="number"
+                autoFocus
+                placeholder="0"
+              />
+            </div>
+            <div>
+              閾値(ポイト還元率率):
+              <TextArea
+                name="pointsRateThreshold"
+                ref={register({ valueAsNumber: true })}
+                type="number"
+                autoFocus
+                placeholder="0"
+              />
+            </div>
+          </FromArea>
+          <SubmitButton disabled={isDirty || isValid} value="Add" />
           <TextButton
             label={'Cancel'}
             href={'#'}
