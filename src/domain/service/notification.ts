@@ -23,31 +23,3 @@ export const notifyAllWishList = async (): Promise<void> => {
   const users = await getAll()
   await Promise.allSettled(users.map((user) => notifyForUser(user)))
 }
-
-export const addIncomingWebhook = async (
-  email: string,
-  url: string,
-  channel: string,
-  service: 'DISCORD'
-) => {
-  await prisma.incomingWebhook.create({
-    data: {
-      incomingWebhookUrl: url,
-      channel,
-      service,
-      user: {
-        connect: {
-          email,
-        },
-      },
-    },
-  })
-}
-
-export const getIncomingWebhooksByUserId = async (userId: number) => {
-  return await prisma.incomingWebhook.findMany({
-    where: {
-      userId,
-    },
-  })
-}

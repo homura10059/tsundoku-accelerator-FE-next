@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { notifyAllWishList } from '../../../domain/service/notification'
+import { notifyAllWishList } from '../../../domain/service/incomingWebhook'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

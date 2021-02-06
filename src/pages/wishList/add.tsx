@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
-import { getIncomingWebhooksByUserId } from '../../domain/service/notification'
+import { getIncomingWebhooksByUserId } from '../../domain/service/incomingWebhook'
 import { IncomingWebhook } from '../../lib/prisma'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

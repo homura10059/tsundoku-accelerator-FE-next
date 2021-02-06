@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { addIncomingWebhook } from '../../../domain/service/notification'
+import { addIncomingWebhook } from '../../../domain/service/incomingWebhook'
 import { getSession } from 'next-auth/client'
 import * as z from 'zod'
 
