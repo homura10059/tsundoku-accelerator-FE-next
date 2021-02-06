@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import TextButton from '../../atoms/Button/TextButton'
 import LocalDate from '../../atoms/Date/LocalDate'
 import ItemTable from '../Item/ItemTable'
+import { IncomingWebhook } from '../../../lib/prisma'
 
 export type ItemProps = {
   url: string
@@ -19,12 +20,13 @@ export type ItemProps = {
 export type WishListProps = {
   id: string
   url: string
-  title: string| null
+  title: string | null
   scrapedAt: number | null
   userId: number | null
   discountRateThreshold: number
   pointsRateThreshold: number
   items: ItemProps[]
+  incomingWebhook: IncomingWebhook
 }
 
 export type Props = WishListProps & {
@@ -102,6 +104,9 @@ const WishListDetail: React.FC<Props> = (props) => {
       </Text>
       <Text>discountRateThreshold : {props.discountRateThreshold}</Text>
       <Text>pointsRateThreshold : {props.pointsRateThreshold}</Text>
+      {props.incomingWebhook && (
+        <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
+      )}
       <ItemTable items={props.items} />
     </>
   )

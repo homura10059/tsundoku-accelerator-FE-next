@@ -160,6 +160,7 @@ export const getWishList = async (id: string) => {
     },
     include: {
       items: true,
+      incomingWebhook: true
     },
   })
 }

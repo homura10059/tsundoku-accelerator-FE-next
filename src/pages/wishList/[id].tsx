@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
 import WishListDetail from '../../components/organisms/WishList/WishListDetail'
+import { IncomingWebhook } from '../../lib/prisma'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = typeof params?.id === 'string' ? params?.id : ''
@@ -35,7 +36,8 @@ export type Props = {
     discountRate: number | null
     points: number | null
     pointsRate: number | null
-  }[]
+  }[],
+  incomingWebhook: IncomingWebhook
 }
 
 const WishList: React.FC<Props> = (props) => {
