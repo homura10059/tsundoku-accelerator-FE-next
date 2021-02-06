@@ -18,16 +18,12 @@ const Wrapper = styled.div`
   margin-left: auto;
   display: flex;
   align-items: center;
-  &:first-child {
-    margin-bottom: 20px;
+  * + * {
+    margin-left: 0.2rem;
   }
 `
 
-const Item = styled.div`
-  &:not(:last-child) {
-    margin-right: 0.2rem;
-  }
-`
+const Item = styled.div``
 
 const Navigation: React.FC<Props> = ({ session, loading }) => {
   if (loading) {

@@ -10,6 +10,9 @@ type Props = {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  * + * {
+    margin-left: 0.5rem;
+  }
 `
 
 const Tabs: React.FC<Props> = ({ session, loading }) => {

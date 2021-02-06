@@ -8,14 +8,12 @@ type Props = {}
 const TopBar = styled.div`
   display: flex;
   margin-bottom: 1rem;
+  * + * {
+    margin-left: 1rem;
+  }
 `
 const Title = styled.h1`
   font-size: 2rem;
-`
-const ButtonWrapper = styled.div`
-  &:not(:last-child) {
-    margin-right: 0.2rem;
-  }
 `
 
 const Notification: React.FC<Props> = (props) => {
@@ -24,12 +22,7 @@ const Notification: React.FC<Props> = (props) => {
       <main>
         <TopBar>
           <Title>IncomingWebhook</Title>
-          <ButtonWrapper>
-            <LinkButton
-              href="/notification/add"
-              label={'Add IncomingWebhook'}
-            />
-          </ButtonWrapper>
+          <LinkButton href="/notification/add" label={'Add IncomingWebhook'} />
         </TopBar>
       </main>
     </Layout>

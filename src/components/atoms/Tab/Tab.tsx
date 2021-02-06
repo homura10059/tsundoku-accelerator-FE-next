@@ -20,10 +20,6 @@ const TabLink = styled.a`
   &[data-active='true'] {
     color: gray;
   }
-
-  &:not(:last-child) {
-    margin-right: 0.5rem;
-  }
 `
 
 const Tab: React.FC<Props> = ({ href, children }) => {
