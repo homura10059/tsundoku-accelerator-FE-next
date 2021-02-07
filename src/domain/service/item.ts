@@ -45,6 +45,7 @@ export const updateItemByUrl = async (url: string) => {
 
 export const updateAllItems = async () => {
   const items = await prisma.item.findMany()
+  console.log('get AllItems')
   items.forEach(async (item) => {
     await updateItem(item)
   })
