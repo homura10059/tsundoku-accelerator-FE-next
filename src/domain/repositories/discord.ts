@@ -119,6 +119,10 @@ export const notify = (
     incomingWebhook: IncomingWebhook
   }
 ) => {
+  if(wishList.items.length === 0){
+    return
+  }
+
   return axios
     .post(
       wishList.incomingWebhook.incomingWebhookUrl,
