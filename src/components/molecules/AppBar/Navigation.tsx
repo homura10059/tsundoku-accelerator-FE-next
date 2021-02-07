@@ -50,9 +50,6 @@ const Navigation: React.FC<Props> = ({ session, loading }) => {
         </p>
       </Item>
       <Item>
-        <LinkButton href="/create" label={'New post'} />
-      </Item>
-      <Item>
         <LinkButton href="/wishList/add" label={'Add WishList'} />
       </Item>
       <Item>
