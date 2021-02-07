@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "prisma migrate deploy --preview-feature && next start -p $PORT",
     "command:update:wishLists": "node schedulers/wishLists/update.js",
-    "command:update:items": "node schedulers/items/update.js"
+    "command:update:items": "node schedulers/items/update.js",
+    "command:update:notifications": "node schedulers/notifications/update.js"
   },
   "engines": {
     "node": "14.15.3"
@@ -19,6 +20,7 @@
   "dependencies": {
     "@prisma/client": "^2.1.4",
     "@types/react-table": "^7.0.26",
+    "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "final-form": "^4.20.1",
     "next": "^10.0.4",
