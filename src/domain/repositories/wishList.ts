@@ -40,7 +40,12 @@ const getScrapedWishListFromPage = async (
       links
         .filter((href: string) => href.includes('?coliid'))
         .filter((href: string) => href.includes('&ref'))
-        .map((href: string) => `${protocol}//${host}${href.split('?')[0]}`)
+        .map((href: string) =>
+          `${protocol}//${host}${href.split('?')[0]}`.replace(
+            '/-/en/dp',
+            '/dp'
+          )
+        )
     ),
   }
 }
