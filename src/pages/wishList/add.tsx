@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Layout from '../../components/Page/Layout'
+import React from 'react'
 import Router from 'next/router'
 import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
@@ -68,71 +67,71 @@ const Draft: React.FC<Props> = (props) => {
   const onError = (errors, e) => console.log(errors, e)
 
   return (
-    <Layout>
-      <div>
-        <form onSubmit={handleSubmit(onSubmit, onError)}>
-          <h1>Add WishList</h1>
-          <FromArea>
-            <div>
-              url :
-              <TextArea
-                name="url"
-                ref={register({ required: true })}
-                type="url"
-                autoFocus
-              />
-            </div>
-            {errors.url && <p>{errors.url.message}</p>}
-            <div>
-              閾値(割引率):
-              <TextArea
-                name="discountRateThreshold"
-                ref={register({ valueAsNumber: true })}
-                type="number"
-                placeholder="20"
-              />
-            </div>
-            {errors.discountRateThreshold && (
-              <p>{errors.discountRateThreshold.message}</p>
-            )}
-            <div>
-              閾値(ポイト還元率率):
-              <TextArea
-                name="pointsRateThreshold"
-                ref={register({ valueAsNumber: true })}
-                type="number"
-                placeholder="20"
-              />
-            </div>
-            {errors.pointsRateThreshold && (
-              <p>{errors.pointsRateThreshold.message}</p>
-            )}
-            <div>
-              incomingWebhook:
-              <select name="incomingWebhookId" ref={register}>
-                <option value={undefined} key={1}>                </option>
-                {props.incomingWebhooks.map((hook) => {
-                  return (
-                    <option value={hook.id} key={hook.id}>
-                      {hook.service}: {hook.id}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
-            {errors.incomingWebhookId && (
-              <p>{errors.incomingWebhookId.message}</p>
-            )}
-          </FromArea>
-          <SubmitButton disabled={!isValid} value="Add" />
-          <TextButton
-            label={'Cancel'}
-            href={'#'}
-            onClick={() => Router.push('/')}
-          />
-        </form>
-      </div>
-    </Layout>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <h1>Add WishList</h1>
+        <FromArea>
+          <div>
+            url :
+            <TextArea
+              name="url"
+              ref={register({ required: true })}
+              type="url"
+              autoFocus
+            />
+          </div>
+          {errors.url && <p>{errors.url.message}</p>}
+          <div>
+            閾値(割引率):
+            <TextArea
+              name="discountRateThreshold"
+              ref={register({ valueAsNumber: true })}
+              type="number"
+              placeholder="20"
+            />
+          </div>
+          {errors.discountRateThreshold && (
+            <p>{errors.discountRateThreshold.message}</p>
+          )}
+          <div>
+            閾値(ポイト還元率率):
+            <TextArea
+              name="pointsRateThreshold"
+              ref={register({ valueAsNumber: true })}
+              type="number"
+              placeholder="20"
+            />
+          </div>
+          {errors.pointsRateThreshold && (
+            <p>{errors.pointsRateThreshold.message}</p>
+          )}
+          <div>
+            incomingWebhook:
+            <select name="incomingWebhookId" ref={register}>
+              <option value={undefined} key={1}>
+                {' '}
+              </option>
+              {props.incomingWebhooks.map((hook) => {
+                return (
+                  <option value={hook.id} key={hook.id}>
+                    {hook.service}: {hook.id}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          {errors.incomingWebhookId && (
+            <p>{errors.incomingWebhookId.message}</p>
+          )}
+        </FromArea>
+        <SubmitButton disabled={!isValid} value="Add" />
+        <TextButton
+          label={'Cancel'}
+          href={'#'}
+          onClick={() => Router.push('/')}
+        />
+      </form>
+    </div>
   )
 }
 

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Layout from '../../components/Page/Layout'
 import Router from 'next/router'
 import TextButton from '../../components/atoms/Button/TextButton'
 import SubmitButton from '../../components/atoms/Button/SubmitButton'
@@ -34,40 +33,38 @@ const Notification: React.FC = () => {
   }
 
   return (
-    <Layout>
-      <div>
-        <form onSubmit={submitData}>
-          <h1>Add IncomingWebhook</h1>
-          <div>
-            url :
-            <TextArea
-              autoFocus
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="url"
-              type="url"
-              value={url}
-            />
-            channel :
-            <TextArea
-              onChange={(e) => setChannel(e.target.value)}
-              placeholder="channel"
-              type="text"
-              value={channel}
-            />
-            service :
-            <select name="service" onChange={(e) => setService(e.target.value)}>
-              <option value="DISCORD">Discord</option>
-            </select>
-          </div>
-          <SubmitButton disabled={!url && !channel && !service} value="Add" />
-          <TextButton
-            label={'Cancel'}
-            href={'#'}
-            onClick={() => Router.push('/')}
+    <div>
+      <form onSubmit={submitData}>
+        <h1>Add IncomingWebhook</h1>
+        <div>
+          url :
+          <TextArea
+            autoFocus
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="url"
+            type="url"
+            value={url}
           />
-        </form>
-      </div>
-    </Layout>
+          channel :
+          <TextArea
+            onChange={(e) => setChannel(e.target.value)}
+            placeholder="channel"
+            type="text"
+            value={channel}
+          />
+          service :
+          <select name="service" onChange={(e) => setService(e.target.value)}>
+            <option value="DISCORD">Discord</option>
+          </select>
+        </div>
+        <SubmitButton disabled={!url && !channel && !service} value="Add" />
+        <TextButton
+          label={'Cancel'}
+          href={'#'}
+          onClick={() => Router.push('/')}
+        />
+      </form>
+    </div>
   )
 }
 

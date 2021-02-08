@@ -1,6 +1,5 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import Layout from '../components/Page/Layout'
 import { getWishLists } from '../domain/service/wishList'
 import { getSession } from 'next-auth/client'
 import WishList, {
@@ -29,16 +28,14 @@ const Wrapper = styled.div`
 
 const Blog: React.FC<Props> = (props) => {
   return (
-    <Layout>
-      <main>
-        <h1>WishList</h1>
-        {props.wishLists.map((wishList) => (
-          <Wrapper key={wishList.id}>
-            <WishList {...wishList} />
-          </Wrapper>
-        ))}
-      </main>
-    </Layout>
+    <main>
+      <h1>WishList</h1>
+      {props.wishLists.map((wishList) => (
+        <Wrapper key={wishList.id}>
+          <WishList {...wishList} />
+        </Wrapper>
+      ))}
+    </main>
   )
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import Layout from '../../components/Page/Layout'
 import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
@@ -36,7 +35,7 @@ export type Props = {
     discountRate: number | null
     points: number | null
     pointsRate: number | null
-  }[],
+  }[]
   incomingWebhook: IncomingWebhook
 }
 
@@ -48,11 +47,9 @@ const WishList: React.FC<Props> = (props) => {
   const userHasValidSession = Boolean(session)
 
   return (
-    <Layout>
-      <Wrapper>
-        <WishListDetail {...props} userHasValidSession={userHasValidSession}/>
-      </Wrapper>
-    </Layout>
+    <Wrapper>
+      <WishListDetail {...props} userHasValidSession={userHasValidSession} />
+    </Wrapper>
   )
 }
 

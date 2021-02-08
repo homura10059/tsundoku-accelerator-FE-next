@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../components/Page/Layout'
 import styled from 'styled-components'
 import LinkButton from '../../components/atoms/Button/LinkButton'
 import { GetServerSideProps } from 'next'
@@ -33,23 +32,21 @@ const Title = styled.h1`
 const Notification: React.FC<Props> = (props) => {
   console.log(props)
   return (
-    <Layout>
-      <main>
-        <TopBar>
-          <Title>IncomingWebhook</Title>
-          <LinkButton href="/notification/add" label={'Add IncomingWebhook'} />
-        </TopBar>
-        {props.incomingWebhooks.map((hook) => (
-          <div>
-            <p>id: {hook.id}</p>
-            <p>
-              service: <a href={hook.incomingWebhookUrl}>{hook.service}</a>
-            </p>
-            <p>channel: {hook.channel}</p>
-          </div>
-        ))}
-      </main>
-    </Layout>
+    <main>
+      <TopBar>
+        <Title>IncomingWebhook</Title>
+        <LinkButton href="/notification/add" label={'Add IncomingWebhook'} />
+      </TopBar>
+      {props.incomingWebhooks.map((hook) => (
+        <div>
+          <p>id: {hook.id}</p>
+          <p>
+            service: <a href={hook.incomingWebhookUrl}>{hook.service}</a>
+          </p>
+          <p>channel: {hook.channel}</p>
+        </div>
+      ))}
+    </main>
   )
 }
 
