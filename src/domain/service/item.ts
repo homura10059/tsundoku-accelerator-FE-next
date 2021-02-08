@@ -46,19 +46,19 @@ export const updateItemByUrl = async (url: string) => {
 export const updateAllItems = async () => {
   const items = await prisma.item.findMany()
   console.log('get AllItems')
-  items.forEach(async (item) => {
+  for (const item of items) {
+    console.log(`item: ${item.url}`)
     await updateItem(item)
-  })
+  }
 }
 
 export const getItemsByUserId = async (userId: number) => {
-  return prisma.wishList
-    .findMany({
-      where: {
-        userId,
-      },
-      include: {
-        items: true,
-      },
-    })
+  return prisma.wishList.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      items: true,
+    },
+  })
 }
