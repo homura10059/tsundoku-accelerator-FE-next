@@ -62,7 +62,7 @@ const convertColorFrom = (
     item.discountRate >= discountRateThreshold ||
     item.pointsRate >= pointsRateThreshold
   ) {
-    return color.yellow
+    return color.green
   }
 
   return color.gray
@@ -73,8 +73,8 @@ const convertEmbedsFrom = (
   discountRateThreshold: number,
   pointsRateThreshold: number
 ): Embed => ({
-  title: item.title,
-  url: item.url,
+  title: `${item.title}`,
+  url: `${item.url}`,
   color: convertColorFrom(item, discountRateThreshold, pointsRateThreshold),
   fields: [
     {
