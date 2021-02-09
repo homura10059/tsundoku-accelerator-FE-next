@@ -45,6 +45,11 @@ export const updateItemByUrl = async (url: string) => {
 
 export const updateAllItems = async () => {
   const items = await prisma.item.findMany()
+  items.sort((a, b) => {
+    if (a.scrapedAt < b.scrapedAt) return -1
+    if (a.scrapedAt > b.scrapedAt) return 1
+    return 0
+  })
   console.log('get AllItems')
   for (const item of items) {
     console.log(`item: ${item.url}`)
