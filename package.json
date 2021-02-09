@@ -12,7 +12,8 @@
     "start": "prisma migrate deploy --preview-feature && next start -p $PORT",
     "command:update:wishLists": "node schedulers/wishLists/update.js",
     "command:update:items": "node schedulers/items/update.js",
-    "command:update:notifications": "node schedulers/notifications/update.js"
+    "command:update:notifications": "node schedulers/notifications/update.js",
+    "command:wakeup": "node schedulers/wakeUp.js"
   },
   "engines": {
     "node": "14.15.3"

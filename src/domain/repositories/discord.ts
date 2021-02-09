@@ -119,17 +119,15 @@ export const notify = (
     incomingWebhook: IncomingWebhook
   }
 ) => {
-  if(wishList.items.length === 0){
+  if (wishList.items.length === 0) {
     return
   }
 
+  const body = convertBodyFrom(wishList)
   return axios
-    .post(
-      wishList.incomingWebhook.incomingWebhookUrl,
-      convertBodyFrom(wishList)
-    )
-    .then(function (response) {
-      console.log(response)
+    .post(wishList.incomingWebhook.incomingWebhookUrl, body)
+    .then((_response) => {
+      // console.log(response)
     })
     .catch(function (error) {
       console.log(error)
