@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 export type Props = WishListModel
 
 const Wrapper = styled.article`
-  background-color: ${({ theme }) => theme.colors.base};
+  background-color: ${({ theme }) => theme.colors.secondary.light};
   padding: 0.5rem;
 `
 const Area = styled.a``

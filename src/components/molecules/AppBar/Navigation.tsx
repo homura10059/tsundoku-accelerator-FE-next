@@ -23,6 +23,10 @@ const Wrapper = styled.div`
   }
 `
 
+const Text = styled.p`
+ color: ${({ theme }) => theme.colors.on.primary};
+`
+
 const Item = styled.div``
 
 const Navigation: React.FC<Props> = ({ session, loading }) => {
@@ -45,9 +49,9 @@ const Navigation: React.FC<Props> = ({ session, loading }) => {
   return (
     <Wrapper>
       <Item>
-        <p>
+        <Text>
           {session.user.name} ({session.user.email})
-        </p>
+        </Text>
       </Item>
       <Item>
         <LinkButton href="/wishList/add" label={'Add WishList'} />

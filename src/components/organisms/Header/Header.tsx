@@ -9,7 +9,7 @@ const AppBar = styled.nav`
   padding: 1.5rem;
   margin-bottom: 0.5rem;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.primary.light};
 `
 
 const Header: React.FC = () => {

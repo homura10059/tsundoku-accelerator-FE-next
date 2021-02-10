@@ -10,7 +10,7 @@ type Props = {
 const TabLink = styled.a`
   font-weight: bold;
   text-decoration: none;
-  color: #000;
+  color: ${({ theme }) => theme.colors.on.primary};
   display: inline-block;
 
   &[data-active='false'] {
