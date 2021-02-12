@@ -24,10 +24,8 @@ const Wrapper = styled.div`
 `
 
 const Text = styled.p`
- color: ${({ theme }) => theme.colors.on.primary};
+  color: ${({ theme }) => theme.colors.on.primary};
 `
-
-const Item = styled.div``
 
 const Navigation: React.FC<Props> = ({ session, loading }) => {
   if (loading) {
@@ -48,17 +46,10 @@ const Navigation: React.FC<Props> = ({ session, loading }) => {
 
   return (
     <Wrapper>
-      <Item>
-        <Text>
-          {session.user.name} ({session.user.email})
-        </Text>
-      </Item>
-      <Item>
-        <LinkButton href="/wishList/add" label={'Add WishList'} />
-      </Item>
-      <Item>
-        <TextButton label={'Log out'} onClick={() => signOut()} />
-      </Item>
+      <Text>
+        {session.user.name} ({session.user.email})
+      </Text>
+      <TextButton label={'Log out'} onClick={() => signOut()} />
     </Wrapper>
   )
 }
