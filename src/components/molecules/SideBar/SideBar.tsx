@@ -1,8 +1,27 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Router, { useRouter } from 'next/router'
-import Link from 'next/link'
 import HiddenText from '../../atoms/Text/HiddenText'
+import TextLink from '../../atoms/Text/TextLink'
+
+type LinkItemProps = {
+  href: string
+  text: string
+}
+
+const LinkItem: React.FC<LinkItemProps> = ({ href, text }) => {
+  const router = useRouter()
+  const isActive: (pathname: string) => boolean = (pathname) =>
+    router.pathname === pathname
+
+  return (
+    <li>
+      <TextLink href={href} isActive={isActive(href)}>
+        {text}
+      </TextLink>
+    </li>
+  )
+}
 
 type Props = {
   isOpen: boolean
@@ -17,7 +36,6 @@ const Nav = styled.nav<{ isOpen: boolean }>`
   top: 0;
   width: 100%;
   height: 100%;
-
   ${(props) =>
     props.isOpen
       ? css`
@@ -28,10 +46,21 @@ const Nav = styled.nav<{ isOpen: boolean }>`
         `}
 `
 
+const Title = styled.h1`
+  color: ${({ theme }) => theme.colors.on.primary};
+  font-size: 1.5rem;
+`
+
+const LinkArea = styled.div`
+  background-color: ${({ theme }) => theme.colors.primary.dark};
+  padding: 0.5rem;
+`
+
 const List = styled.ul`
   background-color: ${({ theme }) => theme.colors.primary.dark};
+  margin-top: 1rem;
   * + * {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 `
 
@@ -51,18 +80,15 @@ const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
 
   return (
     <Nav isOpen={isOpen}>
-      <List>
-        <li>
-          <Link href={'/'} passHref>
-            <a data-active={isActive('/')}>HOME</a>
-          </Link>
-        </li>
-        <li>
-          <Link href={'/notification'} passHref>
-            <a data-active={isActive('/notification')}>Notification</a>
-          </Link>
-        </li>
-      </List>
+      <LinkArea>
+        <Title>Menu</Title>
+        <List>
+          <LinkItem href={'/'} text={'HOME'} />
+          <LinkItem href={'/wishList'} text={'WishList'} />
+          <LinkItem href={'/notification'} text={'Notification'} />
+        </List>
+      </LinkArea>
+
       <CloseArea onClick={() => setIsOpen(false)}>
         <HiddenText text={'close'} />
       </CloseArea>

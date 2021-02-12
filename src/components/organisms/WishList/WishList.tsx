@@ -10,8 +10,8 @@ const Wrapper = styled.article`
   background-color: ${({ theme }) => theme.colors.secondary.light};
   padding: 0.5rem;
 `
-const Area = styled.a``
 const Title = styled.h1``
+const Area = styled.a``
 
 const WishList: React.FC<Props> = (wishList) => {
   const onClick = () =>

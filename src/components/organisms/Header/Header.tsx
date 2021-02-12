@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
-import Tabs from '../../molecules/AppBar/Tabs'
 import Navigation from '../../molecules/AppBar/Navigation'
 import SideBar from '../../molecules/SideBar/SideBar'
 import MenuButton from '../../atoms/Button/MenuButton'
@@ -33,7 +32,6 @@ const Header: React.FC = () => {
         <ServiceIcon />
       </Left>
       <Right>
-        <Tabs session={session} loading={loading} />
         <Navigation session={session} loading={loading} />
       </Right>
     </Wrapper>
