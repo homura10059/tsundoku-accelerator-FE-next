@@ -9,6 +9,7 @@ const Button = styled.a`
   text-decoration: none;
   height: 36px;
   width: 36px;
+  min-width: 36px;
   position: relative;
   border: 2px solid ${({ theme }) => theme.colors.on.primary};
   border-radius: 4px;
