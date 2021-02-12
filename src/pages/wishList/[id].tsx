@@ -1,10 +1,14 @@
 import React from 'react'
+import Router from 'next/router'
 import { GetServerSideProps } from 'next'
 import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
 import WishListDetail from '../../components/organisms/WishList/WishListDetail'
 import { IncomingWebhook } from '../../lib/prisma'
+import NodePage from '../../components/Templates/NodePage'
+import LocalDate from '../../components/atoms/Date/LocalDate'
+import ItemTable from '../../components/organisms/Item/ItemTable'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = typeof params?.id === 'string' ? params?.id : ''
@@ -13,10 +17,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     props: wishList,
   }
 }
-
-const Wrapper = styled.article`
-  padding: 0.5rem;
-`
 
 export type Props = {
   id: string
@@ -39,6 +39,25 @@ export type Props = {
   incomingWebhook: IncomingWebhook
 }
 
+const Text = styled.p`
+  font-size: 1.2rem;
+  margin: 0.5rem;
+`
+
+const updateWishList = async (id: string): Promise<void> => {
+  await fetch(`http://localhost:3000/api/wishList/${id}`, {
+    method: 'PUT',
+  })
+  location.reload()
+}
+
+const deleteWishList = async (id: string): Promise<void> => {
+  await fetch(`http://localhost:3000/api/wishList/${id}`, {
+    method: 'DELETE',
+  })
+  Router.push('/')
+}
+
 const WishList: React.FC<Props> = (props) => {
   const [session, loading] = useSession()
   if (loading) {
@@ -47,9 +66,25 @@ const WishList: React.FC<Props> = (props) => {
   const userHasValidSession = Boolean(session)
 
   return (
-    <Wrapper>
-      <WishListDetail {...props} userHasValidSession={userHasValidSession} />
-    </Wrapper>
+    <NodePage title={`${props.title}`} basePath={`/wishLists/${props.id}`}>
+      <Text>Id: {props.id}</Text>
+      <Text>title: {props.title}</Text>
+      <Text>
+        url: <a href={props.url}>{props.url}</a>
+      </Text>
+      <Text>
+        scrapedAt : <LocalDate unixTimeInSec={props.scrapedAt} />
+      </Text>
+      <Text>discountRateThreshold : {props.discountRateThreshold}</Text>
+      <Text>pointsRateThreshold : {props.pointsRateThreshold}</Text>
+      {props.incomingWebhook && (
+        <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
+      )}
+      <ItemTable items={props.items} />
+      {props.incomingWebhook && (
+        <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
+      )}
+    </NodePage>
   )
 }
 

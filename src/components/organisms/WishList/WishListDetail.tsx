@@ -56,14 +56,14 @@ const Text = styled.p`
 `
 
 const updateWishList = async (id: string): Promise<void> => {
-  await fetch(`http://localhost:3000/api/wishLists/${id}`, {
+  await fetch(`http://localhost:3000/api/wishList/${id}`, {
     method: 'PUT',
   })
   location.reload()
 }
 
 const deleteWishList = async (id: string): Promise<void> => {
-  await fetch(`http://localhost:3000/api/wishLists/${id}`, {
+  await fetch(`http://localhost:3000/api/wishList/${id}`, {
     method: 'DELETE',
   })
   Router.push('/')

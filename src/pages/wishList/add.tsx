@@ -53,7 +53,7 @@ const Draft: React.FC<Props> = (props) => {
   const onSubmit = async (data, e) => {
     e.preventDefault()
     try {
-      await fetch('/api/wishLists', {
+      await fetch('/api/wishList', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
