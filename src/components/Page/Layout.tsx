@@ -9,15 +9,24 @@ type Props = {
 }
 
 const Wrapper = styled.div`
-  padding: 0 2rem;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media screen and (min-width: 990px) {
+    width: 70.6em;
+    min-width: 990px;
+  }
 `
 
 const Layout: React.FC<Props> = ({ title, children }) => (
-  <div>
+  <>
     <Metadata title={title} />
-    <Header />
-    <Wrapper>{children}</Wrapper>
-  </div>
+    <Wrapper>
+      <Header />
+      {children}
+    </Wrapper>
+  </>
 )
 
 export default Layout

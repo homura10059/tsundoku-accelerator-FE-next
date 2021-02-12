@@ -21,6 +21,10 @@ export const theme = {
       error: '#FDFDFD',
     },
   },
+  layer: {
+    top: 100,
+    bottom: 0
+  },
 } as const
 
 // theme の型推論をできるようにする https://qiita.com/Takepepe/items/eec6e1d2101570e7e241
