@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { addIncomingWebhook } from '../../../domain/service/incomingWebhook'
-import { getSession } from '../wishList/node_modules/next-auth/client'
+import { getSession } from 'next-auth/client'
 import * as z from 'zod'
 
 const requestParamSchema = z.object({
