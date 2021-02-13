@@ -1,10 +1,8 @@
 import React from 'react'
-import Router from 'next/router'
 import { GetServerSideProps } from 'next'
 import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
-import WishListDetail from '../../components/organisms/WishList/WishListDetail'
 import { IncomingWebhook } from '../../lib/prisma'
 import NodePage from '../../components/Templates/NodePage'
 import LocalDate from '../../components/atoms/Date/LocalDate'
@@ -43,21 +41,6 @@ const Text = styled.p`
   font-size: 1.2rem;
   margin: 0.5rem;
 `
-
-const updateWishList = async (id: string): Promise<void> => {
-  await fetch(`http://localhost:3000/api/wishList/${id}`, {
-    method: 'PUT',
-  })
-  location.reload()
-}
-
-const deleteWishList = async (id: string): Promise<void> => {
-  await fetch(`http://localhost:3000/api/wishList/${id}`, {
-    method: 'DELETE',
-  })
-  Router.push('/')
-}
-
 const WishList: React.FC<Props> = (props) => {
   const [session, loading] = useSession()
   if (loading) {
