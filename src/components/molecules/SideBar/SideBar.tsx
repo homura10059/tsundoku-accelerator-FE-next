@@ -47,8 +47,9 @@ const Nav = styled.nav<{ isOpen: boolean }>`
 `
 
 const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.on.primary};
   font-size: 1.5rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.on.background};
 `
 
 const LinkArea = styled.div`

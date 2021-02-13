@@ -25,10 +25,13 @@ const TopBar = styled.div`
 `
 const Title = styled.h1`
   font-size: 2rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.on.background};
 `
 
 const MainArea = styled.div`
   margin-top: 1rem;
+  color: ${({ theme }) => theme.colors.on.background};
 `
 
 const NodePage: React.FC<Props> = ({
