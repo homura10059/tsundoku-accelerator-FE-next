@@ -65,8 +65,16 @@ const WishList: React.FC<Props> = (props) => {
   }
   const userHasValidSession = Boolean(session)
 
+  if (!userHasValidSession) {
+    return null
+  }
+
   return (
-    <NodePage title={`${props.title}`} basePath={`/wishLists/${props.id}`}>
+    <NodePage
+      title={`${props.title}`}
+      basePath={`/wishList/${props.id}`}
+      command={{ canUpdate: true, canEdit: true, canDelete: true }}
+    >
       <Text>Id: {props.id}</Text>
       <Text>title: {props.title}</Text>
       <Text>
@@ -81,9 +89,6 @@ const WishList: React.FC<Props> = (props) => {
         <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
       )}
       <ItemTable items={props.items} />
-      {props.incomingWebhook && (
-        <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
-      )}
     </NodePage>
   )
 }

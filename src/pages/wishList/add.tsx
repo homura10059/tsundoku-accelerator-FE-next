@@ -58,7 +58,7 @@ const Draft: React.FC<Props> = (props) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      await Router.push('/')
+      await Router.push('/wishList')
     } catch (error) {
       console.error(error)
     }

@@ -72,11 +72,7 @@ const CloseArea = styled.ul`
 `
 
 const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
-  const router = useRouter()
   Router.events.on('routeChangeComplete', () => setIsOpen(false))
-
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname
 
   return (
     <Nav isOpen={isOpen}>

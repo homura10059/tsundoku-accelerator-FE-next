@@ -1,11 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import LinkButton from '../atoms/Button/LinkButton'
+import CommandButton from '../molecules/Button/CommandButton'
 
 type Props = {
   title: string
   basePath: string
-  canUpdate?: boolean
+  command?: {
+    canUpdate?: boolean
+    canEdit?: boolean
+    canDelete?: boolean
+  }
 }
 
 const Wrapper = styled.main`
@@ -15,7 +20,7 @@ const Wrapper = styled.main`
 const TopBar = styled.div`
   display: flex;
   * + * {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 `
 const Title = styled.h1`
@@ -26,14 +31,25 @@ const MainArea = styled.div`
   margin-top: 1rem;
 `
 
-const NodePage: React.FC<Props> = ({ title, basePath, canUpdate = false, children }) => {
+const NodePage: React.FC<Props> = ({
+  title,
+  basePath,
+  command = { canUpdate: false, canEdit: false, canDelete: false },
+  children,
+}) => {
   return (
     <Wrapper>
       <TopBar>
         <Title>{title}</Title>
-        {canUpdate && (<LinkButton href={`/${basePath}/update`} label={'Update'} />)}
-        <LinkButton href={`/${basePath}/edit`} label={'Edit'} />
-        <LinkButton href={`/${basePath}/delete`} label={'Delete'} />
+        {command.canUpdate && (
+          <CommandButton command={'Update'} basePath={basePath} />
+        )}
+        {command.canEdit && (
+          <LinkButton href={`/${basePath}/edit`} label={'Edit'} />
+        )}
+        {command.canDelete && (
+          <CommandButton command={'Delete'} basePath={basePath} />
+        )}
       </TopBar>
       <MainArea>{children}</MainArea>
     </Wrapper>

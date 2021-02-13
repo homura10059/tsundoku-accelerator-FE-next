@@ -85,7 +85,6 @@ const WishListDetail: React.FC<Props> = (props) => {
           )}
           {props.userHasValidSession && (
             <ButtonWrapper>
-              {' '}
               <TextButton
                 onClick={() => deleteWishList(props.id)}
                 label="Delete"
