@@ -37,9 +37,12 @@ export type Props = {
   incomingWebhook: IncomingWebhook
 }
 
-const Text = styled.p`
+const List = styled.ul`
   font-size: 1.2rem;
-  margin: 0.5rem;
+  margin-left: 0.5rem;
+  li + li {
+    margin-top: 0.3rem;
+  }
 `
 const WishList: React.FC<Props> = (props) => {
   const [session, loading] = useSession()
@@ -58,19 +61,28 @@ const WishList: React.FC<Props> = (props) => {
       basePath={`/wishList/${props.id}`}
       command={{ canUpdate: true, canEdit: true, canDelete: true }}
     >
-      <Text>Id: {props.id}</Text>
-      <Text>title: {props.title}</Text>
-      <Text>
-        url: <a href={props.url}>{props.url}</a>
-      </Text>
-      <Text>
-        scrapedAt : <LocalDate unixTimeInSec={props.scrapedAt} />
-      </Text>
-      <Text>discountRateThreshold : {props.discountRateThreshold}</Text>
-      <Text>pointsRateThreshold : {props.pointsRateThreshold}</Text>
-      {props.incomingWebhook && (
-        <Text>incomingWebhook : {props.incomingWebhook.service}</Text>
-      )}
+      <List>
+        <li>Id: {props.id}</li>
+        <li>
+          title: <a href={props.url}>{props.title} </a>
+        </li>
+        <li>
+          更新日時 : <LocalDate unixTimeInSec={props.scrapedAt} />
+        </li>
+        <li>
+          更新日時 : <LocalDate unixTimeInSec={props.scrapedAt} />
+        </li>
+        {props.incomingWebhook && (
+          <li>通知設定 : {props.incomingWebhook.service}</li>
+        )}
+        <li>
+          閾値
+          <List>
+            <li>値引率: {props.discountRateThreshold}</li>
+            <li>還元率: {props.pointsRateThreshold}</li>
+          </List>
+        </li>
+      </List>
       <ItemTable items={props.items} />
     </NodePage>
   )
