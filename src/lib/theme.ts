@@ -12,6 +12,7 @@ export const theme = {
     },
     background: '#9E1221',
     surface: '#0B0B0B',
+    border: '#FDFDFD',
     error: '#33C4B3',
     on: {
       primary: '#FDFDFD',
