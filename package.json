@@ -13,7 +13,9 @@
     "command:update:wishLists": "node schedulers/wishLists/update.js",
     "command:update:items": "node schedulers/items/update.js",
     "command:update:notifications": "node schedulers/notifications/update.js",
-    "command:wakeup": "node schedulers/wakeUp.js"
+    "command:wakeup": "node schedulers/wakeUp.js",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "engines": {
     "node": "14.15.3"
@@ -40,6 +42,17 @@
   },
   "devDependencies": {
     "@prisma/cli": "2",
+    "@storybook/addon-a11y": "^6.1.17",
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-docs": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-knobs": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/addon-storyshots": "^6.1.17",
+    "@storybook/addons": "^6.1.17",
+    "@storybook/node-logger": "^6.1.17",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.17",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.16",
     "@types/puppeteer": "^5.4.2",
