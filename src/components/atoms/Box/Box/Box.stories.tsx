@@ -28,3 +28,18 @@ showBox.story = {
     (storyFn) => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>,
   ],
 }
+
+export const showBoxCanHover = () => (
+  <Background>
+    <Box canHover={true}>
+      <div>来てくれるかな</div>
+      <div>モルモット君？</div>
+    </Box>
+  </Background>
+)
+
+showBoxCanHover.story = {
+  decorators: [
+    (storyFn) => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>,
+  ],
+}
