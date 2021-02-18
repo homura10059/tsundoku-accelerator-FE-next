@@ -9,7 +9,7 @@ type LinkItemProps = {
 }
 
 const ItemText = styled.div`
-  padding: 0.3rem;
+  padding: 0.5rem;
 `
 
 const LinkItem: React.FC<LinkItemProps> = ({ href, children }) => {
