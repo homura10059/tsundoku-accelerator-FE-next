@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
 import Navigation from '../../molecules/AppBar/Navigation'
-import SideBar from '../../molecules/SideBar/SideBar'
+import SideBar from '../SideBar/SideBar'
 import MenuButton from '../../atoms/Button/MenuButton'
 import ServiceIcon from '../../atoms/Image/ServiceIcon'
 

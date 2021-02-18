@@ -1,25 +1,23 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import HiddenText from '../../atoms/Text/HiddenText'
-import TextLink from '../../atoms/Text/TextLink'
-import Box from '../../atoms/Box/Box'
+import LinkBox from '../../molecules/LinkBox/LinkBox'
 
 type LinkItemProps = {
   href: string
-  text: string
 }
 
-const LinkItem: React.FC<LinkItemProps> = ({ href, text }) => {
-  const router = useRouter()
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname
+const ItemText = styled.div`
+  padding: 0.3rem;
+`
 
+const LinkItem: React.FC<LinkItemProps> = ({ href, children }) => {
   return (
     <li>
-      <TextLink href={href} isActive={isActive(href)}>
-        {text}
-      </TextLink>
+      <LinkBox href={href}>
+        <ItemText>{children}</ItemText>
+      </LinkBox>
     </li>
   )
 }
@@ -66,7 +64,7 @@ const List = styled.ul`
   }
 `
 
-const CloseArea = styled.ul`
+const CloseArea = styled.a`
   background-color: ${({ theme }) => theme.colors.secondary.light};
   opacity: 0.5;
   width: 100%;
@@ -81,13 +79,11 @@ const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
       <LinkArea>
         <Title>Menu</Title>
         <List>
-          <Box canHover={true}>HOME</Box>
-          <LinkItem href={'/'} text={'HOME'} />
-          <LinkItem href={'/wishList'} text={'WishList'} />
-          <LinkItem href={'/notification'} text={'Notification'} />
+          <LinkItem href={'/'}>HOME</LinkItem>
+          <LinkItem href={'/wishList'}>WishList</LinkItem>
+          <LinkItem href={'/notification'}>Notification</LinkItem>
         </List>
       </LinkArea>
-
       <CloseArea onClick={() => setIsOpen(false)}>
         <HiddenText text={'close'} />
       </CloseArea>

@@ -1,11 +1,6 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
 import LinkBox from './LinkBox'
 import styled from 'styled-components'
-
-export default {
-  title: 'LinkBox',
-}
 
 const Background = styled.div`
   background-color: #9cc;
@@ -13,11 +8,20 @@ const Background = styled.div`
   padding: 10px;
 `
 
+export default {
+  title: 'Design System/molecules/LinkBox',
+  decorators: [
+    (Story) => (
+      <Background>
+        <Story />
+      </Background>
+    ),
+  ],
+}
+
 export const showLinkBox = () => (
-  <Background>
-    <LinkBox href={"#"}>
-      <div>来てくれるかな</div>
-      <div>モルモット君？</div>
-    </LinkBox>
-  </Background>
+  <LinkBox href={'#'}>
+    <div>来てくれるかな</div>
+    <div>モルモット君？</div>
+  </LinkBox>
 )

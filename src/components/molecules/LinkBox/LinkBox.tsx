@@ -9,6 +9,10 @@ type Props = {
 
 const Wrapper = styled.a`
   text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const Inner = styled.div`
