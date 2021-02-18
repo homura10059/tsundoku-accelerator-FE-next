@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { theme } from '../../../../lib/theme'
+import { theme } from '../../../lib/theme'
 import Box from './Box'
 import styled from 'styled-components'
 
@@ -23,12 +23,6 @@ export const showBox = () => (
   </Background>
 )
 
-showBox.story = {
-  decorators: [
-    (storyFn) => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>,
-  ],
-}
-
 export const showBoxCanHover = () => (
   <Background>
     <Box canHover={true}>
@@ -37,9 +31,3 @@ export const showBoxCanHover = () => (
     </Box>
   </Background>
 )
-
-showBoxCanHover.story = {
-  decorators: [
-    (storyFn) => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>,
-  ],
-}

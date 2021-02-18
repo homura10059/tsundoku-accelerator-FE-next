@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { hex2rgba } from '../../../../lib/theme'
+import { hex2rgba } from '../../../lib/theme'
 
 type Props = {
   canHover?: boolean
@@ -22,8 +22,7 @@ const Outer = styled(Parallelogram)`
 const OnHover = styled(Parallelogram)`
   background-color: ${({ theme }) => hex2rgba(theme.colors.primary.light, 0)};
 
-  width: 100%;
-  height: 100%;
+  width: 98%;
 
   &:hover {
     background-color: ${({ theme }) => hex2rgba(theme.colors.primary.light, 1)};

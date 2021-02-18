@@ -1,0 +1,23 @@
+import React from 'react'
+import { ThemeProvider } from 'styled-components'
+import LinkBox from './LinkBox'
+import styled from 'styled-components'
+
+export default {
+  title: 'LinkBox',
+}
+
+const Background = styled.div`
+  background-color: #9cc;
+  width: 400px;
+  padding: 10px;
+`
+
+export const showLinkBox = () => (
+  <Background>
+    <LinkBox href={"#"}>
+      <div>来てくれるかな</div>
+      <div>モルモット君？</div>
+    </LinkBox>
+  </Background>
+)

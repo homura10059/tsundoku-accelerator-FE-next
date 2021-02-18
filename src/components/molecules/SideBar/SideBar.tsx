@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import Router, { useRouter } from 'next/router'
 import HiddenText from '../../atoms/Text/HiddenText'
 import TextLink from '../../atoms/Text/TextLink'
+import Box from '../../atoms/Box/Box'
 
 type LinkItemProps = {
   href: string
@@ -80,6 +81,7 @@ const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
       <LinkArea>
         <Title>Menu</Title>
         <List>
+          <Box canHover={true}>HOME</Box>
           <LinkItem href={'/'} text={'HOME'} />
           <LinkItem href={'/wishList'} text={'WishList'} />
           <LinkItem href={'/notification'} text={'Notification'} />
