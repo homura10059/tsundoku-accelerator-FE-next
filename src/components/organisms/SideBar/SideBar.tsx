@@ -48,12 +48,16 @@ const Nav = styled.nav<{ isOpen: boolean }>`
 
 const LinkArea = styled.div`
   background-color: ${({ theme }) => theme.colors.primary.dark};
+`
+
+const TitleArea = styled.div`
   padding: 0.5rem;
 `
 
 const List = styled.ul`
-  background-color: ${({ theme }) => theme.colors.primary.dark};
-  margin-top: 1rem;
+  background-color: ${({ theme }) => theme.colors.secondary.dark};
+  padding: 0.5rem;
+  height: 100%;
   * + * {
     margin-top: 0.5rem;
   }
@@ -72,7 +76,9 @@ const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   return (
     <Nav isOpen={isOpen}>
       <LinkArea>
-        <Title>Menu</Title>
+        <TitleArea>
+          <Title>Menu</Title>
+        </TitleArea>
         <List>
           <LinkItem href={'/'}>HOME</LinkItem>
           <LinkItem href={'/wishList'}>WishList</LinkItem>
