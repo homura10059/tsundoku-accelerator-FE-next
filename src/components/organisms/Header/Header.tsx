@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
 import Navigation from '../../molecules/AppBar/Navigation'
 import SideBar from '../SideBar/SideBar'
-import MenuButton from '../../atoms/Button/MenuButton'
+import MenuButton from '../../atoms/MenuButton/MenuButton'
 import ServiceIcon from '../../atoms/Image/ServiceIcon'
 
 const Wrapper = styled.div`

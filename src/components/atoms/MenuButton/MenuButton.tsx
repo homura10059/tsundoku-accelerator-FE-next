@@ -6,6 +6,7 @@ type Props = {
 }
 
 const Button = styled.a`
+  display: inline-block;
   text-decoration: none;
   height: 36px;
   width: 36px;
