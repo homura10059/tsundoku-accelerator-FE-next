@@ -16,6 +16,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Provider session={pageProps.session}>
+          {
+            // https://zenn.dev/catnose99/articles/3c106c81cbfdec
+          }
+          <script></script>
           <Layout>
             <Component {...pageProps} />
           </Layout>
