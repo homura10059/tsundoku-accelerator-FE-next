@@ -4,6 +4,7 @@ import { withNextRouter } from 'storybook-addon-next-router'
 import { addDecorator } from '@storybook/react'
 import { configure } from '@storybook/react'
 import './mockNextRouter'
+import { Reset } from 'styled-reset'
 
 addDecorator(
   withNextRouter({
@@ -15,9 +16,12 @@ addDecorator(
 )
 
 addDecorator((Story) => (
-  <ThemeProvider theme={theme}>
-    <Story />
-  </ThemeProvider>
+  <>
+    <Reset />
+    <ThemeProvider theme={theme}>
+      <Story />
+    </ThemeProvider>
+  </>
 ))
 
 const addParameters = require('@storybook/react').addParameters
