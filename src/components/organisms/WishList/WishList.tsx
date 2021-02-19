@@ -3,11 +3,11 @@ import Router from 'next/router'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import { WishList as WishListProps } from '@prisma/client'
+import Title from '../../atoms/Title/Title'
 
 export type Props = WishListProps
 
 const Area = styled.a``
-const Title = styled.p``
 const UpdateAt = styled.p``
 
 const WishList: React.FC<Props> = (wishList) => {

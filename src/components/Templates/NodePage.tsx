@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import LinkButton from '../atoms/Button/LinkButton'
+import Title from '../atoms/Title/Title'
 import CommandButton from '../molecules/Button/CommandButton'
 
 type Props = {
@@ -22,11 +23,6 @@ const TopBar = styled.div`
   * + * {
     margin-left: 0.5rem;
   }
-`
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.on.background};
 `
 
 const MainArea = styled.div`

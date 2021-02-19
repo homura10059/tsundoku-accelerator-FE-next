@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import Router from 'next/router'
 import HiddenText from '../../atoms/Text/HiddenText'
 import LinkBox from '../../molecules/LinkBox/LinkBox'
+import Title from '../../atoms/Title/Title'
 
 type LinkItemProps = {
   href: string
@@ -43,12 +44,6 @@ const Nav = styled.nav<{ isOpen: boolean }>`
       : css`
           left: -100%;
         `}
-`
-
-const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.on.background};
 `
 
 const LinkArea = styled.div`
