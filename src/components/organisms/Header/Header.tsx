@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Navigation from '../../molecules/AppBar/Navigation'
 import SideBar from '../SideBar/SideBar'
 import MenuButton from '../../atoms/MenuButton/MenuButton'
-import ServiceIcon from '../../atoms/Image/ServiceIcon'
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,7 +28,6 @@ const Header: React.FC = () => {
       <Left>
         <MenuButton onClick={() => setIsOpen(!isOpen)} />
         <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
-        <ServiceIcon />
       </Left>
       <Right>
         <Navigation session={session} loading={loading} />

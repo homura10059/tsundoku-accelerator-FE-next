@@ -13,13 +13,13 @@ const GlobalStyle = createGlobalStyle`
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      {
+        // https://zenn.dev/catnose99/articles/3c106c81cbfdec
+      }
+      <script></script>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Provider session={pageProps.session}>
-          {
-            // https://zenn.dev/catnose99/articles/3c106c81cbfdec
-          }
-          <script></script>
           <Layout>
             <Component {...pageProps} />
           </Layout>
