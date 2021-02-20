@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LinkButton from '../atoms/Button/LinkButton'
+import LinkButton from '../atoms/LinkButton/LinkButton'
 import Title from '../atoms/Title/Title'
 import CommandButton from '../molecules/Button/CommandButton'
 
@@ -20,6 +20,7 @@ const Wrapper = styled.main`
 
 const TopBar = styled.div`
   display: flex;
+  flex-wrap: wrap;
   * + * {
     margin-left: 0.5rem;
   }
@@ -44,7 +45,7 @@ const NodePage: React.FC<Props> = ({
           <CommandButton command={'Update'} basePath={basePath} />
         )}
         {command.canEdit && (
-          <LinkButton href={`/${basePath}/edit`} label={'Edit'} />
+          <LinkButton href={`/${basePath}/edit`}>Edit</LinkButton>
         )}
         {command.canDelete && (
           <CommandButton command={'Delete'} basePath={basePath} />

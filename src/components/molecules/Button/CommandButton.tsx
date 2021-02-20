@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
 import styled from 'styled-components'
-import TextButton from '../../atoms/Button/TextButton'
+import LinkButton from '../../atoms/LinkButton/LinkButton'
 
 type Props = {
   command: 'Delete' | 'Update'
@@ -40,14 +40,15 @@ const onUpdate = async (
   }
 }
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+  height: 10px;
+  width: 10px;
+`
 const SpinnerWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.secondary.light};
 `
 
 const Spinner = styled.div`
-  height: 33px;
-  width: 33px;
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.colors.on.background};
   border-top-color: ${({ theme }) => theme.colors.on.primary};
@@ -72,7 +73,7 @@ const CommandButton: React.FC<Props> = ({ command, basePath }) => {
   return (
     <Wrapper>
       {!isLoading ? (
-        <TextButton onClick={method} label={command} />
+        <LinkButton onClick={method}>{command}</LinkButton>
       ) : (
         <SpinnerWrapper>
           <Spinner />

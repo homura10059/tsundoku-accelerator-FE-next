@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LinkButton from '../atoms/Button/LinkButton'
+import LinkButton from '../atoms/LinkButton/LinkButton'
 import Title from '../atoms/Title/Title'
 
 type Props = {
@@ -14,6 +14,7 @@ const Wrapper = styled.main`
 
 const TopBar = styled.div`
   display: flex;
+  flex-wrap: wrap;
   * + * {
     margin-left: 1rem;
   }
@@ -28,7 +29,7 @@ const ListPage: React.FC<Props> = ({ title, basePath, children }) => {
     <Wrapper>
       <TopBar>
         <Title>{title}</Title>
-        <LinkButton href={`/${basePath}/add`} label={'Add'} />
+        <LinkButton href={`/${basePath}/add`}>Add</LinkButton>
       </TopBar>
       <MainArea>{children}</MainArea>
     </Wrapper>
