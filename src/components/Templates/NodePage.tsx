@@ -45,7 +45,7 @@ const NodePage: React.FC<Props> = ({
           <CommandButton command={'Update'} basePath={basePath} />
         )}
         {command.canEdit && (
-          <LinkButton href={`/${basePath}/edit`}>Edit</LinkButton>
+          <CommandButton command={'Edit'} basePath={basePath} />
         )}
         {command.canDelete && (
           <CommandButton command={'Delete'} basePath={basePath} />

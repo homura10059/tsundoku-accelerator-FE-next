@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import LinkButton from '../../atoms/LinkButton/LinkButton'
 
 type Props = {
-  command: 'Delete' | 'Update'
+  command: 'Delete' | 'Update' | 'Edit'
   basePath: string
 }
 
@@ -40,24 +40,25 @@ const onUpdate = async (
   }
 }
 
-const Wrapper = styled.div`
-  height: 10px;
-  width: 10px;
-`
-const SpinnerWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.secondary.light};
-`
-
-const Spinner = styled.div`
-  border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.colors.on.background};
-  border-top-color: ${({ theme }) => theme.colors.on.primary};
-  animation: spinner 600ms linear infinite;
-  @keyframes spinner {
-    to {
-      transform: rotate(360deg);
-    }
+const onEdit = async (
+  basePath: string,
+  updateIsLoading: (isLoading: boolean) => void
+): Promise<void> => {
+  try {
+    updateIsLoading(true)
+    await fetch(`/api${basePath}`, {
+      method: 'PATCH',
+    })
+    await Router.reload()
+  } catch (error) {
+    updateIsLoading(false)
+    console.error(error)
   }
+}
+
+const Wrapper = styled.div`
+  width: 84px;
+  height: 26px;
 `
 
 const CommandButton: React.FC<Props> = ({ command, basePath }) => {
@@ -68,17 +69,15 @@ const CommandButton: React.FC<Props> = ({ command, basePath }) => {
       ? () => onDelete(basePath, updateIsLoading)
       : command === 'Update'
       ? () => onUpdate(basePath, updateIsLoading)
+      : command === 'Edit'
+      ? () => onEdit(basePath, updateIsLoading)
       : () => {}
 
   return (
     <Wrapper>
-      {!isLoading ? (
-        <LinkButton onClick={method}>{command}</LinkButton>
-      ) : (
-        <SpinnerWrapper>
-          <Spinner />
-        </SpinnerWrapper>
-      )}
+      <LinkButton isLoading={isLoading} onClick={method}>
+        {command}
+      </LinkButton>
     </Wrapper>
   )
 }

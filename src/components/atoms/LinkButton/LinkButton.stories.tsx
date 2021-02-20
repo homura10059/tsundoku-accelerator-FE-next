@@ -25,3 +25,7 @@ export const showLinkButtonWithHref = () => (
 export const showLinkButtonWithOnClick = () => (
   <LinkButton onClick={() => {}}>onClick</LinkButton>
 )
+
+export const showLinkButtonIsLoading = () => (
+  <LinkButton isLoading={true}>Loading</LinkButton>
+)
