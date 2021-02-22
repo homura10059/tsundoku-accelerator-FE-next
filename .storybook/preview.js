@@ -4,7 +4,7 @@ import { withNextRouter } from 'storybook-addon-next-router'
 import { addDecorator } from '@storybook/react'
 import { configure } from '@storybook/react'
 import './mockNextRouter'
-import { Reset } from 'styled-reset'
+import { GlobalStyle } from '../src/lib/style'
 
 addDecorator(
   withNextRouter({
@@ -17,7 +17,7 @@ addDecorator(
 
 addDecorator((Story) => (
   <>
-    <Reset />
+    <GlobalStyle />
     <ThemeProvider theme={theme}>
       <Story />
     </ThemeProvider>
