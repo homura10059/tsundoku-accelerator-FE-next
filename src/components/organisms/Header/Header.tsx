@@ -23,6 +23,7 @@ const Right = styled.div`
 const Header: React.FC = () => {
   const [session, loading] = useSession()
   const [isOpen, setIsOpen] = useState(false)
+  
   return (
     <Wrapper>
       <Left>
