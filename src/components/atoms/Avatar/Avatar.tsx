@@ -22,6 +22,7 @@ const Wrapper = styled.div<NonNullable<Props['size']>>`
 const AvatarWrapper = styled(Wrapper)``
 
 const AvatarImage = styled.img`
+  display: block;
   border-radius: 50%;
   height: 100%;
   width: 100%;
@@ -37,6 +38,7 @@ const InitialWrapper = styled(Wrapper)`
 `
 
 const InitialText = styled.div`
+  display: block;
   left: 50%;
   position: absolute;
   top: 50%;

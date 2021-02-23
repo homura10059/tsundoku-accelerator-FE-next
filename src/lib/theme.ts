@@ -6,6 +6,10 @@ export const theme = {
       light: '#C21C0E',
       dark: '#9E1221',
     },
+    reverse: {
+      light: '#3DE3F1',
+      dark: '#61EDDE',
+    },
     secondary: {
       light: '#4C4C4C',
       dark: '#0B0B0B',
