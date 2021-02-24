@@ -2,26 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import Router from 'next/router'
 import HiddenText from '../../atoms/Text/HiddenText'
-import LinkBox from '../../molecules/LinkBox/LinkBox'
 import Title from '../../atoms/Title/Title'
-
-type LinkItemProps = {
-  href: string
-}
-
-const ItemText = styled.div`
-  padding: 0.5rem;
-`
-
-const LinkItem: React.FC<LinkItemProps> = ({ href, children }) => {
-  return (
-    <li>
-      <LinkBox href={href}>
-        <ItemText>{children}</ItemText>
-      </LinkBox>
-    </li>
-  )
-}
+import LinkMenu, { LinkItemProps } from '../../molecules/LinkMenu/LinkMenu'
 
 type Props = {
   isOpen: boolean
@@ -54,21 +36,27 @@ const TitleArea = styled.div`
   padding: 0.5rem;
 `
 
-const List = styled.ul`
-  background-color: ${({ theme }) => theme.colors.secondary.dark};
-  padding: 0.5rem;
-  height: 100%;
-  * + * {
-    margin-top: 0.5rem;
-  }
-`
-
 const CloseArea = styled.a`
   background-color: ${({ theme }) => theme.colors.secondary.light};
   opacity: 0.5;
   width: 100%;
   text-decoration: none;
 `
+
+const links: LinkItemProps[] = [
+  {
+    text: 'Home',
+    href: '/',
+  },
+  {
+    text: 'WishList',
+    href: '/wishList',
+  },
+  {
+    text: 'Notification',
+    href: '/notification',
+  },
+]
 
 const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
   Router.events.on('routeChangeComplete', () => setIsOpen(false))
@@ -79,11 +67,7 @@ const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
         <TitleArea>
           <Title>Menu</Title>
         </TitleArea>
-        <List>
-          <LinkItem href={'/'}>HOME</LinkItem>
-          <LinkItem href={'/wishList'}>WishList</LinkItem>
-          <LinkItem href={'/notification'}>Notification</LinkItem>
-        </List>
+        <LinkMenu links={links} />
       </LinkArea>
       <CloseArea onClick={() => setIsOpen(false)}>
         <HiddenText text={'close'} />
