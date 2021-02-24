@@ -26,7 +26,7 @@ export const showLinkMenu = () => (
       { href: '/1', text: 'Link1' },
       { href: '/2', text: 'Link2' },
       { href: '/3', text: 'Link3' },
-      { href: '/4', text: 'Link4' },
+      { text: 'Link4', onClick: () => {} },
     ]}
   />
 )

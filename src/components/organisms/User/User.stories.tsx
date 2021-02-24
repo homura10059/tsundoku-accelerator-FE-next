@@ -20,26 +20,12 @@ export default {
   ],
 }
 
-const mockSetIsOpen = (_isOpen: boolean) => {
-  console.log('mockSetIsOpen clicked')
-}
-
 export const showUserInLoading = () => (
-  <User
-    session={undefined}
-    loading={true}
-    isOpen={false}
-    setIsOpen={mockSetIsOpen}
-  />
+  <User session={undefined} loading={true} />
 )
 
 export const showUserNotLoggedIn = () => (
-  <User
-    session={undefined}
-    loading={false}
-    isOpen={false}
-    setIsOpen={mockSetIsOpen}
-  />
+  <User session={undefined} loading={false} />
 )
 
 const mockSession: Session = {
@@ -52,19 +38,5 @@ const mockSession: Session = {
   },
 }
 export const showUserLoggedIn = () => (
-  <User
-    session={mockSession}
-    loading={false}
-    isOpen={false}
-    setIsOpen={mockSetIsOpen}
-  />
-)
-
-export const showUserLoggedInAndOpened = () => (
-  <User
-    session={mockSession}
-    loading={false}
-    isOpen={true}
-    setIsOpen={mockSetIsOpen}
-  />
+  <User session={mockSession} loading={false} />
 )

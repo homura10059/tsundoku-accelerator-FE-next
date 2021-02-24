@@ -9,7 +9,7 @@ type Props = {
 
 const List = styled.ul`
   background-color: ${({ theme }) => theme.colors.surface};
-  padding: 10px;
+  padding: 15px;
   height: 100%;
   li + li {
     margin-top: 20px;
@@ -55,19 +55,29 @@ const ItemText = styled.span`
   z-index: 5;
 `
 
-type LinkItemProps = {
-  href: string
+export type LinkItemProps = {
+  href?: string
   text: string
+  onClick?: () => void
 }
 
-const LinkItem: React.FC<LinkItemProps> = ({ href, text }) => {
+const LinkItem: React.FC<LinkItemProps> = ({ href, text, onClick }) => {
+  if (href) {
+    return (
+      <li>
+        <Link href={href} passHref>
+          <ItemWrapper onClick={onClick}>
+            <ItemText>{text}</ItemText>
+          </ItemWrapper>
+        </Link>
+      </li>
+    )
+  }
   return (
     <li>
-      <Link href={href} passHref>
-        <ItemWrapper>
-          <ItemText>{text}</ItemText>
-        </ItemWrapper>
-      </Link>
+      <ItemWrapper onClick={onClick}>
+        <ItemText>{text}</ItemText>
+      </ItemWrapper>
     </li>
   )
 }

@@ -5,6 +5,8 @@ import Loader from '../../atoms/Loader/Loader'
 import LinkButton from '../../atoms/LinkButton/LinkButton'
 import Avatar from '../../atoms/Avatar/Avatar'
 import { Session } from 'next-auth/client'
+import LinkMenu, { LinkItemProps } from '../../molecules/LinkMenu/LinkMenu'
+import { signOut } from 'next-auth/client'
 
 type SessionProps = {
   session?: Session
@@ -22,17 +24,26 @@ const AvatarLink = styled.a`
   cursor: pointer;
 `
 
+const links: LinkItemProps[] = [
+  {
+    text: 'Profile',
+    href: '/user/profile',
+  },
+  {
+    text: 'Notification',
+    href: '/notification',
+  },
+  {
+    text: 'Logout',
+    onClick: () => signOut(),
+  },
+]
 
-type Props = SessionProps & {
-  isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
-}
-export const User: React.FC<Props> = ({
-  session,
-  loading,
-  isOpen,
-  setIsOpen,
-}) => {
+type Props = SessionProps
+
+export const User: React.FC<Props> = ({ session, loading }) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   if (loading) {
     return (
       <Wrapper>
@@ -54,13 +65,7 @@ export const User: React.FC<Props> = ({
         <AvatarLink onClick={() => setIsOpen(!isOpen)}>
           <Avatar name={session.user.name} image={session.user.image} />
         </AvatarLink>
-        {isOpen && (
-          <ul>
-            <li>profile</li>
-            <li>notification</li>
-            <li>logout</li>
-          </ul>
-        )}
+        {isOpen && <LinkMenu links={links} />}
       </div>
     </Wrapper>
   )
@@ -68,14 +73,11 @@ export const User: React.FC<Props> = ({
 
 const Connect: React.FC<{}> = ({}) => {
   const [session, loading] = useSession()
-  const [isOpen, setIsOpen] = useState(false)
   return (
     <User
       {...{
         session,
         loading,
-        isOpen,
-        setIsOpen,
       }}
     />
   )
