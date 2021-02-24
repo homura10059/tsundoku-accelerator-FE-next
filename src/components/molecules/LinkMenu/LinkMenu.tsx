@@ -64,21 +64,17 @@ export type LinkItemProps = {
 const LinkItem: React.FC<LinkItemProps> = ({ href, text, onClick }) => {
   if (href) {
     return (
-      <li>
-        <Link href={href} passHref>
-          <ItemWrapper onClick={onClick}>
-            <ItemText>{text}</ItemText>
-          </ItemWrapper>
-        </Link>
-      </li>
+      <Link href={href} passHref>
+        <ItemWrapper onClick={onClick}>
+          <ItemText>{text}</ItemText>
+        </ItemWrapper>
+      </Link>
     )
   }
   return (
-    <li>
-      <ItemWrapper onClick={onClick}>
-        <ItemText>{text}</ItemText>
-      </ItemWrapper>
-    </li>
+    <ItemWrapper onClick={onClick}>
+      <ItemText>{text}</ItemText>
+    </ItemWrapper>
   )
 }
 
@@ -89,7 +85,9 @@ const LinkMenu: React.FC<Props> = ({ links }) => {
   return (
     <List>
       {links.map((link) => (
-        <LinkItem {...link} />
+        <li key={link.text}>
+          <LinkItem {...link} />
+        </li>
       ))}
     </List>
   )
