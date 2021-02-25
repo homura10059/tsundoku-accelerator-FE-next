@@ -47,7 +47,7 @@ const InitialText = styled.div`
 
 const Avatar: React.FC<Props> = ({
   name,
-  size = { height: 32, width: 32 },
+  size = { height: 36, width: 36 },
   image = null,
 }) => {
   if (image) {

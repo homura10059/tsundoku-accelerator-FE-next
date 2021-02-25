@@ -14,10 +14,11 @@ type SessionProps = {
 }
 
 const Wrapper = styled.div`
-  /* centering */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+`
+const MenuWrapper = styled.div`
+  position: absolute;
+  right: 0;
 `
 
 const AvatarLink = styled.a`
@@ -61,12 +62,14 @@ export const User: React.FC<Props> = ({ session, loading }) => {
 
   return (
     <Wrapper>
-      <div>
-        <AvatarLink onClick={() => setIsOpen(!isOpen)}>
-          <Avatar name={session.user.name} image={session.user.image} />
-        </AvatarLink>
-        {isOpen && <LinkMenu links={links} />}
-      </div>
+      <AvatarLink onClick={() => setIsOpen(!isOpen)}>
+        <Avatar name={session.user.name} image={session.user.image} />
+      </AvatarLink>
+      {isOpen && (
+        <MenuWrapper>
+          <LinkMenu links={links} />
+        </MenuWrapper>
+      )}
     </Wrapper>
   )
 }

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
-import Navigation from '../../molecules/AppBar/Navigation'
 import SideBar from '../SideBar/SideBar'
 import MenuButton from '../../atoms/MenuButton/MenuButton'
+import User from '../User/User'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,9 +20,8 @@ const Right = styled.div`
 `
 
 const Header: React.FC = () => {
-  const [session, loading] = useSession()
   const [isOpen, setIsOpen] = useState(false)
-  
+
   return (
     <Wrapper>
       <Left>
@@ -31,7 +29,7 @@ const Header: React.FC = () => {
         <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </Left>
       <Right>
-        <Navigation session={session} loading={loading} />
+        <User />
       </Right>
     </Wrapper>
   )
