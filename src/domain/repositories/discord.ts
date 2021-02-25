@@ -52,20 +52,29 @@ const convertColorFrom = (
   pointsRateThreshold: number
 ): number => {
   if (
-    item.discountRate >= discountRateThreshold &&
-    item.pointsRate >= pointsRateThreshold
+    !(
+      item.discountRate >= discountRateThreshold ||
+      item.pointsRate >= pointsRateThreshold
+    )
+  ) {
+    return color.gray
+  }
+
+  if (
+    item.discountRate >= 30 ||
+    item.pointsRate >= 30
+  ) {
+    return color.yellow
+  }
+
+  if (
+    item.discountRate >= 35 ||
+    item.pointsRate >= 35
   ) {
     return color.red
   }
 
-  if (
-    item.discountRate >= discountRateThreshold ||
-    item.pointsRate >= pointsRateThreshold
-  ) {
-    return color.green
-  }
-
-  return color.gray
+  return color.green
 }
 
 const convertEmbedsFrom = (
