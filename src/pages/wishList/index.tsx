@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 import { getWishLists } from '../../domain/service/wishList'
-import ListPage from '../../components/Templates/ListPage'
+import ListPage from '../../components/aTemplates/ListPage'
 import { WishList as WishListProps } from '@prisma/client'
 import WishList from '../../components/organisms/WishList/WishList'
 
