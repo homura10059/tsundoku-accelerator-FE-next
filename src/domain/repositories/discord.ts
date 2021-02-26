@@ -60,17 +60,17 @@ const convertColorFrom = (
   }
 
   if (
-    item.discountRate >= 30 ||
-    item.pointsRate >= 30
-  ) {
-    return color.yellow
-  }
-
-  if (
     item.discountRate >= 35 ||
     item.pointsRate >= 35
   ) {
     return color.red
+  }
+
+  if (
+    item.discountRate >= 30 ||
+    item.pointsRate >= 30
+  ) {
+    return color.yellow
   }
 
   return color.green
