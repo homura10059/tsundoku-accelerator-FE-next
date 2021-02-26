@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/client'
 import { getWishList } from '../../domain/service/wishList'
 import styled from 'styled-components'
 import { IncomingWebhook } from '../../lib/prisma'
-import NodePage from '../../components/aTemplates/NodePage'
+import NodePage from '../../components/templates/NodePage'
 import LocalDate from '../../components/atoms/Date/LocalDate'
 import ItemTable from '../../components/organisms/Item/ItemTable'
 

@@ -2,7 +2,7 @@ import { Provider } from 'next-auth/client'
 import { AppProps } from 'next/app'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import Layout from '../components/aTemplates/Layout'
+import Layout from '../components/templates/Layout'
 import { GlobalStyle } from '../lib/style'
 import { theme } from '../lib/theme'
 

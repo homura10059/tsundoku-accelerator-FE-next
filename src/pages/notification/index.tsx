@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 import { getIncomingWebhooksByUserId } from '../../domain/service/incomingWebhook'
 import { IncomingWebhook } from '../../lib/prisma'
-import ListPage from '../../components/aTemplates/ListPage'
+import ListPage from '../../components/templates/ListPage'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
