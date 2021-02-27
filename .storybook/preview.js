@@ -17,8 +17,8 @@ addDecorator(
 
 addDecorator((Story) => (
   <>
-    <GlobalStyle />
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Story />
     </ThemeProvider>
   </>
