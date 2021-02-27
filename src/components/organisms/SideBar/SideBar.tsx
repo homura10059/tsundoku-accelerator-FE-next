@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import Router from 'next/router'
 import HiddenText from '../../atoms/Text/HiddenText'
 import Title from '../../atoms/Title/Title'
-import LinkMenu, { LinkItemProps } from '../../molecules/LinkMenu/LinkMenu'
+import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 
 type Props = {
   isOpen: boolean
@@ -43,7 +43,7 @@ const CloseArea = styled.a`
   text-decoration: none;
 `
 
-const links: LinkItemProps[] = [
+const links: LinkProps[] = [
   {
     text: 'Home',
     href: '/',
