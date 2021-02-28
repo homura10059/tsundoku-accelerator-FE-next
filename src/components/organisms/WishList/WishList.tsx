@@ -1,18 +1,14 @@
 import React from 'react'
-import Router from 'next/router'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import { WishList as WishListProps } from '@prisma/client'
 import Title from '../../atoms/Title/Title'
-import Link from 'next/link'
+import LinkItem from '../../atoms/LinkItem/LinkItem'
 
 export type Props = WishListProps
 
-const Area = styled.a`
-  display: block;
-  text-decoration: none;
+const Area = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
-  color: ${({ theme }) => theme.colors.on.surface};
   padding: 0.5rem;
 `
 const UpdateAt = styled.p``
@@ -23,12 +19,12 @@ const WishList: React.FC<Props> = (wishList) => {
     : '-'
   return (
     <>
-      <Link href={`/wishList/${wishList.id}`} passHref>
-        <Area>
+      <Area>
+        <LinkItem href={`/wishList/${wishList.id}`}>
           <Title>{wishList.title}</Title>
           <UpdateAt>更新日時: {scrapedAt}</UpdateAt>
-        </Area>
-      </Link>
+        </LinkItem>
+      </Area>
     </>
   )
 }

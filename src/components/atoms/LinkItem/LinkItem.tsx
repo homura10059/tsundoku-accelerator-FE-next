@@ -17,13 +17,13 @@ const ItemWrapper = styled.a`
 
   :hover:after {
     position: absolute;
-    top: -5%;
-    left: -5%;
+    top: 0;
+    left: 0;
     content: '';
     z-index: 3;
 
-    width: 110%;
-    height: 110%;
+    width: 100%;
+    height: 100%;
 
     background-color: white;
 

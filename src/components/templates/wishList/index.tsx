@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ListPage from '../ListPage'
 import { WishList as WishListProps } from '@prisma/client'
 import WishList from '../../organisms/WishList/WishList'
+import LinkItem from '../../atoms/LinkItem/LinkItem'
 
 
 type Props = {
