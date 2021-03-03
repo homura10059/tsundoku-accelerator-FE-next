@@ -3,9 +3,13 @@ import LinkItem from './LinkItem'
 import styled from 'styled-components'
 
 const Background = styled.div`
-  background-color: #9cc;
+  background-color: black;
   width: 200px;
   padding: 10px;
+`
+
+const Text = styled.p`
+  /* color: white; */
 `
 
 export default {
@@ -20,11 +24,13 @@ export default {
 }
 
 export const showLinkItemSingleLine = () => (
-  <LinkItem href={'/1'}>Link1</LinkItem>
+  <LinkItem href={'/1'}>
+    <Text>Link1</Text>
+  </LinkItem>
 )
 export const showLinkItemMultiLine = () => (
   <LinkItem href={'/1'}>
-    <p>Title</p>
-    <p>sub title</p>
+    <Text>Title</Text>
+    <Text>sub title</Text>
   </LinkItem>
 )

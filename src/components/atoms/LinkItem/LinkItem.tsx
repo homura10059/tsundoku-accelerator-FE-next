@@ -1,18 +1,37 @@
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import { parallelogram, animationMoving } from '../../atoms/Utils/Parallelogram'
+import {
+  parallelogram,
+  parallelogramAnimation,
+  widePentagon,
+  widePentagonAnimation,
+} from '../../atoms/Utils/Parallelogram'
 
 const ItemWrapper = styled.a`
-  position: relative;
-  color: ${({ theme }) => theme.colors.on.surface};
-  text-decoration: none;
-  padding: 5px;
-  z-index: 1;
   display: block;
+  position: relative;
+  text-decoration: none;
 
-  :hover {
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  :hover:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
     background-color: ${({ theme }) => theme.colors.reverse.light};
+    ${widePentagon}
+    ${widePentagonAnimation}
   }
 
   :hover:after {
@@ -20,25 +39,29 @@ const ItemWrapper = styled.a`
     top: 0;
     left: 0;
     content: '';
-    z-index: 3;
 
     width: 100%;
     height: 100%;
 
-    background-color: white;
+    z-index: 2;
 
-    mix-blend-mode: difference;
+    background-color: ${({ theme }) => theme.colors.primary.light};
+    mix-blend-mode: color-dodge;
     ${parallelogram}
-
-    animation-name: moving;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
+    ${parallelogramAnimation}
   }
-
-  ${animationMoving}
 `
 
 const Inner = styled.div`
+  position: relative;
+  z-index: 3;
+  padding: 10px 20px;
+
+  color: ${({ theme }) => theme.colors.on.background};
+
+  :hover{
+    color: ${({ theme }) => theme.colors.on.border};
+  }
 `
 
 export type LinkItemProps = {
@@ -46,21 +69,25 @@ export type LinkItemProps = {
   onClick?: () => void
 }
 
-const LinkItem: React.FC<LinkItemProps> = ({ href, onClick, children }) => {
-  if (href) {
-    return (
-      <Link href={href} passHref>
-        <ItemWrapper onClick={onClick}>
-          <Inner>{children}</Inner>
-        </ItemWrapper>
-      </Link>
-    )
-  }
+const Clickable: React.FC<{
+  onClick?: () => void
+}> = ({ onClick, children }) => {
   return (
     <ItemWrapper onClick={onClick}>
       <Inner>{children}</Inner>
     </ItemWrapper>
   )
+}
+
+const LinkItem: React.FC<LinkItemProps> = ({ href, onClick, children }) => {
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        <Clickable>{children}</Clickable>
+      </Link>
+    )
+  }
+  return <Clickable>{children}</Clickable>
 }
 
 export default LinkItem
