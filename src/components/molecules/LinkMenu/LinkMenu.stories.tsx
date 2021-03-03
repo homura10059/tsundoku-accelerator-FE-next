@@ -4,6 +4,7 @@ import LinkMenu from './LinkMenu'
 
 const Background = styled.div`
   background-color: #9cc;
+  width: 400px;
   padding: 10px;
 `
 
