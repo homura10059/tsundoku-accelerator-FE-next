@@ -5,7 +5,7 @@ import Loader from '../../atoms/Loader/Loader'
 import LinkButton from '../../atoms/LinkButton/LinkButton'
 import Avatar from '../../atoms/Avatar/Avatar'
 import { Session } from 'next-auth/client'
-import LinkMenu, { LinkItemProps } from '../../molecules/LinkMenu/LinkMenu'
+import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 import { signOut } from 'next-auth/client'
 
 type SessionProps = {
@@ -25,7 +25,7 @@ const AvatarLink = styled.a`
   cursor: pointer;
 `
 
-const links: LinkItemProps[] = [
+const links: LinkProps[] = [
   {
     text: 'Profile',
     href: '/user/profile',
