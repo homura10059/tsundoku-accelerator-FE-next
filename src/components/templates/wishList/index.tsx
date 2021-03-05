@@ -11,6 +11,7 @@ type Props = {
 const List = styled.ul`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 
   @media screen and (min-width: 990px) {
     flex-direction: row;
