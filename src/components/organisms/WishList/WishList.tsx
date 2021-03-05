@@ -2,14 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import { WishList as WishListProps } from '@prisma/client'
-import Title from '../../atoms/Title/Title'
 import LinkItem from '../../atoms/LinkItem/LinkItem'
 
 export type Props = WishListProps
 
 const Area = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
-  padding: 0.5rem;
+`
+const Title = styled.h1`
+  font-size: 2rem;
 `
 const UpdateAt = styled.p``
 

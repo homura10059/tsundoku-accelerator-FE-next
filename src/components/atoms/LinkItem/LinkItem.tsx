@@ -55,7 +55,7 @@ const ItemWrapper = styled.a`
 const Inner = styled.div`
   position: relative;
   z-index: 3;
-  padding: 10px 20px;
+  padding: 10px 8%;
 
   color: ${({ theme }) => theme.colors.on.background};
 

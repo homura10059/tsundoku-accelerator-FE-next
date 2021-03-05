@@ -3,16 +3,25 @@ import styled from 'styled-components'
 import ListPage from '../ListPage'
 import { WishList as WishListProps } from '@prisma/client'
 import WishList from '../../organisms/WishList/WishList'
-import LinkItem from '../../atoms/LinkItem/LinkItem'
-
 
 type Props = {
   wishLists: WishListProps[]
 }
 
 const List = styled.ul`
-  li + li {
-    margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 990px) {
+    flex-direction: row;
+  }
+`
+
+const ListItem = styled.li`
+  margin: 1px;
+  width: calc(100% - 2px);
+  @media screen and (min-width: 990px) {
+    width: 50%;
   }
 `
 
@@ -21,9 +30,9 @@ const WishLists: React.FC<Props> = ({ wishLists }) => {
     <ListPage title="WishLists" basePath="wishList">
       <List>
         {wishLists.map((wishList) => (
-          <li key={wishList.id}>
+          <ListItem key={wishList.id}>
             <WishList {...wishList} />
-          </li>
+          </ListItem>
         ))}
       </List>
     </ListPage>
