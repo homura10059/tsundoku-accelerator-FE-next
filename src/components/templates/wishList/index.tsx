@@ -22,7 +22,7 @@ const ListItem = styled.li`
   margin: 1px;
   width: calc(100% - 2px);
   @media screen and (min-width: 990px) {
-    width: 50%;
+    width: calc(50% - 2px);
   }
 `
 
