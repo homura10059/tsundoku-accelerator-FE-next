@@ -6,6 +6,7 @@ import NodePage from '../../../components/templates/NodePage'
 import LocalDate from '../../../components/atoms/Date/LocalDate'
 import ItemTable from '../../../components/organisms/Item/ItemTable'
 import Link from '../../atoms/Link/Link'
+import { hex2rgba } from '../../../lib/theme'
 
 export type Props = {
   id: string
@@ -28,13 +29,23 @@ export type Props = {
   incomingWebhook: IncomingWebhook
 }
 
-const List = styled.ul`
+const WishListDetail = styled.table`
   font-size: 1.2rem;
-  margin-left: 0.5rem;
-  li + li {
-    margin-top: 0.3rem;
+  border-collapse: collapse;
+  background-color: ${({ theme }) => theme.colors.surface};
+
+  th,
+  td {
+    padding: 5px;
+    border-top: solid 1px ${({ theme }) => theme.colors.border};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
   }
 `
+
+const ItemArea = styled.div`
+  margin-top: 10px;
+`
+
 const Detail: React.FC<Props> = (props) => {
   const [session, loading] = useSession()
   if (loading) {
@@ -52,26 +63,41 @@ const Detail: React.FC<Props> = (props) => {
       basePath={`/wishList/${props.id}`}
       command={{ canUpdate: true, canEdit: true, canDelete: true }}
     >
-      <List>
-        <li>Id: {props.id}</li>
-        <li>
-        url: <Link href={props.url}>{props.url}</Link>
-        </li>
-        <li>
-          更新日時 : <LocalDate unixTimeInSec={props.scrapedAt} />
-        </li>
+      <WishListDetail>
+        <tr>
+          <th>Id</th>
+          <td>{props.id}</td>
+        </tr>
+        <tr>
+          <th>url</th>
+          <td>
+            <Link href={props.url}>{props.url}</Link>
+          </td>
+        </tr>
+        <tr>
+          <th>更新日時</th>
+          <td>
+            <LocalDate unixTimeInSec={props.scrapedAt} />
+          </td>
+        </tr>
         {props.incomingWebhook && (
-          <li>通知設定 : {props.incomingWebhook.service}</li>
+          <tr>
+            <th>通知設定</th>
+            <td>{props.incomingWebhook.service}</td>
+          </tr>
         )}
-        <li>
-          閾値
-          <List>
-            <li>値引率: {props.discountRateThreshold}</li>
-            <li>還元率: {props.pointsRateThreshold}</li>
-          </List>
-        </li>
-      </List>
-      <ItemTable items={props.items} />
+        <tr>
+          <th>値引率閾値</th>
+          <td>{props.discountRateThreshold}</td>
+        </tr>
+        <tr>
+          <th>還元率閾値</th>
+          <td>{props.pointsRateThreshold}</td>
+        </tr>
+      </WishListDetail>
+      <ItemArea>
+        <ItemTable items={props.items} />
+      </ItemArea>
     </NodePage>
   )
 }
