@@ -135,10 +135,12 @@ export const updateAllWishLists = async () => {
   })
 }
 
-export const getWishLists = async (userId: number) =>
+export const getWishLists = async (email: string) =>
   prisma.wishList.findMany({
     where: {
-      userId,
+      user: {
+        email,
+      },
     },
   })
 

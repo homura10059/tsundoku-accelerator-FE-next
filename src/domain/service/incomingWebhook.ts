@@ -20,10 +20,12 @@ export const addIncomingWebhook = async (
   })
 }
 
-export const getIncomingWebhooksByUserId = async (userId: number) => {
+export const getIncomingWebhooksByEmail = async (email: string) => {
   return await prisma.incomingWebhook.findMany({
     where: {
-      userId,
+      user: {
+        email,
+      },
     },
   })
 }

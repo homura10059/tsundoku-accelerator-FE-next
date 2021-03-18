@@ -6,14 +6,14 @@ import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
-import { getIncomingWebhooksByUserId } from '../../domain/service/incomingWebhook'
+import { getIncomingWebhooksByEmail } from '../../domain/service/incomingWebhook'
 import { IncomingWebhook } from '../../lib/prisma'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
   const incomingWebhooks = !session
     ? []
-    : await getIncomingWebhooksByUserId(session.user.id)
+    : await getIncomingWebhooksByEmail(session.user.email)
   return { props: { incomingWebhooks } }
 }
 

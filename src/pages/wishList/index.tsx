@@ -5,7 +5,7 @@ import WishLists from '../../components/templates/wishList'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
-  const wishLists = !session ? [] : await getWishLists(session.user.id)
+  const wishLists = !session ? [] : await getWishLists(session.user.email)
   return { props: { wishLists } }
 }
 

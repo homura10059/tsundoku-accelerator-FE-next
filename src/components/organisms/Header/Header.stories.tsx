@@ -14,7 +14,7 @@ export const showHeader = () => <Header />
 
 showHeader.decorators = [
   (Story) => (
-    <Provider session={mockSession} loading={true}>
+    <Provider session={mockSession}>
       <Story />
     </Provider>
   ),
