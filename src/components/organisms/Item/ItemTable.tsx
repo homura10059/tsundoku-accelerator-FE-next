@@ -44,22 +44,32 @@ const ItemTable: React.FC<Props> = ({ items }) => {
     return null
   }
 
+  const sorted = items.sort((a, b) => {
+    const aVal = Math.max(a.discountRate ?? 0, a.pointsRate ?? 0)
+    const bVal = Math.max(b.discountRate ?? 0, b.pointsRate ?? 0)
+    return bVal - aVal
+  })
+
   return (
     <Table>
-      <HeaderRow>
-        <th>item</th>
-        <th>値引率</th>
-        <th>還元率</th>
-      </HeaderRow>
-      {items.map((item) => (
-        <DataRow>
-          <td>
-            <Link href={item.url}> {item.title}</Link>
-          </td>
-          <td align="right">{item.discountRate}</td>
-          <td align="right">{item.pointsRate}</td>
-        </DataRow>
-      ))}
+      <thead>
+        <HeaderRow>
+          <th>item</th>
+          <th>値引率</th>
+          <th>還元率</th>
+        </HeaderRow>
+      </thead>
+      <tbody>
+        {sorted.map((item) => (
+          <DataRow>
+            <td>
+              <Link href={item.url}> {item.title}</Link>
+            </td>
+            <td align="right">{item.discountRate}</td>
+            <td align="right">{item.pointsRate}</td>
+          </DataRow>
+        ))}
+      </tbody>
     </Table>
   )
 }
