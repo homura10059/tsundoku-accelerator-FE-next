@@ -32,7 +32,13 @@ export type Props = {
 const WishListDetail = styled.table`
   background-color: ${({ theme }) => theme.colors.surface};
 
-  th,
+  th {
+    min-width: 85px;
+    padding: 5px;
+    border-top: solid 1px ${({ theme }) => theme.colors.border};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
+  }
+
   td {
     padding: 5px;
     border-top: solid 1px ${({ theme }) => theme.colors.border};
