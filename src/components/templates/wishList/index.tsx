@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import ListPage from '../ListPage'
 import { WishList as WishListProps } from '@prisma/client'
@@ -27,10 +27,23 @@ const ListItem = styled.li`
 `
 
 const WishLists: React.FC<Props> = ({ wishLists }) => {
+  const lists = useMemo(
+    () =>
+      wishLists.sort((a, b) => {
+        if (a.title < b.title) {
+          return -1
+        }
+        if (a.title > b.title) {
+          return 1
+        }
+        return 0
+      }),
+    [wishLists]
+  )
   return (
     <ListPage title="WishLists" basePath="wishList">
       <List>
-        {wishLists.map((wishList) => (
+        {lists.map((wishList) => (
           <ListItem key={wishList.id}>
             <WishList {...wishList} />
           </ListItem>
