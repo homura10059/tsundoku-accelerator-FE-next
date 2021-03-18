@@ -30,8 +30,6 @@ export type Props = {
 }
 
 const WishListDetail = styled.table`
-  font-size: 1.2rem;
-  border-collapse: collapse;
   background-color: ${({ theme }) => theme.colors.surface};
 
   th,
@@ -42,8 +40,22 @@ const WishListDetail = styled.table`
   }
 `
 
+const DetailArea = styled.div`
+  margin-top: 10px;
+  width: 100%;
+`
+
 const ItemArea = styled.div`
   margin-top: 10px;
+  width: 100%;
+`
+
+const UrlText = styled.span`
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
 `
 
 const Detail: React.FC<Props> = (props) => {
@@ -63,39 +75,45 @@ const Detail: React.FC<Props> = (props) => {
       basePath={`/wishList/${props.id}`}
       command={{ canUpdate: true, canEdit: true, canDelete: true }}
     >
-      <WishListDetail>
-        <tr>
-          <th>Id</th>
-          <td>{props.id}</td>
-        </tr>
-        <tr>
-          <th>url</th>
-          <td>
-            <Link href={props.url}>{props.url}</Link>
-          </td>
-        </tr>
-        <tr>
-          <th>更新日時</th>
-          <td>
-            <LocalDate unixTimeInSec={props.scrapedAt} />
-          </td>
-        </tr>
-        {props.incomingWebhook && (
+      <DetailArea>
+        詳細
+        <WishListDetail>
           <tr>
-            <th>通知設定</th>
-            <td>{props.incomingWebhook.service}</td>
+            <th>Id</th>
+            <td>{props.id}</td>
           </tr>
-        )}
-        <tr>
-          <th>値引率閾値</th>
-          <td>{props.discountRateThreshold}</td>
-        </tr>
-        <tr>
-          <th>還元率閾値</th>
-          <td>{props.pointsRateThreshold}</td>
-        </tr>
-      </WishListDetail>
+          <tr>
+            <th>url</th>
+            <td>
+              <Link href={props.url}>
+                <UrlText>{props.url}</UrlText>
+              </Link>
+            </td>
+          </tr>
+          <tr>
+            <th>更新日時</th>
+            <td>
+              <LocalDate unixTimeInSec={props.scrapedAt} />
+            </td>
+          </tr>
+          {props.incomingWebhook && (
+            <tr>
+              <th>通知設定</th>
+              <td>{props.incomingWebhook.service}</td>
+            </tr>
+          )}
+          <tr>
+            <th>値引率閾値</th>
+            <td>{props.discountRateThreshold}</td>
+          </tr>
+          <tr>
+            <th>還元率閾値</th>
+            <td>{props.pointsRateThreshold}</td>
+          </tr>
+        </WishListDetail>
+      </DetailArea>
       <ItemArea>
+        Items
         <ItemTable items={props.items} />
       </ItemArea>
     </NodePage>

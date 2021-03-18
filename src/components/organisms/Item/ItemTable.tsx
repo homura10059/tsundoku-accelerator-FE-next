@@ -16,7 +16,6 @@ export type ItemProps = {
 export type Props = { items: ItemProps[] }
 
 const Table = styled.table`
-  width: 100%;
   color: ${({ theme }) => theme.colors.on.surface};
   background-color: ${({ theme }) => theme.colors.surface};
 
