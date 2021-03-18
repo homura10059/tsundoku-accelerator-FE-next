@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Link from '../../atoms/Link/Link'
 
 export type ItemProps = {
   url: string
@@ -16,36 +17,27 @@ export type Props = { items: ItemProps[] }
 
 const Table = styled.table`
   width: 100%;
-  color: ${({ theme }) => theme.colors.on.secondary};
-  background-color: ${({ theme }) => theme.colors.secondary.dark};
-  border: solid 2px ${({ theme }) => theme.colors.on.secondary};
+  color: ${({ theme }) => theme.colors.on.surface};
+  background-color: ${({ theme }) => theme.colors.surface};
 
-  th,
+  th {
+    padding: 5px;
+    border-top: solid 1px ${({ theme }) => theme.colors.border};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
+  }
+
   td {
-    padding: 0.5rem;
+    padding: 5px;
   }
 `
 
 const HeaderRow = styled.tr`
-  padding: 1rem;
+  th {
+    min-width: 55px;
+  }
 `
 
-const DataRow = styled.tr`
-  position: relative;
-  :after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: ${({ theme }) => theme.colors.primary.dark};
-    opacity: 1;
-    transition: all 0.5s ease;
-  }
-  :hover:after {
-    opacity: 1;
-  }
-`
+const DataRow = styled.tr``
 
 const ItemTable: React.FC<Props> = ({ items }) => {
   if (items.length === 0) {
@@ -61,7 +53,9 @@ const ItemTable: React.FC<Props> = ({ items }) => {
       </HeaderRow>
       {items.map((item) => (
         <DataRow>
-          <td><a href={item.url}>{item.title}</a></td>
+          <td>
+            <Link href={item.url}> {item.title}</Link>
+          </td>
           <td align="right">{item.discountRate}</td>
           <td align="right">{item.pointsRate}</td>
         </DataRow>
