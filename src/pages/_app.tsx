@@ -9,19 +9,13 @@ import { theme } from '../lib/theme'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      {
-        // https://zenn.dev/catnose99/articles/3c106c81cbfdec
-      }
-      <script></script>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Provider session={pageProps.session}>
-          <Metadata />
-          <Header />
-          <Component {...pageProps} />
-        </Provider>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Provider session={pageProps.session}>
+        <Metadata />
+        <Header />
+        <Component {...pageProps} />
+      </Provider>
+    </ThemeProvider>
   )
 }
