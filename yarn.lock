@@ -1413,6 +1413,11 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.0.tgz#6c9eafc78c1529248f8f4d92b0799a712b6052c6"
   integrity sha512-i9YbZPN3QgfighY/1X1Pu118VUz2Fmmhd6b2n0/O8YVgGGfw0FbUYoA97k7FkpGJ+pLCFEDLUmAPPV4D1kpeFw==
 
+"@hookform/resolvers@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.0.0.tgz#256414308d4584f2037d5c4349c119dbd66d11d6"
+  integrity sha512-picG6qjP516JNblvg/wuDc8JPfdm3aNbtPbfu+PXQWFXp6ED6dyBL2IoB/tDvPFaNwwqUEwb6UYVKMIFAH+aqQ==
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -2706,13 +2711,6 @@
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.4.tgz#d86d17697db62f98046874f62fdb3e53a0bbc4cd"
   integrity sha512-9GfTo3a0PHwQeTVoqs0g5bS28KkSY48pp5659wA+Dp4MqceDEa8EHBqrllJvvtyusszyJhViUEap0FDvlk/9Zg==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-table@^7.0.29":
-  version "7.0.29"
-  resolved "https://registry.yarnpkg.com/@types/react-table/-/react-table-7.0.29.tgz#af2c82f2d6a39be5bc0f191b30501309a8db0949"
-  integrity sha512-RCGVKGlTDv3jbj37WJ5HhN3sPb0W/2rqlvyGUtvawnnyrxgI2BGgASvU93rq2jwanVp5J9l1NYAeiGlNhdaBGw==
   dependencies:
     "@types/react" "*"
 
@@ -10327,10 +10325,10 @@ react-helmet-async@^1.0.2:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-hook-form@^6.15.1:
-  version "6.15.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.1.tgz#57d887ec4dac5a6c0099902171aa39cc893f7bca"
-  integrity sha512-bL0LQuQ3OlM3JYfbacKtBPLOHhmgYz8Lj6ivMrvu2M6e1wnt4sbGRtPEPYCc/8z3WDbjrMwfAfLX92OsB65pFA==
+react-hook-form@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.0.0.tgz#7a7b0b51cc26f1448ab2a113bcff8b49e0f78864"
+  integrity sha512-cXoKnNnQe5IxieesTu+enDS7Jfh8lyX8mSMwzNvC4L0k6R6yQ2F8rIhvBbzlFOGSoeEnsR64dvMZ1izWRCAw6A==
 
 react-hotkeys@2.0.0:
   version "2.0.0"
@@ -10450,11 +10448,6 @@ react-syntax-highlighter@^13.5.0:
     lowlight "^1.14.0"
     prismjs "^1.21.0"
     refractor "^3.1.0"
-
-react-table@^7.6.3:
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.6.3.tgz#76434392b3f62344bdb704f5b227c2f29c1ffb14"
-  integrity sha512-hfPF13zDLxPMpLKzIKCE8RZud9T/XrRTsaCIf8zXpWZIZ2juCl7qrGpo3AQw9eAetXV5DP7s2GDm+hht7qq5Dw==
 
 "react-test-renderer@^16.8.0 || ^17.0.0":
   version "17.0.1"

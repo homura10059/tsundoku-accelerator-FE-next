@@ -13,13 +13,21 @@ const LinkText = styled.a`
   cursor: pointer;
 `
 
-const Component: React.FC<Props> = ({ href, onClick, children }) =>
-  href ? (
-    <Link href={href} passHref>
-      <LinkText onClick={onClick}>{children}</LinkText>
-    </Link>
-  ) : (
+const Component: React.FC<Props> = ({ href, onClick, children }) => {
+  if (href) {
+    return onClick ? (
+      <Link href={href} passHref>
+        <LinkText onClick={onClick}>{children}</LinkText>
+      </Link>
+    ) : (
+      <LinkText>{children}</LinkText>
+    )
+  }
+
+  return onClick ? (
     <LinkText onClick={onClick}>{children}</LinkText>
-  )
+  ) : (
+    <LinkText>{children}</LinkText>)
+}
 
 export default Component

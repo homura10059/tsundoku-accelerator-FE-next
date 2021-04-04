@@ -4,7 +4,7 @@ import { theme } from '../../../lib/theme'
 import TextButton from './TextButton'
 
 export default {
-  title: 'TextButton',
+  title: 'Design System/atoms/TextButton',
 }
 
 export const textButton = () => <TextButton />

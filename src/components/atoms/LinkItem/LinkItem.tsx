@@ -5,8 +5,8 @@ import {
   parallelogram,
   parallelogramAnimation,
   widePentagon,
-  widePentagonAnimation,
-} from '../../atoms/Utils/Parallelogram'
+  widePentagonAnimation
+} from '../Utils/Parallelogram'
 
 const ItemWrapper = styled.a`
   display: block;
@@ -69,25 +69,21 @@ export type LinkItemProps = {
   onClick?: () => void
 }
 
-const Clickable: React.FC<{
-  onClick?: () => void
-}> = ({ onClick, children }) => {
+const LinkItem: React.FC<LinkItemProps> = ({ href, onClick, children }) => {
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        <ItemWrapper onClick={onClick}>
+          <Inner>{children}</Inner>
+        </ItemWrapper>
+      </Link>
+    )
+  }
   return (
     <ItemWrapper onClick={onClick}>
       <Inner>{children}</Inner>
     </ItemWrapper>
   )
-}
-
-const LinkItem: React.FC<LinkItemProps> = ({ href, onClick, children }) => {
-  if (href) {
-    return (
-      <Link href={href} passHref>
-        <Clickable>{children}</Clickable>
-      </Link>
-    )
-  }
-  return <Clickable>{children}</Clickable>
 }
 
 export default LinkItem

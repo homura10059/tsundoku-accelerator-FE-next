@@ -9,11 +9,10 @@ type Props = {
 const Button = styled.input`
   background: #ececec;
   border: 0;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
+  padding: 5px 10px;
 `
 
-const SubmitButton: React.FC<Props> = ({ disabled, value }) => (
+const SubmitButton: React.FC<Props> = ({ disabled=false, value='submit' }) => (
   <Button disabled={disabled} type="submit" value={value} />
 )
 
