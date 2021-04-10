@@ -1,21 +1,40 @@
 import React from 'react'
-import Header from './Header'
-import { Provider, Session } from 'next-auth/client'
+import { Header } from './Header'
+import styled from 'styled-components'
+
+const mockSession = {
+  expires: '1',
+  user: {
+    email: 'a',
+    name: 'sophia',
+    image:
+      'https://raw.githubusercontent.com/o-hayato/sophia-bot/master/image/P5S_icon_sophia.png',
+  },
+}
+
 export default {
   title: 'Design System/organisms/Header',
+  decorators: [
+    (Story) => (
+        <Story />
+    ),
+  ],
 }
 
-const mockSession: Session = {
-  expires: '1',
-  user: { email: 'a', name: 'Delta', image: 'c' },
-}
+export const showHeader = () => <Header session={mockSession} loading={false} />
 
-export const showHeader = () => <Header />
+export const showHeaderLoading = () => <Header session={mockSession} loading={true} />
 
-showHeader.decorators = [
-  (Story) => (
-    <Provider session={mockSession}>
-      <Story />
-    </Provider>
-  ),
-]
+export const showHeaderNoSession = () => <Header session={undefined} loading={true} />
+
+const Background = styled.div`
+  background-color: #9cc;
+  width: 400px;
+`
+
+export const showHeaderOnSP = () => <Background><Header session={mockSession} loading={false} /></Background>
+
+export const showHeaderLoadingOnSP = () => <Background><Header session={mockSession} loading={true} /></Background>
+
+export const showHeaderNoSessionOnSP = () => <Background><Header session={undefined} loading={true} /></Background>
+

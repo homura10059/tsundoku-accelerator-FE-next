@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import SideBar from '../SideBar/SideBar'
 import MenuButton from '../../atoms/MenuButton/MenuButton'
 import User from '../User/User'
+import { useSession } from 'next-auth/client'
+import { SessionProps } from '@/interfaces/Session'
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,7 +21,9 @@ const Right = styled.div`
   margin-left: auto;
 `
 
-const Header: React.FC = () => {
+type Props = SessionProps
+
+export const Header: React.FC<Props> =({ session, loading }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -29,10 +33,17 @@ const Header: React.FC = () => {
         <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </Left>
       <Right>
-        <User />
+        <User session={session} loading={loading}/>
       </Right>
     </Wrapper>
   )
 }
 
-export default Header
+const Connect: React.FC = () => {
+  const [session, loading] = useSession()
+  return (
+    <Header session={session} loading={loading}/>
+  )
+}
+
+export default Connect

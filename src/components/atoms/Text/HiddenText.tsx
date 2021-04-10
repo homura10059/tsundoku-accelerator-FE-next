@@ -6,6 +6,7 @@ type Props = {
 }
 
 const Text = styled.span`
+  display:none;
   visibility: hidden;
   overflow: hidden;
   white-space: nowrap;

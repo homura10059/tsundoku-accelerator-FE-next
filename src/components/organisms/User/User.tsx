@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useSession } from 'next-auth/client'
+import { signOut } from 'next-auth/client'
 import Loader from '../../atoms/Loader/Loader'
 import LinkButton from '../../atoms/LinkButton/LinkButton'
 import Avatar from '../../atoms/Avatar/Avatar'
-import { Session } from 'next-auth/client'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
-import { signOut } from 'next-auth/client'
-
-type SessionProps = {
-  session?: Session
-  loading: boolean
-}
+import { SessionProps } from '@/interfaces/Session'
 
 const Wrapper = styled.div`
   position: relative;
@@ -74,16 +68,4 @@ export const User: React.FC<Props> = ({ session, loading }) => {
   )
 }
 
-const Connect: React.FC<{}> = ({}) => {
-  const [session, loading] = useSession()
-  return (
-    <User
-      {...{
-        session,
-        loading,
-      }}
-    />
-  )
-}
-
-export default Connect
+export default User
