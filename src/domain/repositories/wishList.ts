@@ -1,4 +1,4 @@
-import { getBrowser, scrape } from '../repositories/scraper'
+import { getBrowser, scrape } from './scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
 import { ScrapedWishList } from '../model/WishList'
