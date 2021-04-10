@@ -1,6 +1,6 @@
-import { Session } from 'next-auth'
+import { Session } from 'next-auth/client'
 
 export type SessionProps = {
-  session?:Session
+  session?: Session
   loading: boolean
 }

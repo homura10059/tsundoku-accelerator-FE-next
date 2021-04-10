@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from './User'
 import styled from 'styled-components'
-import { Session } from 'next-auth'
+import { Session } from 'next-auth/client'
 
 const Background = styled.div`
   background-color: #9cc;

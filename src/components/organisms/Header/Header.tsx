@@ -21,9 +21,7 @@ const Right = styled.div`
   margin-left: auto;
 `
 
-type Props = SessionProps
-
-export const Header: React.FC<Props> =({ session, loading }) => {
+export const Header: React.FC<SessionProps> =({ session, loading }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
