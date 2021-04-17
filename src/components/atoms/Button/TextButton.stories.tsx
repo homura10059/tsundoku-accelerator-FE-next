@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import { theme } from '../../../lib/theme'
+import { theme } from '../../../functions/theme'
 import TextButton from './TextButton'
 
 export default {

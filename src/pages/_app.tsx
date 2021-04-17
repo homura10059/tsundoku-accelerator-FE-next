@@ -4,8 +4,8 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import Header from '../components/organisms/Header/Header'
 import Metadata from '../components/organisms/Metadata/Metadata'
-import { GlobalStyle } from '../lib/style'
-import { theme } from '../lib/theme'
+import { GlobalStyle } from '../functions/style'
+import { theme } from '../functions/theme'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

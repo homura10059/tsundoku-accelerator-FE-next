@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSession } from 'next-auth/client'
 import styled from 'styled-components'
-import { IncomingWebhook } from '../../../lib/prisma'
+import { IncomingWebhook } from '../../../functions/prisma'
 import NodePage from '../../../components/templates/NodePage'
 import LocalDate from '../../../components/atoms/Date/LocalDate'
 import ItemTable from '../../../components/organisms/Item/ItemTable'
 import Link from '../../atoms/Link/Link'
-import { hex2rgba } from '../../../lib/theme'
+import { hex2rgba } from '../../../functions/theme'
 
 export type Props = {
   id: string

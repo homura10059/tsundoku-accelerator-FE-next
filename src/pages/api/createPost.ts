@@ -1,5 +1,5 @@
 import type { NextApiHandler } from 'next'
-import prisma from '../../lib/prisma'
+import prisma from '../../functions/prisma'
 import * as z from 'zod'
 
 const requestBodySchema = z.object({

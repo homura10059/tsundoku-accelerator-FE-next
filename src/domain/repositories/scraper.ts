@@ -1,4 +1,5 @@
-import puppeteer, { Browser, Page } from 'puppeteer'
+import puppeteer, { Browser } from 'puppeteer'
+
 const scrollPageToBottom = require('puppeteer-autoscroll-down')
 
 export const getBrowser = (() => {

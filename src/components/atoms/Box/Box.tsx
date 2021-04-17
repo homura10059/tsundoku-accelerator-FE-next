@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { hex2rgba } from '../../../lib/theme'
+import { hex2rgba } from '../../../functions/theme'
 
 type Props = {
   canHover?: boolean

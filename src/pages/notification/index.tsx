@@ -2,7 +2,7 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 import { getIncomingWebhooksByEmail } from '../../domain/service/incomingWebhook'
-import { IncomingWebhook } from '../../lib/prisma'
+import { IncomingWebhook } from '../../functions/prisma'
 import ListPage from '../../components/templates/ListPage'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {

@@ -1,5 +1,5 @@
 import { getScrapedWishList } from '../repositories/wishList'
-import prisma from '../../lib/prisma'
+import prisma from '../../functions/prisma'
 
 export const addWishList = async (
   email: string,

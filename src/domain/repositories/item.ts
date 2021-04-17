@@ -3,8 +3,8 @@ import { Browser, Page } from 'puppeteer'
 import { Item } from '../model/Item'
 import * as R from 'ramda'
 import { POINTS, POINTS_RATE, PRICE, SAVING, TITLE } from '../model/CssSelector'
-import { getUnixTimeInSec } from '../../lib/Dates'
-import { concurrentPromise } from '../../lib/promises'
+import { getUnixTimeInSec } from '@/functions/Dates'
+import { concurrentPromise } from '@/functions/promises'
 
 const priceRegex = /\d{1,3}(,\d{3})*/
 const percentageRegex = /\d{1,3}/
@@ -14,7 +14,7 @@ export const getText = async (page: Page, selector: string): Promise<string> => 
     .$(selector)
     .then((element) => element.getProperty('textContent'))
     .then((some) => some.jsonValue())
-    .then((str) => (typeof str === 'string' ? str.trim() : ''))
+    .then((str) => (typeof str === 'string' ? str.trim() : '__no-title__'))
     .catch((_) => '')
 }
 

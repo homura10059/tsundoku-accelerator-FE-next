@@ -1,10 +1,10 @@
-import { theme } from '../src/lib/theme'
+import { theme } from '../src/functions/theme'
 import { ThemeProvider } from 'styled-components'
 import { withNextRouter } from 'storybook-addon-next-router'
 import { addDecorator } from '@storybook/react'
 import { configure } from '@storybook/react'
 import './mockNextRouter'
-import { GlobalStyle } from '../src/lib/style'
+import { GlobalStyle } from '../src/functions/style'
 
 addDecorator(
   withNextRouter({

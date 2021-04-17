@@ -1,5 +1,5 @@
 import { scrapeItem } from '../repositories/item'
-import prisma, { Item } from '../../lib/prisma'
+import prisma, { Item } from '../../functions/prisma'
 
 export const fetchItem = async (url: string) => {
   const dbData = await prisma.item.findUnique({
