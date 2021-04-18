@@ -6,6 +6,7 @@ import LinkButton from '../../atoms/LinkButton/LinkButton'
 import Avatar from '../../atoms/Avatar/Avatar'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 import { SessionProps } from '@/interfaces/Session'
+import { Popover } from "@headlessui/react";
 
 const Wrapper = styled.div`
   position: relative;
@@ -37,8 +38,6 @@ const links: LinkProps[] = [
 type Props = SessionProps
 
 export const User: React.FC<Props> = ({ session, loading }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
   if (loading) {
     return (
       <Wrapper>
@@ -55,18 +54,14 @@ export const User: React.FC<Props> = ({ session, loading }) => {
   }
 
   return (
-    <Wrapper>
-      <p className="text-3xl text-red-500 font-bold">Hello Tailwind</p>
-
-      <AvatarLink onClick={() => setIsOpen(!isOpen)}>
+    <Popover className="relative">
+      <Popover.Button className={'rounded-full flex items-center justify-center'}>
         <Avatar name={session.user.name} image={session.user.image} />
-      </AvatarLink>
-      {isOpen && (
-        <MenuWrapper>
-          <LinkMenu links={links} />
-        </MenuWrapper>
-      )}
-    </Wrapper>
+      </Popover.Button>
+      <Popover.Panel className="absolute z-10 right-0">
+        <LinkMenu links={links} />
+      </Popover.Panel>
+    </Popover>
   )
 }
 

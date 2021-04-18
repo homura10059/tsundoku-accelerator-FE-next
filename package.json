@@ -21,6 +21,8 @@
     "node": "14.15.3"
   },
   "dependencies": {
+    "@headlessui/react": "^1.0.0",
+    "@heroicons/react": "^1.0.1",
     "@hookform/resolvers": "^2.0.0",
     "@prisma/client": "^2.1.4",
     "@tailwindcss/postcss7-compat": "^2.1.0",
