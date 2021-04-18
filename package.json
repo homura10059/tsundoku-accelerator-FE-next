@@ -23,11 +23,14 @@
   "dependencies": {
     "@hookform/resolvers": "^2.0.0",
     "@prisma/client": "^2.1.4",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "autoprefixer": "^9",
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "final-form": "^4.20.1",
     "next": "^10.0.4",
     "next-auth": "^3.1.0",
+    "postcss": "^7",
     "puppeteer": "^5.5.0",
     "puppeteer-autoscroll-down": "^0.1.6",
     "ramda": "^0.27.1",
@@ -38,6 +41,7 @@
     "react-markdown": "^5.0.3",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.4",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "zod": "^1.11.11"
   },
   "devDependencies": {

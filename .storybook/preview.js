@@ -5,6 +5,7 @@ import { addDecorator } from '@storybook/react'
 import { configure } from '@storybook/react'
 import './mockNextRouter'
 import { GlobalStyle } from '../src/functions/style'
+import '../src/styles/globals.css'
 
 addDecorator(
   withNextRouter({

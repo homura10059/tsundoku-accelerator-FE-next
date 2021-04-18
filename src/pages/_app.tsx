@@ -6,6 +6,7 @@ import Header from '../components/organisms/Header/Header'
 import Metadata from '../components/organisms/Metadata/Metadata'
 import { GlobalStyle } from '../functions/style'
 import { theme } from '../functions/theme'
+import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

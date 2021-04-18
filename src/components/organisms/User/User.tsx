@@ -56,6 +56,8 @@ export const User: React.FC<Props> = ({ session, loading }) => {
 
   return (
     <Wrapper>
+      <p className="text-3xl text-red-500 font-bold">Hello Tailwind</p>
+
       <AvatarLink onClick={() => setIsOpen(!isOpen)}>
         <Avatar name={session.user.name} image={session.user.image} />
       </AvatarLink>
