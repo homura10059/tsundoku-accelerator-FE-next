@@ -13,7 +13,7 @@ type Props = {
 
 const Avatar: React.FC<Props> = ({
   name,
-  size = { height: 12, width: 12 },
+  size = { height: 10, width: 10 },
   image = null,
   color = 'on-surface',
 }) => {
