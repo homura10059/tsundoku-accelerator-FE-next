@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import ListPage from '../ListPage'
+import ListPage from '../../organisms/Flame/ListPage'
 import { WishList as WishListProps } from '@prisma/client'
 import WishList from '../../organisms/WishList/WishList'
 

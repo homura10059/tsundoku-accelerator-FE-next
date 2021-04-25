@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import LinkButton from '../atoms/LinkButton/LinkButton'
-import Title from '../atoms/Title/Title'
+import LinkButton from '../../atoms/LinkButton/LinkButton'
+import Title from '../../atoms/Title/Title'
 
 type Props = {
   title: string

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSession } from 'next-auth/client'
 import { IncomingWebhook } from '../../../functions/prisma'
-import NodePage from '../../../components/templates/NodePage'
+import NodePage from '../../organisms/Flame/NodePage'
 import LocalDate from '../../../components/atoms/Date/LocalDate'
 import ItemTable from '../../../components/organisms/Item/ItemTable'
 import Link from '../../atoms/Link/Link'
