@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import classNames from 'classnames'
 
 type Props = {
   href?: string
   onClick?: () => void
+  color?: string
 }
 
 const LinkText = styled.a`
@@ -13,21 +15,29 @@ const LinkText = styled.a`
   cursor: pointer;
 `
 
-const Component: React.FC<Props> = ({ href, onClick, children }) => {
+const Component: React.FC<Props> = ({
+  href,
+  onClick,
+  color = 'on-surface',
+  children,
+}) => {
+  const textClass = classNames('underline', 'cursor-pointer', `text-${color}`)
+
   if (href) {
-    return onClick ? (
-      <Link href={href} passHref>
-        <LinkText onClick={onClick}>{children}</LinkText>
+    return (
+      <Link href={href}>
+        <a className={textClass} onClick={onClick}>
+          {children}
+        </a>
       </Link>
-    ) : (
-      <LinkText>{children}</LinkText>
     )
   }
 
-  return onClick ? (
-    <LinkText onClick={onClick}>{children}</LinkText>
-  ) : (
-    <LinkText>{children}</LinkText>)
+  return (
+    <a className={textClass} onClick={onClick}>
+      {children}
+    </a>
+  )
 }
 
 export default Component

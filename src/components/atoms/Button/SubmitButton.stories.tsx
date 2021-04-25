@@ -1,20 +1,13 @@
 import React from 'react'
 import SubmitButton from './SubmitButton'
-import styled from 'styled-components'
-
-const Background = styled.div`
-  background-color: #9cc;
-  width: 400px;
-  padding: 10px;
-`
 
 export default {
   title: 'Design System/atoms/SubmitButton',
   decorators: [
     (Story) => (
-      <Background>
+      <div className={'bg-green-300 w-full p-2'}>
         <Story />
-      </Background>
+      </div>
     ),
   ],
 }

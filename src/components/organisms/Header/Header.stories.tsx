@@ -32,9 +32,9 @@ const Background = styled.div`
   width: 400px;
 `
 
-export const showHeaderOnSP = () => <Background><Header session={mockSession} loading={false} /></Background>
+export const showHeaderOnSP = () => <div className={'bg-green-300 w-full p-2'}><Header session={mockSession} loading={false} /></div>
 
-export const showHeaderLoadingOnSP = () => <Background><Header session={mockSession} loading={true} /></Background>
+export const showHeaderLoadingOnSP = () => <div className={'bg-green-300 w-full p-2'}><Header session={mockSession} loading={true} /></div>
 
-export const showHeaderNoSessionOnSP = () => <Background><Header session={undefined} loading={true} /></Background>
+export const showHeaderNoSessionOnSP = () => <div className={'bg-green-300 w-full p-2'}><Header session={undefined} loading={true} /></div>
 

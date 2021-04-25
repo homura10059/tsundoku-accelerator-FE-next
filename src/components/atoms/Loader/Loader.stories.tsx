@@ -11,9 +11,9 @@ export default {
   title: 'Design System/atoms/Loader',
   decorators: [
     (Story) => (
-      <Background>
+      <div className={'bg-green-300 w-full p-2'}>
         <Story />
-      </Background>
+      </div>
     ),
   ],
 }
