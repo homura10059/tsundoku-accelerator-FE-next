@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import SideBar from '../SideBar/SideBar'
 import User from '../User/User'
 import { useSession } from 'next-auth/client'
 import { SessionProps } from '@/interfaces/Session'
-import { MenuIcon } from '@heroicons/react/solid'
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,16 +21,11 @@ const Right = styled.div`
 `
 
 export const Header: React.FC<SessionProps> = ({ session, loading }) => {
-  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <Wrapper>
       <Left>
-        <MenuIcon
-          className={'w-10 h-10 text-white cursor-pointer'}
-          onClick={() => setIsOpen(!isOpen)}
-        />
-        <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <SideBar />
       </Left>
       <Right>
         <User session={session} loading={loading} />

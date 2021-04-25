@@ -1,47 +1,11 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
-import Router from 'next/router'
-import HiddenText from '../../atoms/Text/HiddenText'
 import Title from '../../atoms/Title/Title'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
+import { Popover } from '@headlessui/react'
+import { MenuIcon } from '@heroicons/react/solid'
+import classNames from 'classnames'
 
-type Props = {
-  isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
-}
-
-const Nav = styled.nav<{ isOpen: boolean }>`
-  display: flex;
-  z-index: ${({ theme }) => theme.layer.top};
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  ${(props) =>
-    props.isOpen
-      ? css`
-          left: 0;
-        `
-      : css`
-          left: -100%;
-        `}
-`
-
-const LinkArea = styled.div`
-  background-color: ${({ theme }) => theme.colors.primary.dark};
-`
-
-const TitleArea = styled.div`
-  padding: 0.5rem;
-`
-
-const CloseArea = styled.a`
-  background-color: ${({ theme }) => theme.colors.secondary.light};
-  opacity: 0.5;
-  width: 100%;
-  text-decoration: none;
-`
+type Props = {}
 
 const links: LinkProps[] = [
   {
@@ -58,21 +22,29 @@ const links: LinkProps[] = [
   },
 ]
 
-const SideBar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
-  Router.events.on('routeChangeComplete', () => setIsOpen(false))
-
+const SideBar: React.VFC<Props> = ({}) => {
   return (
-    <Nav isOpen={isOpen}>
-      <LinkArea>
-        <TitleArea>
+    <Popover className="relative">
+      <Popover.Button>
+        <MenuIcon className={'w-10 h-10 text-white cursor-pointer'} />
+      </Popover.Button>
+
+      <Popover.Panel
+        className={classNames(
+          'absolute',
+          'z-10',
+          '-top-2',
+          '-left-2',
+          'h-screen',
+          'bg-primary-dark'
+        )}
+      >
+        <div className={'p-2'}>
           <Title>Menu</Title>
-        </TitleArea>
+        </div>
         <LinkMenu links={links} />
-      </LinkArea>
-      <CloseArea onClick={() => setIsOpen(false)}>
-        <HiddenText text={'close'} />
-      </CloseArea>
-    </Nav>
+      </Popover.Panel>
+    </Popover>
   )
 }
 

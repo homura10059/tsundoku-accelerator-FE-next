@@ -3,8 +3,13 @@ import SideBar from './SideBar'
 
 export default {
   title: 'Design System/organisms/SideBar',
+  decorators: [
+    (Story) => (
+      <div className={'bg-green-300 w-full p-2'}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 
-export const showOpen = () => <SideBar isOpen={true} setIsOpen={() => {}} />
-
-export const showClose = () => <SideBar isOpen={false} setIsOpen={() => {}} />
+export const show = () => <SideBar />

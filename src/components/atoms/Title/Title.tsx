@@ -1,14 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+import classNames from 'classnames'
 
-type Props = {}
+type Props = {
+  color?: string
+}
 
-const Text = styled.h1`
-  font-size: 2rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.on.primary};
-`
-
-const Title: React.FC<Props> = ({ children }) => <Text>{children}</Text>
+const Title: React.FC<Props> = ({ color = 'on-primary', children }) => (
+  <h1 className={classNames('text-4xl', 'font-bold', `text-${color}`)}>
+    {children}
+  </h1>
+)
 
 export default Title
