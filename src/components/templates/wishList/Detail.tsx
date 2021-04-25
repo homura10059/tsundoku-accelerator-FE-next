@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSession } from 'next-auth/client'
-import styled from 'styled-components'
 import { IncomingWebhook } from '../../../functions/prisma'
 import NodePage from '../../../components/templates/NodePage'
 import LocalDate from '../../../components/atoms/Date/LocalDate'
 import ItemTable from '../../../components/organisms/Item/ItemTable'
 import Link from '../../atoms/Link/Link'
-import { hex2rgba } from '../../../functions/theme'
+import classNames from 'classnames'
 
 export type Props = {
   id: string
@@ -29,42 +28,74 @@ export type Props = {
   incomingWebhook: IncomingWebhook
 }
 
-const WishListDetail = styled.table`
-  background-color: ${({ theme }) => theme.colors.surface};
+const DetailRow: React.VFC<{
+  header: string
+  text?: string | number
+  url?: string
+  date?: number
+}> = ({ header, text, url, date }) => {
+  return (
+    <tr>
+      <th
+        className={classNames(
+          'min-w-4',
+          'p-2',
+          'border-solid',
+          'border-on-surface',
+          'border-t',
+          'border-b'
+        )}
+      >
+        {header}
+      </th>
+      <td
+        className={classNames(
+          'min-w-4',
+          'p-2',
+          'border-solid',
+          'border-on-surface',
+          'border-t',
+          'border-b'
+        )}
+      >
+        {text ? (
+          text
+        ) : url ? (
+          <Link href={url}>
+            <span className={'break-all'}>{url}</span>
+          </Link>
+        ) : date ? (
+          <LocalDate unixTimeInSec={date} />
+        ) : null}
+      </td>
+    </tr>
+  )
+}
 
-  th {
-    min-width: 85px;
-    padding: 5px;
-    border-top: solid 1px ${({ theme }) => theme.colors.border};
-    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
-  }
+const DetailArea: React.VFC<Props> = (props) => {
+  return (
+    <div className={classNames('w-full', 'mt-4')}>
+      詳細
+      <table className={'bg-surface'}>
+        <tbody>
+          <DetailRow header={'Id'} text={props.id} />
+          <DetailRow header={'url'} url={props.url} />
+          <DetailRow header={'更新日時'} date={props.scrapedAt} />
+          {props.incomingWebhook && (
+            <DetailRow
+              header={'通知設定'}
+              text={props.incomingWebhook.service}
+            />
+          )}
+          <DetailRow header={'値引率閾値'} text={props.discountRateThreshold} />
+          <DetailRow header={'還元率閾値'} text={props.pointsRateThreshold} />
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
-  td {
-    padding: 5px;
-    border-top: solid 1px ${({ theme }) => theme.colors.border};
-    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
-  }
-`
-
-const DetailArea = styled.div`
-  margin-top: 10px;
-  width: 100%;
-`
-
-const ItemArea = styled.div`
-  margin-top: 10px;
-  width: 100%;
-`
-
-const UrlText = styled.span`
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-all;
-  word-break: break-word;
-  hyphens: auto;
-`
-
-const Detail: React.FC<Props> = (props) => {
+const Detail: React.VFC<Props> = (props) => {
   const [session, loading] = useSession()
   if (loading) {
     return <div>Authenticating ...</div>
@@ -81,47 +112,11 @@ const Detail: React.FC<Props> = (props) => {
       basePath={`/wishList/${props.id}`}
       command={{ canUpdate: true, canEdit: true, canDelete: true }}
     >
-      <DetailArea>
-        詳細
-        <WishListDetail>
-          <tr>
-            <th>Id</th>
-            <td>{props.id}</td>
-          </tr>
-          <tr>
-            <th>url</th>
-            <td>
-              <Link href={props.url}>
-                <UrlText>{props.url}</UrlText>
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <th>更新日時</th>
-            <td>
-              <LocalDate unixTimeInSec={props.scrapedAt} />
-            </td>
-          </tr>
-          {props.incomingWebhook && (
-            <tr>
-              <th>通知設定</th>
-              <td>{props.incomingWebhook.service}</td>
-            </tr>
-          )}
-          <tr>
-            <th>値引率閾値</th>
-            <td>{props.discountRateThreshold}</td>
-          </tr>
-          <tr>
-            <th>還元率閾値</th>
-            <td>{props.pointsRateThreshold}</td>
-          </tr>
-        </WishListDetail>
-      </DetailArea>
-      <ItemArea>
+      <DetailArea {...props} />
+      <div className={classNames('w-full', 'mt-4')}>
         Items
         <ItemTable items={props.items} />
-      </ItemArea>
+      </div>
     </NodePage>
   )
 }

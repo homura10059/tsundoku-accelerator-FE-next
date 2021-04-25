@@ -36,8 +36,6 @@ const HeaderRow = styled.tr`
   }
 `
 
-const DataRow = styled.tr``
-
 const ItemTable: React.FC<Props> = ({ items }) => {
   if (items.length === 0) {
     return null
@@ -59,14 +57,14 @@ const ItemTable: React.FC<Props> = ({ items }) => {
         </HeaderRow>
       </thead>
       <tbody>
-        {sorted.map((item) => (
-          <DataRow>
+        {sorted.map((item, index) => (
+          <tr key={index}>
             <td>
               <Link href={item.url}> {item.title}</Link>
             </td>
             <td align="right">{item.discountRate}</td>
             <td align="right">{item.pointsRate}</td>
-          </DataRow>
+          </tr>
         ))}
       </tbody>
     </Table>
