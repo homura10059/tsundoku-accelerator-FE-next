@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import classNames from 'classnames'
 
 type Props = {
   size?: {
@@ -8,59 +8,52 @@ type Props = {
   }
   name: string
   image?: string
+  color?: string
 }
-
-const Wrapper = styled.div<NonNullable<Props['size']>>`
-  ${(props) =>
-    css`
-      width: ${props.width}px;
-      height: ${props.height}px;
-    `}
-  border-radius: 50%;
-`
-
-const AvatarWrapper = styled(Wrapper)``
-
-const AvatarImage = styled.img`
-  display: block;
-  border-radius: 50%;
-  height: 100%;
-  width: 100%;
-`
-
-const InitialWrapper = styled(Wrapper)`
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-
-  border: solid 1px ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.on.surface};
-`
-
-const InitialText = styled.div`
-  display: block;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`
 
 const Avatar: React.FC<Props> = ({
   name,
-  size = { height: 36, width: 36 },
+  size = { height: 12, width: 12 },
   image = null,
+  color = 'on-surface',
 }) => {
+  const { width, height } = size
   if (image) {
     return (
-      <AvatarWrapper {...size}>
-        <AvatarImage src={image} />
-      </AvatarWrapper>
+      <img
+        className={classNames(
+          `w-${width}`,
+          `h-${height}`,
+          'rounded-full',
+          'flex',
+          'items-center',
+          'justify-center'
+        )}
+        src={image}
+        width={size.width}
+        height={size.height}
+      />
     )
   }
   return (
-    <InitialWrapper {...size}>
-      <InitialText>{name.slice(0, 1)}</InitialText>
-    </InitialWrapper>
+    <div
+      className={classNames(
+        `w-${width}`,
+        `h-${height}`,
+        'border-solid',
+        'border-2',
+        `border-${color}`,
+        'rounded-full',
+        'flex',
+        'items-center',
+        'justify-center',
+        'align-middle'
+      )}
+    >
+      <div className={classNames(`text-${color}`, 'text-3xl', 'text-center')}>
+        {name.slice(0, 1)}
+      </div>
+    </div>
   )
 }
 

@@ -33,9 +33,13 @@ export const showAvatarBig = () => (
     image={
       'https://raw.githubusercontent.com/o-hayato/sophia-bot/master/image/P5S_icon_sophia.png'
     }
-    size={{ width: 64, height: 64 }}
+    size={{ width: 36, height: 36 }}
     name={'sophia'}
   />
 )
 
 export const showAvatarInitial = () => <Avatar name={'sophia'} />
+
+export const showAvatarInitialBlack = () => (
+  <Avatar name={'sophia'} color={'black'} />
+)
