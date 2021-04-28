@@ -8,10 +8,6 @@ type Props = {
   basePath: string
 }
 
-const Wrapper = styled.main`
-  margin-top: 0.5rem;
-`
-
 const TopBar = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -26,13 +22,13 @@ const MainArea = styled.div`
 
 const ListPage: React.FC<Props> = ({ title, basePath, children }) => {
   return (
-    <Wrapper>
+    <div className={'bg-background p-1 h-screen'}>
       <TopBar>
         <Title>{title}</Title>
         <LinkButton href={`/${basePath}/add`}>Add</LinkButton>
       </TopBar>
       <MainArea>{children}</MainArea>
-    </Wrapper>
+    </div>
   )
 }
 

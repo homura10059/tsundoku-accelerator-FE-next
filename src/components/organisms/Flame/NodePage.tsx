@@ -14,10 +14,6 @@ type Props = {
   }
 }
 
-const Wrapper = styled.main`
-  margin-top: 0.5rem;
-`
-
 const TopBar = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -38,7 +34,7 @@ const NodePage: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <Wrapper>
+    <div className={'bg-background p-1 h-screen'}>
       <TopBar>
         <Title>{title}</Title>
         {command.canUpdate && (
@@ -52,7 +48,7 @@ const NodePage: React.FC<Props> = ({
         )}
       </TopBar>
       <MainArea>{children}</MainArea>
-    </Wrapper>
+    </div>
   )
 }
 

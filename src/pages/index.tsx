@@ -3,12 +3,14 @@ import styled from 'styled-components'
 
 type Props = {}
 
-const MainArea = styled.main`
-  color: ${({ theme }) => theme.colors.on.background};
-`
-
 const Main: React.FC<Props> = () => {
-  return <MainArea>セール情報を収集してくれるサイト</MainArea>
+  return (
+    <div className={'bg-background p-1 h-screen'}>
+      <main className={'text-on-background'}>
+        セール情報を収集してくれるサイト
+      </main>
+    </div>
+  )
 }
 
 export default Main

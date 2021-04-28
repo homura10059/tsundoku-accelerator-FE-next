@@ -1,3 +1,20 @@
 @tailwind base;
+
+#__next {
+    width: 100%;
+    min-height: 900px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media screen and (min-width: 990px) {
+    #__next {
+        width: 70.6em;
+        min-width: 990px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
