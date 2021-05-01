@@ -25,25 +25,35 @@ const links: LinkProps[] = [
 const SideBar: React.VFC<Props> = ({}) => {
   return (
     <Popover className="relative">
-      <Popover.Button>
-        <MenuIcon className={'w-10 h-10 text-white cursor-pointer'} />
-      </Popover.Button>
+      {({ open }) => (
+        <>
+          <Popover.Button>
+            <MenuIcon className={'w-10 h-10 text-white cursor-pointer'} />
+          </Popover.Button>
 
-      <Popover.Panel
-        className={classNames(
-          'absolute',
-          'z-10',
-          '-top-2',
-          '-left-2',
-          'h-screen',
-          'bg-primary-dark'
-        )}
-      >
-        <div className={'p-2'}>
-          <Title>Menu</Title>
-        </div>
-        <LinkMenu links={links} />
-      </Popover.Panel>
+          <Popover.Overlay
+            className={`${
+              open ? 'opacity-30 fixed inset-0' : 'opacity-0'
+            } bg-secondary-light`}
+          />
+
+          <Popover.Panel
+            className={classNames(
+              'absolute',
+              'z-10',
+              '-top-2',
+              '-left-2',
+              'h-screen',
+              'bg-primary-dark'
+            )}
+          >
+            <div className={'p-2'}>
+              <Title>Menu</Title>
+            </div>
+            <LinkMenu links={links} />
+          </Popover.Panel>
+        </>
+      )}
     </Popover>
   )
 }
