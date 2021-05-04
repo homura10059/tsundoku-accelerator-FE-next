@@ -32,9 +32,12 @@ const SideBar: React.VFC<Props> = ({}) => {
           </Popover.Button>
 
           <Popover.Overlay
-            className={`${
-              open ? 'opacity-30 fixed inset-0' : 'opacity-0'
-            } bg-secondary-light`}
+            className={classNames('bg-secondary-light', {
+              'opacity-0': !open,
+              'opacity-30': open,
+              fixed: open,
+              'inset-0': open,
+            })}
           />
 
           <Popover.Panel
