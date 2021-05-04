@@ -1,7 +1,7 @@
 @tailwind base;
 
 #__next {
-  @apply bg-background container min-h-screen lg:w-10/12 lg:min-w-max lg:min-h-screen lg:mr-auto lg:ml-auto;
+  @apply bg-background container min-h-screen lg:w-10/12 lg:min-w-max lg:min-h-screen lg:mx-auto;
 }
 
 @tailwind components;

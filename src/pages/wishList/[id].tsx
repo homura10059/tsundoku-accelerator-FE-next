@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import { getWishList } from '../../domain/service/wishList'
+import { getWishList } from '@/domain/service/wishList'
 import Detail from '../../components/templates/wishList/Detail'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {

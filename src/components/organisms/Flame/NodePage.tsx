@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import LinkButton from '../../atoms/LinkButton/LinkButton'
 import Title from '../../atoms/Title/Title'
 import CommandButton from '../../molecules/Button/CommandButton'
+import classNames from 'classnames'
 
 type Props = {
   title: string
@@ -14,19 +13,6 @@ type Props = {
   }
 }
 
-const TopBar = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  * + * {
-    margin-left: 0.5rem;
-  }
-`
-
-const MainArea = styled.div`
-  margin-top: 1rem;
-  color: ${({ theme }) => theme.colors.on.background};
-`
-
 const NodePage: React.FC<Props> = ({
   title,
   basePath,
@@ -35,19 +21,28 @@ const NodePage: React.FC<Props> = ({
 }) => {
   return (
     <div className={'p-1'}>
-      <TopBar>
+      <div
+        className={classNames(
+          'flex',
+          'flex-wrap',
+          'items-center',
+          'lg:space-x-4' // PCの時だけmarginをつける
+        )}
+      >
         <Title>{title}</Title>
-        {command.canUpdate && (
-          <CommandButton command={'Update'} basePath={basePath} />
-        )}
-        {command.canEdit && (
-          <CommandButton command={'Edit'} basePath={basePath} />
-        )}
-        {command.canDelete && (
-          <CommandButton command={'Delete'} basePath={basePath} />
-        )}
-      </TopBar>
-      <MainArea>{children}</MainArea>
+        <div className={classNames('flex', 'space-x-2')}>
+          {command.canUpdate && (
+            <CommandButton command={'Update'} basePath={basePath} />
+          )}
+          {command.canEdit && (
+            <CommandButton command={'Edit'} basePath={basePath} />
+          )}
+          {command.canDelete && (
+            <CommandButton command={'Delete'} basePath={basePath} />
+          )}
+        </div>
+      </div>
+      <div className={classNames('mt-4', 'text-on-background')}>{children}</div>
     </div>
   )
 }
