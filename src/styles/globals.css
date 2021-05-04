@@ -1,19 +1,7 @@
 @tailwind base;
 
 #__next {
-    width: 100%;
-    min-height: 900px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-@media screen and (min-width: 990px) {
-    #__next {
-        width: 70.6em;
-        min-width: 990px;
-        margin-right: auto;
-        margin-left: auto;
-    }
+  @apply bg-background container min-h-screen lg:w-10/12 lg:min-w-max lg:min-h-screen lg:mr-auto lg:ml-auto;
 }
 
 @tailwind components;

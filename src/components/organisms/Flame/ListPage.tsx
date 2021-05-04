@@ -22,7 +22,7 @@ const MainArea = styled.div`
 
 const ListPage: React.FC<Props> = ({ title, basePath, children }) => {
   return (
-    <div className={'bg-background p-1 h-screen'}>
+    <div className={'p-1'}>
       <TopBar>
         <Title>{title}</Title>
         <LinkButton href={`/${basePath}/add`}>Add</LinkButton>

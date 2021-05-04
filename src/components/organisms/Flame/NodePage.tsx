@@ -34,7 +34,7 @@ const NodePage: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <div className={'bg-background p-1 h-screen'}>
+    <div className={'p-1'}>
       <TopBar>
         <Title>{title}</Title>
         {command.canUpdate && (
