@@ -45,6 +45,7 @@ const Refresh: React.FC<Props> = ({ basePath }) => {
         { 'hover:bg-primary-light': !isLoading }
       )}
       onClick={callback}
+      disabled={isLoading}
     >
       {isLoading ? (
         <Icon className={className} />
