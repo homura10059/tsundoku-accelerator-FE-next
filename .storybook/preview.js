@@ -6,6 +6,7 @@ import { configure } from '@storybook/react'
 import './mockNextRouter'
 import { GlobalStyle } from '../src/functions/style'
 import '../src/styles/globals.css'
+import * as nextImage from 'next/image';
 
 addDecorator(
   withNextRouter({
@@ -35,3 +36,8 @@ addParameters({
         : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
   },
 })
+
+Object.defineProperty(nextImage, 'default', {
+  configurable: true,
+  value: props => <img {...props} />
+});

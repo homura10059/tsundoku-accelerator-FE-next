@@ -1,12 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
 import CommandButton from './CommandButton'
-
-const Background = styled.div`
-  background-color: #9cc;
-  width: 400px;
-  padding: 10px;
-`
 
 export default {
   title: 'Design System/molecules/CommandButton',

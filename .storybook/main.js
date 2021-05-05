@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   stories: ['../src/components/**/*.stories.@(tsx|mdx)'],
   addons: [
@@ -8,4 +10,8 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-viewport',
   ],
+  webpackFinal: async (config, { configType }) => {
+    config.resolve.alias['@'] = path.resolve(__dirname, '../src')
+    return config
+  },
 }

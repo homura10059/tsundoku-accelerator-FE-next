@@ -1,14 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import Loader from './Loader'
 
-const Background = styled.div`
-  background-color:  #9cc;
-  padding: 10px;
-`
-
 export default {
-  title: 'Design System/atoms/Loader',
+  title: 'Design System/atoms/Loader/Loader',
   decorators: [
     (Story) => (
       <div className={'bg-green-300 w-full p-2'}>
