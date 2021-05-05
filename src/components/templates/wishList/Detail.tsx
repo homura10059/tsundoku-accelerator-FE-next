@@ -110,7 +110,11 @@ const Detail: React.VFC<Props> = (props) => {
     <NodePage
       title={`${props.title}`}
       basePath={`/wishList/${props.id}`}
-      command={{ canUpdate: true, canEdit: true, canDelete: true }}
+      command={{
+        canRefresh: true,
+        canEdit: true,
+        canDelete: true,
+      }}
     >
       <DetailArea {...props} />
       <div className={classNames('w-full', 'mt-4')}>

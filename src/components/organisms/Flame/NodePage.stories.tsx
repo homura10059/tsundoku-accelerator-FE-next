@@ -16,28 +16,30 @@ export const showAllButton = () => (
   <NodePage
     title={'ダミータイトル'}
     basePath={`/`}
-    command={{ canUpdate: true, canEdit: true, canDelete: true }}
+    command={{
+      canRefresh: true,
+      canEdit: true,
+      canDelete: true,
+    }}
   >
     ダミーダミー
   </NodePage>
 )
 
-export const showUpdateButton = () => (
+export const showRefreshButton = () => (
   <NodePage
     title={'ダミータイトル'}
     basePath={`/`}
-    command={{ canUpdate: true, canEdit: false, canDelete: false }}
+    command={{
+      canRefresh: true,
+    }}
   >
     ダミーダミー
   </NodePage>
 )
 
 export const showEditButton = () => (
-  <NodePage
-    title={'ダミータイトル'}
-    basePath={`/`}
-    command={{ canUpdate: false, canEdit: true, canDelete: false }}
-  >
+  <NodePage title={'ダミータイトル'} basePath={`/`} command={{ canEdit: true }}>
     ダミーダミー
   </NodePage>
 )
@@ -46,7 +48,7 @@ export const showDeleteButton = () => (
   <NodePage
     title={'ダミータイトル'}
     basePath={`/`}
-    command={{ canUpdate: false, canEdit: false, canDelete: true }}
+    command={{ canDelete: true }}
   >
     ダミーダミー
   </NodePage>

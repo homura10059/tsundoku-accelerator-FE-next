@@ -2,12 +2,13 @@ import React from 'react'
 import Title from '../../atoms/Title/Title'
 import CommandButton from '../../molecules/Button/CommandButton'
 import classNames from 'classnames'
+import Refresh from '@/components/molecules/Button/Refresh'
 
 type Props = {
   title: string
   basePath: string
   command?: {
-    canUpdate?: boolean
+    canRefresh?: boolean
     canEdit?: boolean
     canDelete?: boolean
   }
@@ -16,7 +17,11 @@ type Props = {
 const NodePage: React.FC<Props> = ({
   title,
   basePath,
-  command = { canUpdate: false, canEdit: false, canDelete: false },
+  command = {
+    canRefresh: false,
+    canEdit: false,
+    canDelete: false,
+  },
   children,
 }) => {
   return (
@@ -31,9 +36,7 @@ const NodePage: React.FC<Props> = ({
       >
         <Title>{title}</Title>
         <div className={classNames('flex', 'space-x-2')}>
-          {command.canUpdate && (
-            <CommandButton command={'Update'} basePath={basePath} />
-          )}
+          {command.canRefresh && <Refresh basePath={basePath} />}
           {command.canEdit && (
             <CommandButton command={'Edit'} basePath={basePath} />
           )}

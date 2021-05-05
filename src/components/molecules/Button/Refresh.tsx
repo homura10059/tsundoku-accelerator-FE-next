@@ -42,7 +42,7 @@ const Refresh: React.FC<Props> = ({ basePath }) => {
         'p-1',
         'text-on-background',
         'bg-secondary-dark',
-        { 'hover:bg-primary-dark': !isLoading }
+        { 'hover:bg-primary-light': !isLoading }
       )}
       onClick={callback}
     >
