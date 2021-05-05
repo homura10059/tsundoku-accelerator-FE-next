@@ -1,9 +1,9 @@
 import React from 'react'
 import Title from '../../atoms/Title/Title'
-import CommandButton from '../../molecules/Button/CommandButton'
 import classNames from 'classnames'
 import Refresh from '@/components/molecules/Button/Refresh'
 import Delete from '@/components/molecules/Button/Delete'
+import Edit from '@/components/molecules/Button/Edit'
 
 type Props = {
   title: string
@@ -38,9 +38,7 @@ const NodePage: React.FC<Props> = ({
         <Title>{title}</Title>
         <div className={classNames('flex', 'space-x-2')}>
           {command.canRefresh && <Refresh basePath={basePath} />}
-          {command.canEdit && (
-            <CommandButton command={'Edit'} basePath={basePath} />
-          )}
+          {command.canEdit && <Edit basePath={basePath} />}
           {command.canDelete && <Delete basePath={basePath} />}
         </div>
       </div>
