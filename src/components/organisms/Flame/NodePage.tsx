@@ -3,6 +3,7 @@ import Title from '../../atoms/Title/Title'
 import CommandButton from '../../molecules/Button/CommandButton'
 import classNames from 'classnames'
 import Refresh from '@/components/molecules/Button/Refresh'
+import Delete from '@/components/molecules/Button/Delete'
 
 type Props = {
   title: string
@@ -40,9 +41,7 @@ const NodePage: React.FC<Props> = ({
           {command.canEdit && (
             <CommandButton command={'Edit'} basePath={basePath} />
           )}
-          {command.canDelete && (
-            <CommandButton command={'Delete'} basePath={basePath} />
-          )}
+          {command.canDelete && <Delete basePath={basePath} />}
         </div>
       </div>
       <div className={classNames('mt-4', 'text-on-background')}>{children}</div>
