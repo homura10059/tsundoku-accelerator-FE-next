@@ -35,7 +35,7 @@ const Notification: React.FC = () => {
   return (
     <div>
       <form onSubmit={submitData}>
-        <h1>Add IncomingWebhook</h1>
+        <h1>ActionIcon IncomingWebhook</h1>
         <div>
           url :
           <TextArea
@@ -57,7 +57,7 @@ const Notification: React.FC = () => {
             <option value="DISCORD">Discord</option>
           </select>
         </div>
-        <SubmitButton disabled={!url && !channel && !service} value="Add" />
+        <SubmitButton disabled={!url && !channel && !service} value="ActionIcon" />
         <TextButton
           label={'Cancel'}
           href={'#'}

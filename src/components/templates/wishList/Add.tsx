@@ -44,7 +44,7 @@ const ButtonArea = styled.div`
     margin-left: 10px;
   }
 `
-const Add: React.FC<Props> = (props) => {
+const ActionIcon: React.FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
@@ -78,7 +78,7 @@ const Add: React.FC<Props> = (props) => {
   const onError = (errors, e) => console.log(errors, e)
 
   return (
-    <NodePage title={'Add WishList'} basePath={`/wishList/`}>
+    <NodePage title={'ActionIcon WishList'} basePath={`/wishList/`}>
       <FromArea onSubmit={handleSubmit(onSubmit, onError)}>
         <InputArea>
           <tbody>
@@ -133,7 +133,7 @@ const Add: React.FC<Props> = (props) => {
         <ButtonArea>
           <SubmitButton
             disabled={!isDirty || Object.keys(errors).length !== 0}
-            value="Add"
+            value="ActionIcon"
           />
           <TextButton
             label={'Cancel'}
