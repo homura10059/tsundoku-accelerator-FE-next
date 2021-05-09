@@ -44,7 +44,7 @@ const ButtonArea = styled.div`
     margin-left: 10px;
   }
 `
-const ActionIcon: React.FC<Props> = (props) => {
+const Add: React.FC<Props> = (props) => {
   const {
     register,
     handleSubmit,
