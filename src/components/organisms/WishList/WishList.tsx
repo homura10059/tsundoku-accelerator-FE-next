@@ -1,32 +1,22 @@
 import React from 'react'
-import styled from 'styled-components'
 import { format } from 'date-fns'
 import { WishList as WishListProps } from '@prisma/client'
 import LinkItem from '../../atoms/LinkItem/LinkItem'
+import classNames from 'classnames'
 
 export type Props = WishListProps
-
-const Area = styled.div`
-  background-color: ${({ theme }) => theme.colors.surface};
-`
-const Title = styled.h1`
-  font-size: 2rem;
-`
-const UpdateAt = styled.p``
 
 const WishList: React.FC<Props> = (wishList) => {
   const scrapedAt = wishList.scrapedAt
     ? format(new Date(wishList.scrapedAt * 1000), 'yyyy/MM/dd HH:mm:ss')
     : '-'
   return (
-    <>
-      <Area>
-        <LinkItem href={`/wishList/${wishList.id}`}>
-          <Title>{wishList.title}</Title>
-          <UpdateAt>更新日時: {scrapedAt}</UpdateAt>
-        </LinkItem>
-      </Area>
-    </>
+    <div className={classNames('bg-surface')}>
+      <LinkItem href={`/wishList/${wishList.id}`}>
+        <h1 className={classNames('text-2xl')}>{wishList.title}</h1>
+        <p>更新日時: {scrapedAt}</p>
+      </LinkItem>
+    </div>
   )
 }
 
