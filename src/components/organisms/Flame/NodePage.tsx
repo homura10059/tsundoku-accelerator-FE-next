@@ -28,12 +28,7 @@ const NodePage: React.FC<Props> = ({
   return (
     <div className={'p-1'}>
       <div
-        className={classNames(
-          'flex',
-          'flex-wrap',
-          'items-center',
-          'lg:space-x-4' // PCの時だけmarginをつける
-        )}
+        className={classNames('flex', 'flex-wrap', 'items-center', 'space-x-4')}
       >
         <Title>{title}</Title>
         <div className={classNames('flex', 'space-x-2')}>
