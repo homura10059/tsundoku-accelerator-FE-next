@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Router from 'next/router'
 import React, { useCallback, useState } from 'react'
 
-import Icon from '@/components/atoms/Loader/Icon'
+import ActionIcon from '@/components/atoms/Button/ActionIcon'
 
 type Props = {
   basePath: string
@@ -34,26 +34,13 @@ const Refresh: React.FC<Props> = ({ basePath }) => {
   const className = classNames('w-5', 'h-5')
 
   return (
-    <button
-      className={classNames(
-        'border-2',
-        'border-solid',
-        'border-on-background',
-        'rounded-md',
-        'p-1',
-        'text-on-background',
-        'bg-secondary-dark',
-        { 'hover:bg-primary-light': !isLoading }
-      )}
+    <ActionIcon
       onClick={callback}
       disabled={isLoading}
+      iconClassName={className}
     >
-      {isLoading ? (
-        <Icon className={className} />
-      ) : (
-        <RefreshIcon className={className} />
-      )}
-    </button>
+      <RefreshIcon className={className} />
+    </ActionIcon>
   )
 }
 
