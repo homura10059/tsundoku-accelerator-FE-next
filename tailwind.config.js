@@ -45,10 +45,28 @@ const config = {
           '75%': {
             'clip-path': 'polygon(5% 5%, 99% -1%, 85% 100%, 1% 85%)'
           }
+        },
+        pentagon: {
+          '0%': {
+            'clip-path': 'polygon(11% 0%, 95% 35%, 100% 60%, 5% 100%, 0%, 85%)'
+          },
+          '25%': {
+            'clip-path': 'polygon(10% 0%, 95% 35%, 99% 60%, 5% 101%, 0%, 85%)'
+          },
+          '50%': {
+            'clip-path': 'polygon(10% 1%, 95% 35%, 100% 59%, 5% 100%, 0%, 85%)'
+          },
+          '75%': {
+            'clip-path': 'polygon(10% 0%, 94% 34%, 100% 60%, 5% 100%, 1%, 85%)'
+          },
+          '100%': {
+            'clip-path': 'polygon(10% 0%, 95% 35%, 100% 60%, 5% 100%, 0%, 85%)'
+          }
         }
       },
       animation: {
-        parallelogram: 'parallelogram 1s linear infinite'
+        parallelogram: 'parallelogram 1s linear infinite',
+        pentagon: 'pentagon 1s linear infinite'
       }
     }
   },
