@@ -1,9 +1,11 @@
-import React from 'react'
-import Title from '../../atoms/Title/Title'
 import classNames from 'classnames'
-import Refresh from '@/components/molecules/Button/Refresh'
+import React from 'react'
+
 import Delete from '@/components/molecules/Button/Delete'
 import Edit from '@/components/molecules/Button/Edit'
+import Refresh from '@/components/molecules/Button/Refresh'
+
+import Title from '../../atoms/Title/Title'
 
 type Props = {
   title: string
@@ -21,9 +23,9 @@ const NodePage: React.FC<Props> = ({
   command = {
     canRefresh: false,
     canEdit: false,
-    canDelete: false,
+    canDelete: false
   },
-  children,
+  children
 }) => {
   return (
     <div className={'p-1'}>

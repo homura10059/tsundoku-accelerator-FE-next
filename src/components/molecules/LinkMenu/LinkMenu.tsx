@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+
 import LinkItem, { LinkItemProps } from '../../atoms/LinkItem/LinkItem'
 
 export type LinkProps = LinkItemProps & { text: string }
@@ -24,7 +24,7 @@ const LinkMenu: React.FC<Props> = ({ links }) => {
   }
   return (
     <List>
-      {links.map((link) => (
+      {links.map(link => (
         <li key={link.text}>
           <LinkItem href={link.href} onClick={link.onClick}>
             {link.text}

@@ -1,6 +1,7 @@
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 import styled, { css } from 'styled-components'
+
 import Loader from '../Loader/Loader'
 
 type Props = {
@@ -19,7 +20,7 @@ const Wrapper = styled.div<{ isLoading: boolean }>`
   justify-content: center;
   align-items: center;
 
-  ${(props) =>
+  ${props =>
     !props.isLoading &&
     css`
       &:hover {
@@ -47,7 +48,7 @@ const LinkButton: React.FC<Props> = ({
   isLoading = false,
   href,
   onClick,
-  children,
+  children
 }) => {
   if (isLoading) {
     return (

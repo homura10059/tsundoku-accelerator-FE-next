@@ -1,11 +1,11 @@
-import { scrapeItem } from '../repositories/item'
 import prisma, { Item } from '../../functions/prisma'
+import { scrapeItem } from '../repositories/item'
 
 export const fetchItem = async (url: string) => {
   const dbData = await prisma.item.findUnique({
     where: {
-      url,
-    },
+      url
+    }
   })
 
   const scrapedData = await scrapeItem(dbData.url)
@@ -25,19 +25,19 @@ export const updateItem = async (item: Item) => {
       discount: result.discount,
       discountRate: result.discountRate,
       points: result.points,
-      pointsRate: result.pointsRate,
+      pointsRate: result.pointsRate
     },
     where: {
-      url: result.url,
-    },
+      url: result.url
+    }
   })
 }
 
 export const updateItemByUrl = async (url: string) => {
   const item = await prisma.item.findUnique({
     where: {
-      url,
-    },
+      url
+    }
   })
 
   await updateItem(item)
@@ -60,10 +60,10 @@ export const updateAllItems = async () => {
 export const getItemsByUserId = async (userId: number) => {
   return prisma.wishList.findMany({
     where: {
-      userId,
+      userId
     },
     include: {
-      items: true,
-    },
+      items: true
+    }
   })
 }

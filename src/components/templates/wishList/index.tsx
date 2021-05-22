@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react'
-import ListPage from '../../organisms/Flame/ListPage'
 import { WishList as WishListProps } from '@prisma/client'
-import WishList from '../../organisms/WishList/WishList'
 import classNames from 'classnames'
+import React, { useMemo } from 'react'
+
+import ListPage from '../../organisms/Flame/ListPage'
+import WishList from '../../organisms/WishList/WishList'
 
 type Props = {
   wishLists: WishListProps[]
@@ -25,8 +26,11 @@ const WishLists: React.FC<Props> = ({ wishLists }) => {
   return (
     <ListPage title="WishLists" basePath="wishList">
       <ul className={classNames('flex', 'flex-wrap')}>
-        {lists.map((wishList) => (
-          <li key={wishList.id} className={classNames('w-full', 'p-1', 'lg:w-1/2')}>
+        {lists.map(wishList => (
+          <li
+            key={wishList.id}
+            className={classNames('w-full', 'p-1', 'lg:w-1/2')}
+          >
             <WishList {...wishList} />
           </li>
         ))}

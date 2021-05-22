@@ -1,15 +1,16 @@
 import React from 'react'
+
 import ActionIcon from './ActionIcon'
 
 export default {
   title: 'Design System/atoms/Button/ActionIcon',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-green-300 w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 const dummyOnClick = async () => {}
@@ -21,7 +22,11 @@ export const showDisabled = () => (
 )
 
 export const showDisabledWithSize = () => (
-  <ActionIcon onClick={dummyOnClick} disabled={true} iconClassName={'w-10 h-10'}>
+  <ActionIcon
+    onClick={dummyOnClick}
+    disabled={true}
+    iconClassName={'w-10 h-10'}
+  >
     Button
   </ActionIcon>
 )

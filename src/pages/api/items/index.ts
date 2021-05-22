@@ -1,9 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as z from 'zod'
-import { fetchItem, updateItemByUrl, updateAllItems } from '../../../domain/service/item'
+
+import {
+  fetchItem,
+  updateAllItems,
+  updateItemByUrl
+} from '../../../domain/service/item'
 
 const requestParamSchema = z.object({
-  url: z.string().min(1),
+  url: z.string().min(1)
 })
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const item = await fetchItem(result.url)
         res.json({
           status: 'ok',
-          item,
+          item
         })
       } catch (error) {
         res.json({ status: 'error', error })
@@ -25,7 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const result = requestParamSchema.parse(req.query)
         await updateItemByUrl(result.url)
         res.json({
-          status: 'ok',
+          status: 'ok'
         })
       } catch (error) {
         res.json({ status: 'error', error })
@@ -35,7 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await updateAllItems()
         res.json({
-          status: 'ok',
+          status: 'ok'
         })
       } catch (error) {
         res.status(500).json({ status: 'error', error })

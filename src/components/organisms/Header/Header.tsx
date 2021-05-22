@@ -1,9 +1,11 @@
+import { useSession } from 'next-auth/client'
 import React from 'react'
 import styled from 'styled-components'
+
+import { SessionProps } from '@/interfaces/Session'
+
 import SideBar from '../SideBar/SideBar'
 import User from '../User/User'
-import { useSession } from 'next-auth/client'
-import { SessionProps } from '@/interfaces/Session'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +23,6 @@ const Right = styled.div`
 `
 
 export const Header: React.FC<SessionProps> = ({ session, loading }) => {
-
   return (
     <Wrapper>
       <Left>

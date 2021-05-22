@@ -1,5 +1,6 @@
 import puppeteer, { Browser } from 'puppeteer'
 
+// eslint-disable-next-line no-undef
 const scrollPageToBottom = require('puppeteer-autoscroll-down')
 
 export const getBrowser = (() => {
@@ -11,7 +12,7 @@ export const getBrowser = (() => {
 
     if (!browser) {
       browser = puppeteer.launch({
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
       })
     }
     return browser
@@ -25,5 +26,3 @@ export const scrape = async (browser: Browser, url: string) => {
   await scrollPageToBottom(page)
   return page
 }
-
-

@@ -4,7 +4,6 @@ export type WishListUrl = string
 export type ItemUrl = string
 export type Title = string
 
-
 // number
 export type UnixTimeInSec = number
 export type Price = number

@@ -1,10 +1,11 @@
 import type { NextApiHandler } from 'next'
-import prisma from '../../functions/prisma'
 import * as z from 'zod'
+
+import prisma from '../../functions/prisma'
 
 const requestBodySchema = z.object({
   title: z.string().min(1),
-  content: z.string(),
+  content: z.string()
 })
 
 const handler: NextApiHandler = async (req, res) => {
@@ -14,11 +15,11 @@ const handler: NextApiHandler = async (req, res) => {
       data: {
         title: result.title,
         content: result.content,
-        published: true,
-      },
+        published: true
+      }
     })
     res.json({
-      ok: true,
+      ok: true
     })
     return
   } catch (error) {

@@ -42,7 +42,7 @@ const color = {
   red: parseInt('ff0000', 16),
   yellow: parseInt('ffff00', 16),
   green: parseInt('008000', 16),
-  gray: parseInt('808080', 16),
+  gray: parseInt('808080', 16)
 }
 
 const convertColorFrom = (
@@ -59,17 +59,11 @@ const convertColorFrom = (
     return color.gray
   }
 
-  if (
-    item.discountRate >= 35 ||
-    item.pointsRate >= 35
-  ) {
+  if (item.discountRate >= 35 || item.pointsRate >= 35) {
     return color.red
   }
 
-  if (
-    item.discountRate >= 30 ||
-    item.pointsRate >= 30
-  ) {
+  if (item.discountRate >= 30 || item.pointsRate >= 30) {
     return color.yellow
   }
 
@@ -88,19 +82,19 @@ const convertEmbedsFrom = (
     {
       name: '金額',
       value: `¥${item.price}`,
-      inline: true,
+      inline: true
     },
     {
       name: '値引き率',
       value: `${item.discountRate}%`,
-      inline: true,
+      inline: true
     },
     {
       name: 'ポイント還元率',
       value: `${item.pointsRate}%`,
-      inline: true,
-    },
-  ],
+      inline: true
+    }
+  ]
 })
 
 const convertBodyFrom = (
@@ -112,13 +106,13 @@ const convertBodyFrom = (
   avatar_url:
     'https://raw.githubusercontent.com/o-hayato/sophia-bot/master/image/P5S_icon_sophia.png',
   content: `セール情報です！ from ${wishList.url}`,
-  embeds: wishList.items.map((item) =>
+  embeds: wishList.items.map(item =>
     convertEmbedsFrom(
       item,
       wishList.discountRateThreshold,
       wishList.pointsRateThreshold
     )
-  ),
+  )
 })
 
 export const notify = (
@@ -134,7 +128,7 @@ export const notify = (
   const body = convertBodyFrom(wishList)
   return axios
     .post(wishList.incomingWebhook.incomingWebhookUrl, body)
-    .then((_response) => {
+    .then(_response => {
       // console.log(response)
     })
     .catch(function (error) {

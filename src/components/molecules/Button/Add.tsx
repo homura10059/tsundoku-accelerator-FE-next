@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react'
-import Router from 'next/router'
 import { DocumentAddIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
+import Router from 'next/router'
+import React, { useCallback, useState } from 'react'
+
 import Icon from '@/components/atoms/Loader/Icon'
 
 type Props = {
@@ -17,14 +18,14 @@ const onAdd = async (
     await Router.push(`${basePath}/add`)
   } catch (error) {
     updateIsLoading(false)
-    console.error(error)
+    console.log(error)
   }
 }
 
 const Add: React.FC<Props> = ({ basePath }) => {
   const [isLoading, updateIsLoading] = useState(false)
   const callback = useCallback(() => onAdd(basePath, updateIsLoading), [
-    basePath,
+    basePath
   ])
 
   const className = classNames('w-5', 'h-5')

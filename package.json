@@ -15,7 +15,8 @@
     "command:update:notifications": "node schedulers/notifications/update.js",
     "command:wakeup": "node schedulers/wakeUp.js",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx}'"
   },
   "engines": {
     "node": "14.15.3"
@@ -70,6 +71,11 @@
     "@types/react": "^17.0.0",
     "@types/styled-components": "^5.1.7",
     "@types/tailwindcss": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "storybook-addon-next-router": "^2.0.4",

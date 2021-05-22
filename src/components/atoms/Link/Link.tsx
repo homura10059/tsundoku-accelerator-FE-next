@@ -1,7 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
-import styled from 'styled-components'
 import classNames from 'classnames'
+import Link from 'next/link'
+import React from 'react'
 
 type Props = {
   href?: string
@@ -9,17 +8,11 @@ type Props = {
   color?: string
 }
 
-const LinkText = styled.a`
-  color: ${({ theme }) => theme.colors.on.surface};
-  text-decoration: underline;
-  cursor: pointer;
-`
-
 const Component: React.FC<Props> = ({
   href,
   onClick,
   color = 'on-surface',
-  children,
+  children
 }) => {
   const textClass = classNames('underline', 'cursor-pointer', `text-${color}`)
 

@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { addWishList } from '../../../domain/service/wishList'
 import { getSession } from 'next-auth/client'
 import * as z from 'zod'
+
+import { addWishList } from '../../../domain/service/wishList'
 
 const requestParamSchema = z.object({
   url: z.string().min(1),
   discountRateThreshold: z.number().optional(),
   pointsRateThreshold: z.number().optional(),
-  incomingWebhookId: z.string().optional(),
+  incomingWebhookId: z.string().optional()
 })
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -29,10 +30,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           incomingWebhookId
         )
         res.json({
-          status: 'ok',
+          status: 'ok'
         })
       } catch (error) {
-        console.error(error)
         res.status(500).json({ status: 'error', error })
       }
       break

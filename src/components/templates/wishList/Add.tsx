@@ -1,14 +1,15 @@
-import React from 'react'
-import Router from 'next/router'
-import TextButton from '../../atoms/Button/TextButton'
-import SubmitButton from '../../atoms/Button/SubmitButton'
-import styled from 'styled-components'
-import { useForm } from 'react-hook-form'
-import { IncomingWebhook } from '../../../functions/prisma'
-import NodePage from '../../organisms/Flame/NodePage'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Router from 'next/router'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
 import * as z from 'zod'
+
+import { IncomingWebhook } from '../../../functions/prisma'
+import SubmitButton from '../../atoms/Button/SubmitButton'
+import TextButton from '../../atoms/Button/TextButton'
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage'
+import NodePage from '../../organisms/Flame/NodePage'
 
 const schema = z.object({
   url: z
@@ -17,7 +18,7 @@ const schema = z.object({
     .url({ message: 'url形式で入力してください' }),
   discountRateThreshold: z.number().min(0).max(100),
   pointsRateThreshold: z.number().min(0).max(100),
-  incomingWebhookId: z.string().optional(),
+  incomingWebhookId: z.string().optional()
 })
 
 type FormInputs = z.infer<typeof schema>
@@ -44,19 +45,19 @@ const ButtonArea = styled.div`
     margin-left: 10px;
   }
 `
-const Add: React.FC<Props> = (props) => {
+const Add: React.FC<Props> = props => {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isValid, errors },
+    formState: { isDirty, isValid, errors }
   } = useForm<FormInputs>({
     mode: 'onTouched',
     resolver: zodResolver(schema),
     defaultValues: {
       url: '',
       discountRateThreshold: 20,
-      pointsRateThreshold: 20,
-    },
+      pointsRateThreshold: 20
+    }
   })
 
   console.log({ isDirty, isValid, errors })
@@ -67,11 +68,11 @@ const Add: React.FC<Props> = (props) => {
       await fetch('/api/wishList', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       })
       await Router.push('/wishList')
     } catch (error) {
-      console.error(error)
+      console.log(error)
     }
   }
 
@@ -86,7 +87,7 @@ const Add: React.FC<Props> = (props) => {
               <th>url</th>
               <td>
                 <input type="url" {...register('url')} />
-                <ErrorMessage error={errors.url}/>
+                <ErrorMessage error={errors.url} />
               </td>
             </tr>
             <tr>
@@ -95,10 +96,10 @@ const Add: React.FC<Props> = (props) => {
                 <input
                   type="number"
                   {...register('discountRateThreshold', {
-                    valueAsNumber: true,
+                    valueAsNumber: true
                   })}
                 />
-                <ErrorMessage error={errors.discountRateThreshold}/>
+                <ErrorMessage error={errors.discountRateThreshold} />
               </td>
             </tr>
             <tr>
@@ -107,10 +108,10 @@ const Add: React.FC<Props> = (props) => {
                 <input
                   type="number"
                   {...register('pointsRateThreshold', {
-                    valueAsNumber: true,
+                    valueAsNumber: true
                   })}
                 />
-                <ErrorMessage error={errors.pointsRateThreshold}/>
+                <ErrorMessage error={errors.pointsRateThreshold} />
               </td>
             </tr>
             <tr>
@@ -120,7 +121,7 @@ const Add: React.FC<Props> = (props) => {
                   <option value="" key={1}>
                     Select...
                   </option>
-                  {props.incomingWebhooks.map((hook) => (
+                  {props.incomingWebhooks.map(hook => (
                     <option value={hook.id} key={hook.id}>
                       {hook.service}: {hook.id}
                     </option>

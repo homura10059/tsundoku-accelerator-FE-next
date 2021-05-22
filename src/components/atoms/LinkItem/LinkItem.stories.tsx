@@ -1,12 +1,7 @@
 import React from 'react'
-import LinkItem from './LinkItem'
 import styled from 'styled-components'
 
-const Background = styled.div`
-  background-color: black;
-  width: 200px;
-  padding: 10px;
-`
+import LinkItem from './LinkItem'
 
 const Text = styled.p`
   /* color: white; */
@@ -15,12 +10,12 @@ const Text = styled.p`
 export default {
   title: 'Design System/atoms/LinkItem',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-green-300 w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 export const showLinkItemSingleLine = () => (

@@ -1,5 +1,5 @@
-import React from 'react'
 import Image from 'next/image'
+import React from 'react'
 
 type Props = {
   className?: string
@@ -11,7 +11,7 @@ type Props = {
 
 const Icon: React.FC<Props> = ({
   className,
-  size = { width: 20, height: 20 },
+  size = { width: 20, height: 20 }
 }) => {
   return (
     <Image

@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react'
-import Router from 'next/router'
 import { PencilAltIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
+import Router from 'next/router'
+import React, { useCallback, useState } from 'react'
+
 import Icon from '@/components/atoms/Loader/Icon'
 
 type Props = {
@@ -15,19 +16,19 @@ const onEdit = async (
   try {
     updateIsLoading(true)
     await fetch(`/api${basePath}`, {
-      method: 'PATCH',
+      method: 'PATCH'
     })
     await Router.reload()
   } catch (error) {
     updateIsLoading(false)
-    console.error(error)
+    console.log(error)
   }
 }
 
 const Edit: React.FC<Props> = ({ basePath }) => {
   const [isLoading, updateIsLoading] = useState(false)
   const callback = useCallback(() => onEdit(basePath, updateIsLoading), [
-    basePath,
+    basePath
   ])
 
   const className = classNames('w-5', 'h-5')

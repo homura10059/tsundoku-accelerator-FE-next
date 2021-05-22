@@ -1,19 +1,21 @@
-import { getBrowser, scrape } from './scraper'
 import { Browser, Page } from 'puppeteer'
 import * as R from 'ramda'
-import { ScrapedWishList } from '../model/WishList'
-import { getUnixTimeNow } from '@/functions/Dates'
-import { unique } from '@/functions/arrays'
 import url from 'url'
+
+import { unique } from '@/functions/arrays'
+import { getUnixTimeNow } from '@/functions/Dates'
+
 import { WISH_LIST_NAME } from '../model/CssSelector'
+import { ScrapedWishList } from '../model/WishList'
+import { getBrowser, scrape } from './scraper'
 
 const getTitle = async (page: Page): Promise<string> => {
   return page
     .$(WISH_LIST_NAME)
-    .then((element) => element.getProperty('textContent'))
-    .then((some) => some.jsonValue())
-    .then((str) => (typeof str === 'string' ? str.trim() : ''))
-    .catch((_) => '')
+    .then(element => element.getProperty('textContent'))
+    .then(some => some.jsonValue())
+    .then(str => (typeof str === 'string' ? str.trim() : ''))
+    .catch(_ => '')
 }
 
 const getScrapedWishListFromPage = async (
@@ -21,9 +23,9 @@ const getScrapedWishListFromPage = async (
 ): Promise<ScrapedWishList> => {
   const title = await getTitle(page)
   const links = await page
-    .$$eval('a', (elements) => {
+    .$$eval('a', elements => {
       return elements
-        .map((element) => element.getAttribute('href'))
+        .map(element => element.getAttribute('href'))
         .filter((href: string | null): href is string => href !== null)
     })
     .finally(() => page.close())
@@ -41,12 +43,9 @@ const getScrapedWishListFromPage = async (
         .filter((href: string) => href.includes('?coliid'))
         .filter((href: string) => href.includes('&ref'))
         .map((href: string) =>
-          `${protocol}//${host}${href.split('?')[0]}`.replace(
-            '/-/en/dp',
-            '/dp'
-          )
+          `${protocol}//${host}${href.split('?')[0]}`.replace('/-/en/dp', '/dp')
         )
-    ),
+    )
   }
 }
 
@@ -56,13 +55,13 @@ const scrapedWishList = async (
 ): Promise<ScrapedWishList> => {
   console.log('start scrapeUrl:' + url)
   const scrapeUrl = R.curry(scrape)(browser)
-  return scrapeUrl(url).then((page) => getScrapedWishListFromPage(page))
+  return scrapeUrl(url).then(page => getScrapedWishListFromPage(page))
 }
 
 export const getScrapedWishLists = async (urls: string[]) => {
   const browser = await getBrowser()
   console.log('browser:')
-  return Promise.all(urls.map((url) => scrapedWishList(browser, url)))
+  return Promise.all(urls.map(url => scrapedWishList(browser, url)))
 }
 
 export const getScrapedWishList = async (url: string) => {

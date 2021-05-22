@@ -1,9 +1,10 @@
-import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
+import React from 'react'
+
+import ListPage from '../../components/organisms/Flame/ListPage'
 import { getIncomingWebhooksByEmail } from '../../domain/service/incomingWebhook'
 import { IncomingWebhook } from '../../functions/prisma'
-import ListPage from '../../components/organisms/Flame/ListPage'
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const session = await getSession({ req })
@@ -17,11 +18,10 @@ type Props = {
   incomingWebhooks: IncomingWebhook[]
 }
 
-const Notification: React.FC<Props> = (props) => {
-  console.log(props)
+const Notification: React.FC<Props> = props => {
   return (
     <ListPage title="IncomingWebhook" basePath="notification">
-      {props.incomingWebhooks.map((hook) => (
+      {props.incomingWebhooks.map(hook => (
         <div>
           <p>id: {hook.id}</p>
           <p>

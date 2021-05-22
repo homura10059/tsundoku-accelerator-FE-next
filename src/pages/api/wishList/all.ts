@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+
 import { updateAllWishLists } from '../../../domain/service/wishList'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -7,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await updateAllWishLists()
         res.json({
-          status: 'ok',
+          status: 'ok'
         })
       } catch (error) {
         res.json({ status: 'error', error })

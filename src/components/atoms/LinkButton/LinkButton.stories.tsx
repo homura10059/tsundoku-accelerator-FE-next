@@ -1,15 +1,16 @@
 import React from 'react'
+
 import LinkButton from './LinkButton'
 
 export default {
   title: 'Design System/atoms/LinkButton',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-green-300 w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 export const showLinkButtonWithHref = () => (

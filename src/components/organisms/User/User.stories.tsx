@@ -1,23 +1,17 @@
-import React from 'react'
-import { User } from './User'
-import styled from 'styled-components'
 import { Session } from 'next-auth/client'
+import React from 'react'
 
-const Background = styled.div`
-  background-color: #9cc;
-  width: 400px;
-  padding: 10px;
-`
+import { User } from './User'
 
 export default {
   title: 'Design System/organisms/User',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-green-300 w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 export const showUserInLoading = () => (
@@ -34,8 +28,8 @@ const mockSession: Session = {
     email: 'a',
     name: 'sophia',
     image:
-      'https://raw.githubusercontent.com/o-hayato/sophia-bot/master/image/P5S_icon_sophia.png',
-  },
+      'https://raw.githubusercontent.com/o-hayato/sophia-bot/master/image/P5S_icon_sophia.png'
+  }
 }
 export const showUserLoggedIn = () => (
   <User session={mockSession} loading={false} />

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+
 import HiddenText from '../Text/HiddenText'
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 }
 const Wrapper = styled.div<Required<Props>>`
   background: ${({ theme }) => theme.colors.surface};
-  ${(props) =>
+  ${props =>
     css`
       width: ${props.width}px;
       height: ${props.height}px;
@@ -24,7 +25,7 @@ type SpinnerProps = {
   width: number
 }
 const Spinner = styled.div<SpinnerProps>`
-  ${(props) =>
+  ${props =>
     css`
       width: ${props.width}px;
       height: ${props.width}px;

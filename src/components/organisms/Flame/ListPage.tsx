@@ -1,7 +1,9 @@
-import React from 'react'
-import Title from '../../atoms/Title/Title'
 import classNames from 'classnames'
+import React from 'react'
+
 import Add from '@/components/molecules/Button/Add'
+
+import Title from '../../atoms/Title/Title'
 
 type Props = {
   title: string
@@ -12,7 +14,9 @@ type Props = {
 const ListPage: React.VFC<Props> = ({ title, basePath, children }) => {
   return (
     <div className={'p-1'}>
-      <div className={classNames('flex', 'flex-wrap', 'items-center', 'space-x-4' )}>
+      <div
+        className={classNames('flex', 'flex-wrap', 'items-center', 'space-x-4')}
+      >
         <Title>{title}</Title>
         <Add basePath={basePath} />
       </div>

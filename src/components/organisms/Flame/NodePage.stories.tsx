@@ -1,15 +1,16 @@
 import React from 'react'
+
 import NodePage from './NodePage'
 
 export default {
   title: 'Design System/organisms/Flame/NodePage',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-background w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 export const showAllButton = () => (
@@ -19,7 +20,7 @@ export const showAllButton = () => (
     command={{
       canRefresh: true,
       canEdit: true,
-      canDelete: true,
+      canDelete: true
     }}
   >
     ダミーダミー
@@ -31,7 +32,7 @@ export const showRefreshButton = () => (
     title={'ダミータイトル'}
     basePath={`/`}
     command={{
-      canRefresh: true,
+      canRefresh: true
     }}
   >
     ダミーダミー

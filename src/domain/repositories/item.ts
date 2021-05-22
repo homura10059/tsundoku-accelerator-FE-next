@@ -1,25 +1,30 @@
-import { getBrowser, scrape } from './scraper'
 import { Browser, Page } from 'puppeteer'
-import { Item } from '../model/Item'
 import * as R from 'ramda'
-import { POINTS, POINTS_RATE, PRICE, SAVING, TITLE } from '../model/CssSelector'
+
 import { getUnixTimeInSec } from '@/functions/Dates'
 import { concurrentPromise } from '@/functions/promises'
+
+import { POINTS, POINTS_RATE, PRICE, SAVING, TITLE } from '../model/CssSelector'
+import { Item } from '../model/Item'
+import { getBrowser, scrape } from './scraper'
 
 const priceRegex = /\d{1,3}(,\d{3})*/
 const percentageRegex = /\d{1,3}/
 
-export const getText = async (page: Page, selector: string): Promise<string> => {
+export const getText = async (
+  page: Page,
+  selector: string
+): Promise<string> => {
   return page
     .$(selector)
-    .then((element) => element.getProperty('textContent'))
-    .then((some) => some.jsonValue())
-    .then((str) => (typeof str === 'string' ? str.trim() : '__no-title__'))
-    .catch((_) => '')
+    .then(element => element.getProperty('textContent'))
+    .then(some => some.jsonValue())
+    .then(str => (typeof str === 'string' ? str.trim() : '__no-title__'))
+    .catch(_ => '')
 }
 
 const getTitle = async (page: Page): Promise<Pick<Item, 'title'>> => {
-  return getText(page, TITLE).then((title) => ({ title }))
+  return getText(page, TITLE).then(title => ({ title }))
 }
 
 const getPrice = async (page: Page): Promise<Pick<Item, 'price'>> => {
@@ -29,7 +34,7 @@ const getPrice = async (page: Page): Promise<Pick<Item, 'price'>> => {
       price:
         price && price.length > 0
           ? parseInt(price[0].trim().replace(',', ''), 10)
-          : undefined,
+          : undefined
     }
   })
 }
@@ -46,7 +51,9 @@ const getSaving = async (
           ? parseInt(discount[0].trim().replace(',', ''), 10)
           : undefined,
       discountRate:
-        discountPer && discountPer.length > 0 ? parseInt(discountPer[0], 10) : undefined,
+        discountPer && discountPer.length > 0
+          ? parseInt(discountPer[0], 10)
+          : undefined
     }
   })
 }
@@ -58,7 +65,7 @@ const getPoint = async (page: Page): Promise<Pick<Item, 'points'>> => {
       points:
         points && points.length > 0
           ? parseInt(points[0].trim().replace(',', ''), 10)
-          : undefined,
+          : undefined
     }
   })
 }
@@ -77,7 +84,9 @@ const getPointsPer = async (page: Page): Promise<Pick<Item, 'pointsRate'>> => {
       const pointsPer = percentageRegex.exec(pointsPerStr)
       return {
         pointsRate:
-          pointsPer && pointsPer.length > 0 ? parseInt(pointsPer[0], 10) : undefined,
+          pointsPer && pointsPer.length > 0
+            ? parseInt(pointsPer[0], 10)
+            : undefined
       }
     })
 }
@@ -89,28 +98,24 @@ export const scrapeItemWishBrowser = async (
   const page = await scrape(browser, url)
   const initialState: Pick<Item, 'url' | 'scrapedAt'> = {
     url,
-    scrapedAt: getUnixTimeInSec(new Date(Date.now())),
+    scrapedAt: getUnixTimeInSec(new Date(Date.now()))
   }
-  console.time('item.url:' + url)
   // await randomSleep()
   return Promise.all([
     getTitle(page),
     getPrice(page),
     getSaving(page),
     getPoint(page),
-    getPointsPer(page),
+    getPointsPer(page)
   ])
-    .then((values) => {
-      console.timeEnd('item.url:' + url)
+    .then(values => {
       const history = values.reduce((prev, current) => {
         return { ...prev, ...current }
       }, initialState)
       console.log('history:' + JSON.stringify(history))
       return history
     })
-    .catch((err) => {
-      console.timeEnd('item.url:' + url)
-      console.error(err)
+    .catch(_err => {
       return undefined
     })
     .finally(() => page.close())
@@ -128,6 +133,6 @@ export const scrapeItems = async (urls: string[]) => {
     scrapeItemWishBrowser
   )(browser)
 
-  const methods = urls.map((url) => get.bind(null, url))
+  const methods = urls.map(url => get.bind(null, url))
   return concurrentPromise<Item | undefined>(methods, 3)
 }

@@ -1,11 +1,12 @@
-import React from 'react'
+import classNames from 'classnames'
 import { useSession } from 'next-auth/client'
-import { IncomingWebhook } from '../../../functions/prisma'
-import NodePage from '../../organisms/Flame/NodePage'
+import React from 'react'
+
 import LocalDate from '../../../components/atoms/Date/LocalDate'
 import ItemTable from '../../../components/organisms/Item/ItemTable'
+import { IncomingWebhook } from '../../../functions/prisma'
 import Link from '../../atoms/Link/Link'
-import classNames from 'classnames'
+import NodePage from '../../organisms/Flame/NodePage'
 
 export type Props = {
   id: string
@@ -72,7 +73,7 @@ const DetailRow: React.VFC<{
   )
 }
 
-const DetailArea: React.VFC<Props> = (props) => {
+const DetailArea: React.VFC<Props> = props => {
   return (
     <div className={classNames('w-full', 'mt-4')}>
       詳細
@@ -95,7 +96,7 @@ const DetailArea: React.VFC<Props> = (props) => {
   )
 }
 
-const Detail: React.VFC<Props> = (props) => {
+const Detail: React.VFC<Props> = props => {
   const [session, loading] = useSession()
   if (loading) {
     return <div>Authenticating ...</div>
@@ -113,7 +114,7 @@ const Detail: React.VFC<Props> = (props) => {
       command={{
         canRefresh: true,
         canEdit: true,
-        canDelete: true,
+        canDelete: true
       }}
     >
       <DetailArea {...props} />

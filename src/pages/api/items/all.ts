@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import * as z from 'zod'
+
 import { updateAllItems } from '../../../domain/service/item'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await updateAllItems()
         res.json({
-          status: 'ok',
+          status: 'ok'
         })
       } catch (error) {
         res.json({ status: 'error', error })

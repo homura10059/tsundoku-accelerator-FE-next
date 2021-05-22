@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import * as z from 'zod'
+
 import {
-  fetchWishList,
-  updateWishListById,
   deleteWishList,
+  fetchWishList,
+  updateWishListById
 } from '../../../domain/service/wishList'
 
 const requestParamSchema = z.object({
-  id: z.string().min(1),
+  id: z.string().min(1)
 })
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -17,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const list = await fetchWishList(result.id)
       res.json({
         status: 'ok',
-        list,
+        list
       })
       break
     }
@@ -25,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const result = requestParamSchema.parse(req.query)
       await updateWishListById(result.id)
       res.json({
-        status: 'ok',
+        status: 'ok'
       })
       break
     }
@@ -33,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const result = requestParamSchema.parse(req.query)
       await deleteWishList(result.id)
       res.json({
-        status: 'ok',
+        status: 'ok'
       })
       break
     }

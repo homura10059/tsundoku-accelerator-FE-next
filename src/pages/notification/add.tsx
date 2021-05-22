@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
 import Router from 'next/router'
-import TextButton from '../../components/atoms/Button/TextButton'
-import SubmitButton from '../../components/atoms/Button/SubmitButton'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+
+import SubmitButton from '../../components/atoms/Button/SubmitButton'
+import TextButton from '../../components/atoms/Button/TextButton'
 
 const TextArea = styled.input`
   width: 100%;
@@ -24,11 +25,12 @@ const Notification: React.FC = () => {
       await fetch('/api/notifications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
       await Router.push('/notification')
     } catch (error) {
-      console.error(error)
+      // eslint-disable-next-line no-console
+      console.log(error)
     }
   }
 
@@ -40,24 +42,27 @@ const Notification: React.FC = () => {
           url :
           <TextArea
             autoFocus
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={e => setUrl(e.target.value)}
             placeholder="url"
             type="url"
             value={url}
           />
           channel :
           <TextArea
-            onChange={(e) => setChannel(e.target.value)}
+            onChange={e => setChannel(e.target.value)}
             placeholder="channel"
             type="text"
             value={channel}
           />
           service :
-          <select name="service" onChange={(e) => setService(e.target.value)}>
+          <select name="service" onChange={e => setService(e.target.value)}>
             <option value="DISCORD">Discord</option>
           </select>
         </div>
-        <SubmitButton disabled={!url && !channel && !service} value="ActionIcon" />
+        <SubmitButton
+          disabled={!url && !channel && !service}
+          value="ActionIcon"
+        />
         <TextButton
           label={'Cancel'}
           href={'#'}

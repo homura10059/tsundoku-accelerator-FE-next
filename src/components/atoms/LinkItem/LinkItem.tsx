@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+
 import {
   parallelogram,
   parallelogramAnimation,
@@ -59,7 +60,7 @@ const Inner = styled.div`
 
   color: ${({ theme }) => theme.colors.on.background};
 
-  :hover{
+  :hover {
     color: ${({ theme }) => theme.colors.on.border};
   }
 `

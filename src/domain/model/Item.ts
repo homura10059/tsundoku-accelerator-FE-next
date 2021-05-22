@@ -6,7 +6,7 @@ import {
   PointsRate,
   Price,
   Title,
-  UnixTimeInSec,
+  UnixTimeInSec
 } from './global'
 
 export type Item = {

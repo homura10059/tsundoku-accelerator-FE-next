@@ -1,11 +1,14 @@
-import { Provider } from 'next-auth/client'
+import '../styles/globals.css'
+
 import { AppProps } from 'next/app'
+import { Provider } from 'next-auth/client'
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import Header from '../components/organisms/Header/Header'
+
 import { GlobalStyle } from '@/functions/style'
 import { theme } from '@/functions/theme'
-import '../styles/globals.css'
+
+import Header from '../components/organisms/Header/Header'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

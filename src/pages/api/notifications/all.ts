@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+
 import { notifyAllWishList } from '../../../domain/service/notification'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -6,7 +7,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST': {
       await notifyAllWishList()
       res.json({
-        status: 'ok',
+        status: 'ok'
       })
       break
     }

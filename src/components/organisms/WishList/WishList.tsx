@@ -1,12 +1,13 @@
-import React from 'react'
-import { format } from 'date-fns'
 import { WishList as WishListProps } from '@prisma/client'
-import LinkItem from '../../atoms/LinkItem/LinkItem'
 import classNames from 'classnames'
+import { format } from 'date-fns'
+import React from 'react'
+
+import LinkItem from '../../atoms/LinkItem/LinkItem'
 
 export type Props = WishListProps
 
-const WishList: React.FC<Props> = (wishList) => {
+const WishList: React.FC<Props> = wishList => {
   const scrapedAt = wishList.scrapedAt
     ? format(new Date(wishList.scrapedAt * 1000), 'yyyy/MM/dd HH:mm:ss')
     : '-'

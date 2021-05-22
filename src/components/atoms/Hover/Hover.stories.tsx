@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Add from './Add'
+import Hover from './Hover'
 
 export default {
-  title: 'Design System/molecules/Button/Add',
+  title: 'Design System/atoms/Hover',
   decorators: [
     Story => (
       <div className={'bg-green-300 w-full p-2'}>
@@ -13,4 +13,4 @@ export default {
   ]
 }
 
-export const showButton = () => <Add basePath={'/'} />
+export const show = () => <Hover>aaa</Hover>

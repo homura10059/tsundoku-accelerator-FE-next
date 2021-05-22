@@ -1,5 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 
 type Props = {
   size?: {
@@ -15,7 +15,7 @@ const Avatar: React.FC<Props> = ({
   name,
   size = { height: 10, width: 10 },
   image = null,
-  color = 'on-surface',
+  color = 'on-surface'
 }) => {
   const { width, height } = size
   if (image) {

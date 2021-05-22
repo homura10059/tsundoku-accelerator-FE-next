@@ -1,5 +1,6 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
+
 import Icon from '@/components/atoms/Loader/Icon'
 
 type Props = {
@@ -13,7 +14,7 @@ const ActionIcon: React.VFC<Props> = ({
   onClick,
   disabled,
   iconClassName = 'w-5 h-5',
-  children,
+  children
 }) => {
   return (
     <button
@@ -30,11 +31,7 @@ const ActionIcon: React.VFC<Props> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {disabled ? (
-        <Icon className={iconClassName} />
-      ) : (
-        <>{children}</>
-      )}
+      {disabled ? <Icon className={iconClassName} /> : <>{children}</>}
     </button>
   )
 }

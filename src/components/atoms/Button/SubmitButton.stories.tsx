@@ -1,15 +1,16 @@
 import React from 'react'
+
 import SubmitButton from './SubmitButton'
 
 export default {
   title: 'Design System/atoms/Button/SubmitButton',
   decorators: [
-    (Story) => (
+    Story => (
       <div className={'bg-green-300 w-full p-2'}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 }
 
 export const showEnabled = () => (

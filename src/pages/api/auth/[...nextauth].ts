@@ -1,7 +1,8 @@
 import { NextApiHandler } from 'next'
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
+import Providers from 'next-auth/providers'
+
 import prisma from '../../../functions/prisma'
 
 const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options)
@@ -11,13 +12,13 @@ const options = {
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientSecret: process.env.GITHUB_SECRET
     }),
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    }),
+      clientSecret: process.env.DISCORD_CLIENT_SECRET
+    })
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
-  secret: process.env.SECRET,
+  secret: process.env.SECRET
 }

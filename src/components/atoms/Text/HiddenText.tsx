@@ -6,14 +6,14 @@ type Props = {
 }
 
 const Text = styled.span`
-  display:none;
+  display: none;
   visibility: hidden;
   overflow: hidden;
   white-space: nowrap;
   width: 0;
   height: 0;
   opacity: 0;
-  text-indent:100%;
+  text-indent: 100%;
 `
 
 const HiddenText: React.FC<Props> = ({ text }) => <Text>{text}</Text>

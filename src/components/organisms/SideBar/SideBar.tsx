@@ -1,28 +1,29 @@
-import React from 'react'
-import Title from '../../atoms/Title/Title'
-import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 import { Popover } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
+import React from 'react'
+
+import Title from '../../atoms/Title/Title'
+import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 
 type Props = {}
 
 const links: LinkProps[] = [
   {
     text: 'Home',
-    href: '/',
+    href: '/'
   },
   {
     text: 'WishList',
-    href: '/wishList',
+    href: '/wishList'
   },
   {
     text: 'Notification',
-    href: '/notification',
-  },
+    href: '/notification'
+  }
 ]
 
-const SideBar: React.VFC<Props> = ({}) => {
+const SideBar: React.VFC<Props> = () => {
   return (
     <Popover className="relative">
       {({ open }) => (
@@ -36,7 +37,7 @@ const SideBar: React.VFC<Props> = ({}) => {
               'opacity-0': !open,
               'opacity-30': open,
               fixed: open,
-              'inset-0': open,
+              'inset-0': open
             })}
           />
 

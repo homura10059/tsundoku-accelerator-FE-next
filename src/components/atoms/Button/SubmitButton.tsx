@@ -12,8 +12,9 @@ const Button = styled.input`
   padding: 5px 10px;
 `
 
-const SubmitButton: React.FC<Props> = ({ disabled=false, value='submit' }) => (
-  <Button disabled={disabled} type="submit" value={value} />
-)
+const SubmitButton: React.FC<Props> = ({
+  disabled = false,
+  value = 'submit'
+}) => <Button disabled={disabled} type="submit" value={value} />
 
 export default SubmitButton
