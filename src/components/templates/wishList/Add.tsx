@@ -79,7 +79,7 @@ const Add: React.FC<Props> = props => {
   const onError = (errors, e) => console.log(errors, e)
 
   return (
-    <NodePage title={'ActionIcon WishList'} basePath={`/wishList/`}>
+    <NodePage title={'Add WishList'} basePath={`/wishList/`}>
       <FromArea onSubmit={handleSubmit(onSubmit, onError)}>
         <InputArea>
           <tbody>
@@ -134,7 +134,7 @@ const Add: React.FC<Props> = props => {
         <ButtonArea>
           <SubmitButton
             disabled={!isDirty || Object.keys(errors).length !== 0}
-            value="ActionIcon"
+            value="Add"
           />
           <TextButton
             label={'Cancel'}

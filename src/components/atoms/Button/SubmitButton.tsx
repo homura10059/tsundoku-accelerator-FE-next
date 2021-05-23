@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -15,6 +16,13 @@ const Button = styled.input`
 const SubmitButton: React.FC<Props> = ({
   disabled = false,
   value = 'submit'
-}) => <Button disabled={disabled} type="submit" value={value} />
+}) => (
+  <Button
+    // className={classNames()}
+    disabled={disabled}
+    type="submit"
+    value={value}
+  />
+)
 
 export default SubmitButton
