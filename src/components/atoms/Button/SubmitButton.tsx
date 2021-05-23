@@ -1,24 +1,24 @@
 import classNames from 'classnames'
 import React from 'react'
-import styled from 'styled-components'
 
 type Props = {
   disabled?: boolean
   value?: string
 }
 
-const Button = styled.input`
-  background: #ececec;
-  border: 0;
-  padding: 5px 10px;
-`
-
 const SubmitButton: React.FC<Props> = ({
   disabled = false,
   value = 'submit'
 }) => (
-  <Button
-    // className={classNames()}
+  <input
+    className={classNames(
+      'py-2',
+      'px-4',
+      'bg-secondary-light',
+      'active:bg-secondary-dark',
+      'text-on-secondary',
+      'disabled:opacity-80'
+    )}
     disabled={disabled}
     type="submit"
     value={value}

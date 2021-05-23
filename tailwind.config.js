@@ -72,10 +72,13 @@ const config = {
   },
   variants: {
     extend: {
-      animation: ['motion-safe', 'hover']
+      backgroundColor: ['active'],
+      animation: ['motion-safe', 'hover'],
+      opacity: ['disabled']
     }
   },
   plugins: []
 }
 
+// eslint-disable-next-line no-undef
 module.exports = config
