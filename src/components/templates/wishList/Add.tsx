@@ -86,7 +86,11 @@ const Add: React.FC<Props> = props => {
             <tr>
               <th>url</th>
               <td>
-                <input type="url" {...register('url')} />
+                <input
+                  className={'text-surface'}
+                  type="url"
+                  {...register('url')}
+                />
                 <ErrorMessage error={errors.url} />
               </td>
             </tr>
@@ -94,6 +98,7 @@ const Add: React.FC<Props> = props => {
               <th>閾値(割引率)</th>
               <td>
                 <input
+                  className={'text-surface'}
                   type="number"
                   {...register('discountRateThreshold', {
                     valueAsNumber: true
@@ -106,6 +111,7 @@ const Add: React.FC<Props> = props => {
               <th>閾値(ポイト還元率率)</th>
               <td>
                 <input
+                  className={'text-surface'}
                   type="number"
                   {...register('pointsRateThreshold', {
                     valueAsNumber: true
@@ -117,7 +123,10 @@ const Add: React.FC<Props> = props => {
             <tr>
               <th>incomingWebhook</th>
               <td>
-                <select {...register('incomingWebhookId')}>
+                <select
+                  className={'text-surface'}
+                  {...register('incomingWebhookId')}
+                >
                   <option value="" key={1}>
                     Select...
                   </option>
