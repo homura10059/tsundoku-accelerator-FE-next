@@ -59,10 +59,7 @@ const Notification: React.FC = () => {
             <option value="DISCORD">Discord</option>
           </select>
         </div>
-        <SubmitButton
-          disabled={!url && !channel && !service}
-          value="Add"
-        />
+        <SubmitButton disabled={!url && !channel && !service} value="Add" />
         <TextButton
           label={'Cancel'}
           href={'#'}
