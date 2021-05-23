@@ -60,11 +60,7 @@ const Notification: React.FC = () => {
           </select>
         </div>
         <SubmitButton disabled={!url && !channel && !service} value="Add" />
-        <TextButton
-          label={'Cancel'}
-          href={'#'}
-          onClick={() => Router.push('/')}
-        />
+        <TextButton onClick={() => Router.push('/')}>Cancel</TextButton>
       </form>
     </div>
   )

@@ -145,11 +145,7 @@ const Add: React.FC<Props> = props => {
             disabled={!isDirty || Object.keys(errors).length !== 0}
             value="Add"
           />
-          <TextButton
-            label={'Cancel'}
-            href={'#'}
-            onClick={() => Router.back()}
-          />
+          <TextButton onClick={() => Router.back()}>Cancel</TextButton>
         </ButtonArea>
       </FromArea>
     </NodePage>

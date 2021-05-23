@@ -1,39 +1,25 @@
+import classNames from 'classnames'
 import React from 'react'
-import styled from 'styled-components'
 
 type Props = {
-  label?: string
-  href?: string
   onClick?: () => void
+  children?: React.ReactNode
 }
 
-const Wrapper = styled.button`
-  background-color: ${({ theme }) => theme.colors.secondary.light};
-  border: none;
-  border-radius: 6px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease,
-    background-color 0.25s ease;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  :hover {
-    transform: translate3d(0px, -1px, 0px);
-    background-color: ${({ theme }) => theme.colors.secondary.dark};
-    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-  }
-`
-
-const Button = styled.a`
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.on.secondary};
-  display: inline-block;
-  padding: 0.5rem 1rem;
-`
-
-const TextButton: React.FC<Props> = ({ label, href, onClick }) => (
-  <Wrapper>
-    <Button href={href} onClick={onClick}>
-      {label}
-    </Button>
-  </Wrapper>
+const TextButton: React.FC<Props> = ({ onClick, children }) => (
+  <button
+    className={classNames(
+      'py-2',
+      'px-4',
+      'bg-secondary-light',
+      'active:bg-secondary-dark',
+      'text-on-secondary',
+      'disabled:opacity-80'
+    )}
+    onClick={onClick}
+  >
+    {children}
+  </button>
 )
 
 export default TextButton
