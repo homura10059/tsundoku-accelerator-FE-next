@@ -13,13 +13,11 @@ export default {
   ]
 }
 
-export const showLinkButtonWithHref = () => <Link href="/">href</Link>
+export const showLinkWithHref = () => <Link href="/">href</Link>
 
-export const showLinkButtonWithOnClick = () => (
-  <Link onClick={() => {}}>onClick</Link>
-)
+export const showLinkWithOnClick = () => <Link onClick={() => {}}>onClick</Link>
 
-export const showLinkButtonWithHrefAndOnClick = () => (
+export const showLinkWithHrefAndOnClick = () => (
   <Link href="/" onClick={() => {}}>
     onClick & href
   </Link>

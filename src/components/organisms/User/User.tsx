@@ -1,12 +1,13 @@
 import { Popover } from '@headlessui/react'
+import classNames from 'classnames'
 import { signOut } from 'next-auth/client'
 import React from 'react'
 
+import Icon from '@/components/atoms/Loader/Icon'
+import Login from '@/components/molecules/Button/Login'
 import { SessionProps } from '@/interfaces/Session'
 
 import Avatar from '../../atoms/Avatar/Avatar'
-import LinkButton from '../../atoms/LinkButton/LinkButton'
-import Loader from '../../atoms/Loader/Loader'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 
 const links: LinkProps[] = [
@@ -30,14 +31,25 @@ export const User: React.FC<Props> = ({ session, loading }) => {
   if (loading) {
     return (
       <div className={'relative'}>
-        <Loader width={32} height={32} />
+        <Icon
+          className={classNames(
+            'border-2',
+            'border-solid',
+            'border-on-background',
+            'rounded-md',
+            'w-10',
+            'h-10',
+            'p-1',
+            'bg-secondary-dark'
+          )}
+        />
       </div>
     )
   }
   if (!session) {
     return (
       <div className={'relative'}>
-        <LinkButton href="/api/auth/signin">Log in</LinkButton>
+        <Login />
       </div>
     )
   }
