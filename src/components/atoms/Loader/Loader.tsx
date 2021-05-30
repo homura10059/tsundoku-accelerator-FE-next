@@ -7,6 +7,7 @@ type Props = {
   width?: number
   height?: number
 }
+
 const Wrapper = styled.div<Required<Props>>`
   background: ${({ theme }) => theme.colors.surface};
   ${props =>
