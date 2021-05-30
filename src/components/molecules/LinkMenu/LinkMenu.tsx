@@ -1,5 +1,5 @@
+import classNames from 'classnames'
 import React from 'react'
-import styled from 'styled-components'
 
 import LinkItem, { LinkItemProps } from '../../atoms/LinkItem/LinkItem'
 
@@ -9,21 +9,12 @@ type Props = {
   links: LinkProps[]
 }
 
-const List = styled.ul`
-  background-color: ${({ theme }) => theme.colors.surface};
-  padding: 15px;
-  height: 100%;
-  li + li {
-    margin-top: 20px;
-  }
-`
-
 const LinkMenu: React.FC<Props> = ({ links }) => {
   if (links.length === 0) {
     return null
   }
   return (
-    <List>
+    <ul className={classNames('bg-surface', 'p-4', 'h-full', 'space-y-3')}>
       {links.map(link => (
         <li key={link.text}>
           <LinkItem href={link.href} onClick={link.onClick}>
@@ -31,7 +22,7 @@ const LinkMenu: React.FC<Props> = ({ links }) => {
           </LinkItem>
         </li>
       ))}
-    </List>
+    </ul>
   )
 }
 
