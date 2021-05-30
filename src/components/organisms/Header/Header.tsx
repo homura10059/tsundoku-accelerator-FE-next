@@ -1,37 +1,30 @@
+import classNames from 'classnames'
 import { useSession } from 'next-auth/client'
 import React from 'react'
-import styled from 'styled-components'
 
 import { SessionProps } from '@/interfaces/Session'
 
 import SideBar from '../SideBar/SideBar'
 import User from '../User/User'
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.primary.light};
-  padding: 0.2rem;
-`
-
-const Left = styled.div`
-  display: flex;
-`
-const Right = styled.div`
-  display: flex;
-  margin-left: auto;
-`
-
 export const Header: React.FC<SessionProps> = ({ session, loading }) => {
   return (
-    <Wrapper>
-      <Left>
+    <div
+      className={classNames(
+        'flex',
+        'justify-between',
+        'content-center',
+        'bg-primary-light',
+        'p-1'
+      )}
+    >
+      <div className={'flex'}>
         <SideBar />
-      </Left>
-      <Right>
+      </div>
+      <div className={'flex'}>
         <User session={session} loading={loading} />
-      </Right>
-    </Wrapper>
+      </div>
+    </div>
   )
 }
 
