@@ -6,7 +6,7 @@ export default {
   title: 'Design System/atoms/Hover',
   decorators: [
     Story => (
-      <div className={'bg-green-300 w-full p-2'}>
+      <div className={'bg-green-300 w-full p-5'}>
         <Story />
       </div>
     )

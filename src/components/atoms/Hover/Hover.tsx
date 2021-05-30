@@ -8,13 +8,8 @@ type Props = {
 const Hover: React.VFC<Props> = ({ children }) => {
   return (
     // TODO: tailwindcssでbefore/afterが使えるようになったらやり直す
-    <div
-      className={classNames(
-        'motion-safe:hover:animate-parallelogram',
-        'hover:bg-reverse-light'
-      )}
-    >
-      {children}
+    <div className={classNames('hover-anime')}>
+      <div className={classNames('hover-anime__inner')}>{children}</div>
     </div>
   )
 }
