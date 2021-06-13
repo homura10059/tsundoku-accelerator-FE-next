@@ -20,7 +20,7 @@ export const getText = async (
     .then(element => element.getProperty('textContent'))
     .then(some => some.jsonValue())
     .then(str => (typeof str === 'string' ? str.trim() : '__no-title__'))
-    .catch(_ => '')
+    .catch(_ => '__error__')
 }
 
 const getTitle = async (page: Page): Promise<Pick<Item, 'title'>> => {
