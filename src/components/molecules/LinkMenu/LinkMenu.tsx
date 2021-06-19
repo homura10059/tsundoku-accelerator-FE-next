@@ -1,9 +1,14 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import React from 'react'
 
-import LinkItem, { LinkItemProps } from '../../atoms/LinkItem/LinkItem'
+import Hover from '@/components/atoms/Hover/Hover'
 
-export type LinkProps = LinkItemProps & { text: string }
+export type LinkProps = {
+  href?: string
+  onClick?: () => void
+  text: string
+}
 
 type Props = {
   links: LinkProps[]
@@ -17,9 +22,11 @@ const LinkMenu: React.FC<Props> = ({ links }) => {
     <ul className={classNames('bg-surface', 'p-4', 'h-full', 'space-y-3')}>
       {links.map(link => (
         <li key={link.text}>
-          <LinkItem href={link.href} onClick={link.onClick}>
-            {link.text}
-          </LinkItem>
+          <Hover>
+            <Link href={link.href ?? '#'}>
+              <a onClick={link.onClick}>{link.text}</a>
+            </Link>
+          </Hover>
         </li>
       ))}
     </ul>
