@@ -1,9 +1,10 @@
 import { WishList as WishListProps } from '@prisma/client'
 import classNames from 'classnames'
 import { format } from 'date-fns'
+import Link from 'next/link'
 import React from 'react'
 
-import LinkItem from '../../atoms/LinkItem/LinkItem'
+import Hover from '@/components/atoms/Hover/Hover'
 
 export type Props = WishListProps
 
@@ -13,10 +14,14 @@ const WishList: React.FC<Props> = wishList => {
     : '-'
   return (
     <div className={classNames('bg-surface')}>
-      <LinkItem href={`/wishList/${wishList.id}`}>
-        <h1 className={classNames('text-2xl')}>{wishList.title}</h1>
-        <p>更新日時: {scrapedAt}</p>
-      </LinkItem>
+      <Hover>
+        <Link href={`/wishList/${wishList.id}`}>
+          <a>
+            <h1 className={classNames('text-2xl')}>{wishList.title}</h1>
+            <p>更新日時: {scrapedAt}</p>
+          </a>
+        </Link>
+      </Hover>
     </div>
   )
 }
