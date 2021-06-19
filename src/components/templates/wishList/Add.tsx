@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import styled from 'styled-components'
 import * as z from 'zod'
 
 import { IncomingWebhook } from '../../../functions/prisma'
@@ -27,24 +26,6 @@ type Props = {
   incomingWebhooks: IncomingWebhook[]
 }
 
-const FromArea = styled.form`
-  padding: 5px;
-`
-const InputArea = styled.table`
-  th {
-    padding: 5px;
-  }
-
-  td {
-    padding: 5px;
-  }
-`
-const ButtonArea = styled.div`
-  margin-top: 5px;
-  * + * {
-    margin-left: 10px;
-  }
-`
 const Add: React.FC<Props> = props => {
   const {
     register,
@@ -80,12 +61,12 @@ const Add: React.FC<Props> = props => {
 
   return (
     <NodePage title={'Add WishList'} basePath={`/wishList/`}>
-      <FromArea onSubmit={handleSubmit(onSubmit, onError)}>
-        <InputArea>
+      <form className={'p-1'} onSubmit={handleSubmit(onSubmit, onError)}>
+        <table className={'table-auto'}>
           <tbody>
             <tr>
               <th>url</th>
-              <td>
+              <td className={'p-1'}>
                 <input
                   className={'text-surface'}
                   type="url"
@@ -96,7 +77,7 @@ const Add: React.FC<Props> = props => {
             </tr>
             <tr>
               <th>閾値(割引率)</th>
-              <td>
+              <td className={'p-1'}>
                 <input
                   className={'text-surface'}
                   type="number"
@@ -109,7 +90,7 @@ const Add: React.FC<Props> = props => {
             </tr>
             <tr>
               <th>閾値(ポイト還元率率)</th>
-              <td>
+              <td className={'p-1'}>
                 <input
                   className={'text-surface'}
                   type="number"
@@ -122,7 +103,7 @@ const Add: React.FC<Props> = props => {
             </tr>
             <tr>
               <th>incomingWebhook</th>
-              <td>
+              <td className={'p-1'}>
                 <select
                   className={'text-surface'}
                   {...register('incomingWebhookId')}
@@ -139,15 +120,15 @@ const Add: React.FC<Props> = props => {
               </td>
             </tr>
           </tbody>
-        </InputArea>
-        <ButtonArea>
+        </table>
+        <div className={'mt-2 space-x-2'}>
           <SubmitButton
             disabled={!isDirty || Object.keys(errors).length !== 0}
             value="Add"
           />
           <TextButton onClick={() => Router.back()}>Cancel</TextButton>
-        </ButtonArea>
-      </FromArea>
+        </div>
+      </form>
     </NodePage>
   )
 }
