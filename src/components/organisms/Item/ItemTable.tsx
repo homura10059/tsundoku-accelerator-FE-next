@@ -1,5 +1,5 @@
+import classNames from 'classnames'
 import React from 'react'
-import styled from 'styled-components'
 
 import Link from '../../atoms/Link/Link'
 
@@ -16,27 +16,6 @@ export type ItemProps = {
 
 export type Props = { items: ItemProps[] }
 
-const Table = styled.table`
-  color: ${({ theme }) => theme.colors.on.surface};
-  background-color: ${({ theme }) => theme.colors.surface};
-
-  th {
-    padding: 5px;
-    border-top: solid 1px ${({ theme }) => theme.colors.border};
-    border-bottom: solid 1px ${({ theme }) => theme.colors.border};
-  }
-
-  td {
-    padding: 5px;
-  }
-`
-
-const HeaderRow = styled.tr`
-  th {
-    min-width: 55px;
-  }
-`
-
 const ItemTable: React.FC<Props> = ({ items }) => {
   if (items.length === 0) {
     return null
@@ -49,13 +28,13 @@ const ItemTable: React.FC<Props> = ({ items }) => {
   })
 
   return (
-    <Table>
-      <thead>
-        <HeaderRow>
-          <th>item</th>
-          <th>値引率</th>
-          <th>還元率</th>
-        </HeaderRow>
+    <table className={classNames('text-on-surface', 'bg-surface', 'w-full')}>
+      <thead className={'border-solid border-t border-b'}>
+        <tr>
+          <th className={'w-min p-1'}>item</th>
+          <th className={'w-1/6 lg:w-auto p-1'}>値引率</th>
+          <th className={'w-1/6 lg:w-auto p-1'}>還元率</th>
+        </tr>
       </thead>
       <tbody>
         {sorted.map((item, index) => (
@@ -68,7 +47,7 @@ const ItemTable: React.FC<Props> = ({ items }) => {
           </tr>
         ))}
       </tbody>
-    </Table>
+    </table>
   )
 }
 
