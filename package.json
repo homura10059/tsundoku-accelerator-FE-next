@@ -43,8 +43,6 @@
     "react-final-form": "^6.5.2",
     "react-hook-form": "^7.0.0",
     "react-markdown": "^5.0.3",
-    "styled-components": "^5.2.1",
-    "styled-reset": "^4.3.4",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "zod": "^1.11.11"
   },
@@ -69,7 +67,6 @@
     "@types/puppeteer": "^5.4.2",
     "@types/ramda": "^0.27.34",
     "@types/react": "^17.0.0",
-    "@types/styled-components": "^5.1.7",
     "@types/tailwindcss": "^2.0.2",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",

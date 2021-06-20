@@ -1,10 +1,7 @@
-import { theme } from '../src/functions/theme'
-import { ThemeProvider } from 'styled-components'
 import { withNextRouter } from 'storybook-addon-next-router'
 import { addDecorator } from '@storybook/react'
 import { configure } from '@storybook/react'
 import './mockNextRouter'
-import { GlobalStyle } from '../src/functions/style'
 import '../src/styles/globals.css'
 import * as nextImage from 'next/image';
 
@@ -19,10 +16,7 @@ addDecorator(
 
 addDecorator((Story) => (
   <>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
       <Story />
-    </ThemeProvider>
   </>
 ))
 
