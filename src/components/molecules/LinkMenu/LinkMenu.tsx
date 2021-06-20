@@ -24,7 +24,9 @@ const LinkMenu: React.FC<Props> = ({ links }) => {
         <li key={link.text}>
           <Hover>
             <Link href={link.href ?? '#'}>
-              <a onClick={link.onClick}>{link.text}</a>
+              <a className={'block'} onClick={link.onClick}>
+                {link.text}
+              </a>
             </Link>
           </Hover>
         </li>

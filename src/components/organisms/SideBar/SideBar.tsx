@@ -1,7 +1,7 @@
-import { Popover } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
-import React from 'react'
+import { Drawer } from '@mantine/core'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
 import Title from '../../atoms/Title/Title'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
@@ -24,41 +24,34 @@ const links: LinkProps[] = [
 ]
 
 const SideBar: React.VFC<Props> = () => {
+  const router = useRouter()
+  const [opened, setOpened] = useState(false)
+
+  useEffect(() => {
+    const handleRouteChange = (_url, { _shallow }) => {
+      setOpened(false)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
   return (
-    <Popover className="relative">
-      {({ open }) => (
-        <>
-          <Popover.Button>
-            <MenuIcon className={'w-10 h-10 text-white cursor-pointer'} />
-          </Popover.Button>
+    <>
+      <Drawer opened={opened} onClose={() => setOpened(false)}>
+        <div className={'bg-primary-dark p-2'}>
+          <Title>Menu</Title>
+        </div>
+        <LinkMenu links={links} />
+      </Drawer>
 
-          <Popover.Overlay
-            className={classNames('bg-secondary-light', {
-              'opacity-0': !open,
-              'opacity-30': open,
-              fixed: open,
-              'inset-0': open
-            })}
-          />
-
-          <Popover.Panel
-            className={classNames(
-              'absolute',
-              'z-10',
-              '-top-2',
-              '-left-2',
-              'h-screen',
-              'bg-primary-dark'
-            )}
-          >
-            <div className={'p-2'}>
-              <Title>Menu</Title>
-            </div>
-            <LinkMenu links={links} />
-          </Popover.Panel>
-        </>
-      )}
-    </Popover>
+      <button onClick={() => setOpened(true)}>
+        <MenuIcon className={'w-10 h-10 text-white cursor-pointer'} />
+      </button>
+    </>
   )
 }
 
