@@ -1,7 +1,8 @@
-import { Popover } from '@headlessui/react'
+import { Popover } from '@mantine/core'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Icon from '@/components/atoms/Loader/Icon'
 import Login from '@/components/molecules/Button/Login'
@@ -28,6 +29,21 @@ const links: LinkProps[] = [
 type Props = SessionProps
 
 export const User: React.FC<Props> = ({ session, loading }) => {
+  const router = useRouter()
+  const [opened, setOpened] = useState(false)
+
+  useEffect(() => {
+    const handleRouteChange = (_url, { _shallow }) => {
+      setOpened(false)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
+
   if (loading) {
     return (
       <div className={'relative'}>
@@ -55,15 +71,24 @@ export const User: React.FC<Props> = ({ session, loading }) => {
   }
 
   return (
-    <Popover className="relative">
-      <Popover.Button
-        className={'rounded-full flex items-center justify-center'}
-      >
-        <Avatar name={session.user.name} image={session.user.image} />
-      </Popover.Button>
-      <Popover.Panel className="absolute z-10 right-0">
-        <LinkMenu links={links} />
-      </Popover.Panel>
+    <Popover
+      opened={opened}
+      onClose={() => setOpened(false)}
+      target={
+        <button
+          className={'rounded-full flex items-center justify-center'}
+          onClick={() => setOpened(o => !o)}
+        >
+          <Avatar name={session.user.name} image={session.user.image} />
+        </button>
+      }
+      bodyStyle={{ border: 0 }}
+      position="bottom"
+      placement="end"
+      spacing={5}
+      withArrow
+    >
+      <LinkMenu links={links} />
     </Popover>
   )
 }
