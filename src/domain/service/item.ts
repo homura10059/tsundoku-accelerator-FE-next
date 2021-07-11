@@ -57,13 +57,17 @@ export const updateAllItems = async () => {
   }
 }
 
-export const getItemsByUserId = async (userId: number) => {
-  return prisma.wishList.findMany({
-    where: {
-      userId
-    },
-    include: {
-      items: true
-    }
-  })
+export const getItemsByUserId = async (email: string) => {
+  return prisma.wishList
+    .findMany({
+      where: {
+        user: {
+          email
+        }
+      },
+      include: {
+        items: true
+      }
+    })
+    .then(lists => lists.map(x => x.items).flat())
 }

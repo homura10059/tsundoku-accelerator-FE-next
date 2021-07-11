@@ -1,17 +1,13 @@
-import { useDocumentTitle } from '@mantine/hooks'
-import React from 'react'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
 
-type Props = {}
+import Home from '@/components/templates/home/index'
+import { getItemsByUserId } from '@/domain/service/item'
 
-const Main: React.FC<Props> = () => {
-  useDocumentTitle('積読アクセラレータ')
-  return (
-    <div className={'p-1'}>
-      <main className={'text-on-background'}>
-        セール情報を収集してくれるサイト
-      </main>
-    </div>
-  )
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req })
+  const items = await getItemsByUserId(session.user.email)
+  return { props: { items } }
 }
 
-export default Main
+export default Home
