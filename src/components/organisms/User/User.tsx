@@ -1,4 +1,4 @@
-import { Loader, Popover } from '@mantine/core'
+import { Avatar, Loader, Popover } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/client'
 import React, { useEffect, useState } from 'react'
@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import Login from '@/components/molecules/Button/Login'
 import { SessionProps } from '@/interfaces/Session'
 
-import Avatar from '../../atoms/Avatar/Avatar'
 import LinkMenu, { LinkProps } from '../../molecules/LinkMenu/LinkMenu'
 
 const links: LinkProps[] = [
@@ -49,6 +48,7 @@ export const User: React.FC<Props> = ({ session, loading }) => {
       </div>
     )
   }
+
   if (!session) {
     return (
       <div className={'relative'}>
@@ -66,7 +66,11 @@ export const User: React.FC<Props> = ({ session, loading }) => {
           className={'rounded-full flex items-center justify-center'}
           onClick={() => setOpened(o => !o)}
         >
-          <Avatar name={session.user.name} image={session.user.image} />
+          <Avatar
+            src={session.user.image}
+            alt={session.user.name}
+            radius="xl"
+          />
         </button>
       }
       bodyStyle={{ border: 0 }}
