@@ -1,10 +1,8 @@
-import { Popover } from '@mantine/core'
-import classNames from 'classnames'
+import { Loader, Popover } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/client'
 import React, { useEffect, useState } from 'react'
 
-import Icon from '@/components/atoms/Loader/Icon'
 import Login from '@/components/molecules/Button/Login'
 import { SessionProps } from '@/interfaces/Session'
 
@@ -47,18 +45,7 @@ export const User: React.FC<Props> = ({ session, loading }) => {
   if (loading) {
     return (
       <div className={'relative'}>
-        <Icon
-          className={classNames(
-            'border-2',
-            'border-solid',
-            'border-on-background',
-            'rounded-md',
-            'w-10',
-            'h-10',
-            'p-1',
-            'bg-secondary-dark'
-          )}
-        />
+        <Loader style={{ fill: '#FFFFFF' }} />
       </div>
     )
   }
