@@ -44,7 +44,6 @@
     "react-final-form": "^6.5.2",
     "react-hook-form": "^7.0.0",
     "react-jss": "^10.6.0",
-    "react-markdown": "^5.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "zod": "^1.11.11"
   },
