@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '@mantine/hooks'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -12,6 +13,7 @@ type Props = {
 }
 
 const ListPage: React.VFC<Props> = ({ title, basePath, children }) => {
+  useDocumentTitle(title)
   return (
     <div className={'p-1'}>
       <div

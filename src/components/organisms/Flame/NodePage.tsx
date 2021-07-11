@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '@mantine/hooks'
 import classNames from 'classnames'
 import React from 'react'
 
@@ -27,6 +28,7 @@ const NodePage: React.FC<Props> = ({
   },
   children
 }) => {
+  useDocumentTitle(title)
   return (
     <div className={'p-1'}>
       <div
