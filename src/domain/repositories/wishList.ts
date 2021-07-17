@@ -1,5 +1,4 @@
 import { Browser, Page } from 'puppeteer'
-import * as R from 'ramda'
 import url from 'url'
 
 import { unique } from '@/functions/arrays'
@@ -7,28 +6,13 @@ import { getUnixTimeNow } from '@/functions/Dates'
 
 import { WISH_LIST_NAME } from '../model/CssSelector'
 import { ScrapedWishList } from '../model/WishList'
-import { getBrowser, scrape } from './scraper'
-
-const getTitle = async (page: Page): Promise<string> => {
-  return page
-    .$(WISH_LIST_NAME)
-    .then(element => element.getProperty('textContent'))
-    .then(some => some.jsonValue())
-    .then(str => (typeof str === 'string' ? str.trim() : ''))
-    .catch(_ => '')
-}
+import { getBrowser, getHrefList, getText, scrape } from './scraper'
 
 const getScrapedWishListFromPage = async (
   page: Page
 ): Promise<ScrapedWishList> => {
-  const title = await getTitle(page)
-  const links = await page
-    .$$eval('a', elements => {
-      return elements
-        .map(element => element.getAttribute('href'))
-        .filter((href: string | null): href is string => href !== null)
-    })
-    .finally(() => page.close())
+  const title = await getText(page, WISH_LIST_NAME)
+  const links = await getHrefList(page, 'a')
 
   const parsedUrl = url.parse(page.url())
   const protocol = parsedUrl.protocol || 'https:'
@@ -54,8 +38,15 @@ const scrapedWishList = async (
   url: string
 ): Promise<ScrapedWishList> => {
   console.log('start scrapeUrl:' + url)
-  const scrapeUrl = R.curry(scrape)(browser)
-  return scrapeUrl(url).then(page => getScrapedWishListFromPage(page))
+  try {
+    const page = await scrape(browser, url)
+    const wishList = await getScrapedWishListFromPage(page)
+    await page.close()
+    console.log('end scrapeUrl:' + url)
+    return wishList
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 export const getScrapedWishLists = async (urls: string[]) => {
