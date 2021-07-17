@@ -32,6 +32,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "date-fns": "^2.16.1",
+    "discord.js": "^12.5.3",
     "final-form": "^4.20.1",
     "next": "^10.0.4",
     "next-auth": "^3.1.0",

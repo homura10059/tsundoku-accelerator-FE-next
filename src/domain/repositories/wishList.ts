@@ -1,6 +1,7 @@
 import { Browser, Page } from 'puppeteer'
 import url from 'url'
 
+import { notifyError } from '@/domain/repositories/discord'
 import { unique } from '@/functions/arrays'
 import { getUnixTimeNow } from '@/functions/Dates'
 
@@ -45,7 +46,7 @@ const scrapedWishList = async (
     console.log('end scrapeUrl:' + url)
     return wishList
   } catch (e) {
-    console.log(e)
+    await notifyError(e)
   }
 }
 

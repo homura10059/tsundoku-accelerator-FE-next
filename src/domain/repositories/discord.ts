@@ -1,5 +1,6 @@
 import { IncomingWebhook, Item, WishList } from '@prisma/client'
 import axios from 'axios'
+import { WebhookClient } from 'discord.js'
 
 type Field = {
   name: string
@@ -134,4 +135,15 @@ export const notify = (
     .catch(function (error) {
       console.log(error)
     })
+}
+export const getIdAndToken = (url: string): [id: string, token: string] => {
+  const [id, token] = url.split('/').slice(-2)
+  return [id, token]
+}
+export const notifyError = async (e: Error) => {
+  const webHookUrl = process.env.ALERT_WEB_HOOK_URL ?? ''
+  const [id, token] = getIdAndToken(webHookUrl)
+
+  const hook = new WebhookClient(id, token)
+  await hook.send(e.message)
 }
