@@ -93,29 +93,31 @@ export const updateWishList = async (wishList: {
     }
   })
 
-  next.items.forEach(async url => {
-    await prisma.item.upsert({
-      where: {
-        url
-      },
-      create: {
-        url,
-        scrapedAt: null,
-        wishLists: {
-          connect: {
-            id: next.id
+  await Promise.all(
+    next.items.map(async url => {
+      prisma.item.upsert({
+        where: {
+          url
+        },
+        create: {
+          url,
+          scrapedAt: null,
+          wishLists: {
+            connect: {
+              id: next.id
+            }
+          }
+        },
+        update: {
+          wishLists: {
+            connect: {
+              id: next.id
+            }
           }
         }
-      },
-      update: {
-        wishLists: {
-          connect: {
-            id: next.id
-          }
-        }
-      }
+      })
     })
-  })
+  )
 }
 
 export const updateWishListById = async (id: string) => {
@@ -130,9 +132,11 @@ export const updateWishListById = async (id: string) => {
 
 export const updateAllWishLists = async () => {
   const wishLists = await prisma.wishList.findMany()
-  wishLists.forEach(async wishList => {
-    await updateWishList(wishList)
-  })
+  await Promise.all(
+    wishLists.map(async wishList => {
+      await updateWishList(wishList)
+    })
+  )
 }
 
 export const getWishLists = async (email: string) =>
