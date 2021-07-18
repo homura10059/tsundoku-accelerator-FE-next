@@ -24,7 +24,7 @@ const Add: React.FC<Props> = () => {
     },
 
     validationRules: {
-      url: value => /^https:\/\/+$/.test(value)
+      url: value => /^https:\/\/.+$/.test(value)
     }
   })
 
@@ -52,7 +52,7 @@ const Add: React.FC<Props> = () => {
           required
           label={<Label text={'URL'} />}
           labelProps={{ className: 'text-on-surface' }}
-          error={form.errors.url && 'Please specify valid email'}
+          error={form.errors.url && 'Please specify valid url'}
           value={form.values.url}
           onChange={event =>
             form.setFieldValue('url', event.currentTarget.value)
@@ -62,7 +62,7 @@ const Add: React.FC<Props> = () => {
           required
           label={<Label text={'Channel'} />}
           labelProps={{ className: 'text-on-surface' }}
-          error={form.errors.channel && 'Please specify valid email'}
+          error={form.errors.channel && 'Please specify valid channel'}
           value={form.values.channel}
           onChange={event =>
             form.setFieldValue('channel', event.currentTarget.value)

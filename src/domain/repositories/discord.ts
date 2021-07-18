@@ -116,7 +116,7 @@ const convertBodyFrom = (
   )
 })
 
-export const notify = (
+export const notify = async (
   wishList: WishList & {
     items: Item[]
     incomingWebhook: IncomingWebhook
@@ -127,19 +127,16 @@ export const notify = (
   }
 
   const body = convertBodyFrom(wishList)
-  return axios
-    .post(wishList.incomingWebhook.incomingWebhookUrl, body)
-    .then(_response => {
-      // console.log(response)
-    })
-    .catch(function (error) {
-      console.log(error)
-    })
+  const [id, token] = getIdAndToken(wishList.incomingWebhook.incomingWebhookUrl)
+  const hook = new WebhookClient(id, token)
+  await hook.send(body)
 }
+
 export const getIdAndToken = (url: string): [id: string, token: string] => {
   const [id, token] = url.split('/').slice(-2)
   return [id, token]
 }
+
 export const notifyError = async (e: Error) => {
   const webHookUrl = process.env.ALERT_WEB_HOOK_URL ?? ''
   const [id, token] = getIdAndToken(webHookUrl)
