@@ -9,6 +9,21 @@ import { WISH_LIST_NAME } from '../model/CssSelector'
 import { ScrapedWishList } from '../model/WishList'
 import { getBrowser, getHrefList, getText, scrape } from './scraper'
 
+const filteredLink = (
+  protocol: string,
+  host: string,
+  links: string[]
+): string[] => {
+  return unique(
+    links
+      .filter((href: string) => href.includes('?coliid'))
+      .filter((href: string) => href.includes('&ref'))
+      .map((href: string) =>
+        `${protocol}//${host}${href.split('?')[0]}`.replace('/-/en/dp', '/dp')
+      )
+  )
+}
+
 const getScrapedWishListFromPage = async (
   page: Page
 ): Promise<ScrapedWishList> => {
@@ -18,19 +33,13 @@ const getScrapedWishListFromPage = async (
   const parsedUrl = url.parse(page.url())
   const protocol = parsedUrl.protocol || 'https:'
   const host = parsedUrl.host || 'www.amazon.co.jp'
+  const items = filteredLink(protocol, host, links)
 
   return {
     url: page.url(),
     title: title,
     scrapedAt: getUnixTimeNow(),
-    items: unique(
-      links
-        .filter((href: string) => href.includes('?coliid'))
-        .filter((href: string) => href.includes('&ref'))
-        .map((href: string) =>
-          `${protocol}//${host}${href.split('?')[0]}`.replace('/-/en/dp', '/dp')
-        )
-    )
+    items
   }
 }
 

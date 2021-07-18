@@ -93,31 +93,29 @@ export const updateWishList = async (wishList: {
     }
   })
 
-  await Promise.all(
-    next.items.map(async url => {
-      prisma.item.upsert({
-        where: {
-          url
-        },
-        create: {
-          url,
-          scrapedAt: null,
-          wishLists: {
-            connect: {
-              id: next.id
-            }
-          }
-        },
-        update: {
-          wishLists: {
-            connect: {
-              id: next.id
-            }
+  next.items.forEach(async url => {
+    await prisma.item.upsert({
+      where: {
+        url
+      },
+      create: {
+        url,
+        scrapedAt: null,
+        wishLists: {
+          connect: {
+            id: next.id
           }
         }
-      })
+      },
+      update: {
+        wishLists: {
+          connect: {
+            id: next.id
+          }
+        }
+      }
     })
-  )
+  })
 }
 
 export const updateWishListById = async (id: string) => {
