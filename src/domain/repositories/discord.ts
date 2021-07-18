@@ -1,5 +1,4 @@
 import { IncomingWebhook, Item, WishList } from '@prisma/client'
-import axios from 'axios'
 import { WebhookClient } from 'discord.js'
 
 type Field = {
