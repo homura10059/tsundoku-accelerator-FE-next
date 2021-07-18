@@ -28,7 +28,7 @@ const ItemTable: React.FC<Props> = ({ items }) => {
   })
 
   return (
-    <table className={classNames('text-on-surface', 'bg-surface', 'w-full')}>
+    <table className={classNames('text-on-surface', 'bg-surface')}>
       <thead className={'border-solid border-t border-b'}>
         <tr>
           <th className={'w-min p-1'}>item</th>
