@@ -1,7 +1,6 @@
+import { Loader } from '@mantine/core'
 import classNames from 'classnames'
 import React from 'react'
-
-import Icon from '@/components/atoms/Loader/Icon'
 
 type Props = {
   onClick: () => Promise<void>
@@ -31,7 +30,11 @@ const ActionIcon: React.VFC<Props> = ({
       onClick={onClick}
       disabled={disabled}
     >
-      {disabled ? <Icon className={iconClassName} /> : <>{children}</>}
+      {disabled ? (
+        <Loader className={iconClassName} style={{ fill: '#FFFFFF' }} />
+      ) : (
+        <>{children}</>
+      )}
     </button>
   )
 }
