@@ -1,5 +1,6 @@
 /** @type {import('@types/tailwindcss/tailwind-config').TailwindConfig} */
 const config = {
+  mode: 'jit',
   purge: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}'
@@ -68,13 +69,6 @@ const config = {
         parallelogram: 'parallelogram 1s linear infinite',
         pentagon: 'pentagon 1s linear infinite'
       }
-    }
-  },
-  variants: {
-    extend: {
-      backgroundColor: ['active'],
-      animation: ['motion-safe', 'hover'],
-      opacity: ['disabled']
     }
   },
   plugins: []
