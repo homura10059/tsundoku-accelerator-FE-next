@@ -70,8 +70,7 @@ const config = {
         pentagon: 'pentagon 1s linear infinite'
       }
     }
-  },
-  plugins: []
+  }
 }
 
 // eslint-disable-next-line no-undef
