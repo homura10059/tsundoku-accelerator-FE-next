@@ -3,12 +3,16 @@ const path = require("path");
 module.exports = {
   stories: ['../src/components/**/*.stories.@(tsx|mdx)'],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-actions',
-    '@storybook/addon-knobs',
-    '@storybook/addon-docs',
-    '@storybook/addon-a11y',
-    '@storybook/addon-viewport',
+    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-postcss',
+      options: {
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+        theme: {}
+      },
+    },
   ],
   webpackFinal: async (config, { configType }) => {
     config.resolve.alias['@'] = path.resolve(__dirname, '../src')
