@@ -1,6 +1,7 @@
 import { useDocumentTitle } from '@mantine/hooks'
 import React from 'react'
 
+import NodePage from '@/components/organisms/Flame/NodePage'
 import ItemTable from '@/components/organisms/Item/ItemTable'
 
 type Props = {
@@ -19,12 +20,13 @@ type Props = {
 const Home: React.VFC<Props> = ({ items }) => {
   useDocumentTitle('積読アクセラレータ')
   return (
-    <div className={'p-1'}>
-      <main className={'text-on-background'}>
-        セール情報一覧
-        <ItemTable items={items} />
-      </main>
-    </div>
+    <NodePage
+      title={'セール情報一覧'}
+      basePath={'/items/all'}
+      command={{ canRefresh: true }}
+    >
+      <ItemTable items={items} />
+    </NodePage>
   )
 }
 

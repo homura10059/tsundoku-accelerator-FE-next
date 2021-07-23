@@ -43,13 +43,18 @@ export const updateItemByUrl = async (url: string) => {
   await updateItem(item)
 }
 
-export const updateAllItems = async () => {
-  const items = await prisma.item.findMany()
+const sortByScrapedAt = (from: Item[]) => {
+  const items = [...from]
   items.sort((a, b) => {
     if (a.scrapedAt < b.scrapedAt) return -1
     if (a.scrapedAt > b.scrapedAt) return 1
     return 0
   })
+  return items
+}
+
+export const updateAllItems = async () => {
+  const items = sortByScrapedAt(await prisma.item.findMany())
   console.log('get AllItems')
   for (const item of items) {
     console.log(`item: ${item.url}`)
@@ -70,4 +75,12 @@ export const getItemsByUserId = async (email: string) => {
       }
     })
     .then(lists => lists.map(x => x.items).flat())
+}
+
+export const updateItemsByUser = async (email: string) => {
+  const items = sortByScrapedAt(await getItemsByUserId(email))
+  for (const item of items) {
+    console.log(`item: ${item.url}`)
+    await updateItem(item)
+  }
 }
